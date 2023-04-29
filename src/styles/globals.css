@@ -1,0 +1,150 @@
+@font-face {
+  font-family: Electrolize;
+  src: url('../../public/Electrolize.ttf');
+}
+h1,h2,h3,h4,h5,h6,p{
+  font-family: Electrolize;
+}
+body{
+  overflow-x: hidden !important;
+}
+nav .nav-link{
+  color: #637592 !important; 
+  font-size: 14px !important;
+  font-family: Electrolize;
+}
+nav .active{
+  color: #fff !important; 
+  font-size: 14px !important;
+}
+nav .dropdown-item:hover{
+  background-color: transparent !important;
+  color: #029DBB;
+  transform: perspective(1);
+}
+nav .dropdown-item{
+  background-color: transparent !important;
+  color: #029DBB;
+}
+ .dropdown-item:hover{
+  background-color: transparent !important;
+  color: #029DBB;
+
+}
+ .dropdown-item{
+  background-color: transparent !important;
+  color: #029DBB;
+}
+.img-xrp{
+  width: 60px;
+}
+
+@media (min-width: 768px) {
+  .animate {
+    animation-duration: 0.3s;
+    -webkit-animation-duration: 0.3s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0rem);
+    opacity: 1;
+  }
+
+  0% {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+}
+
+
+@-webkit-keyframes slideIn {
+  0% {
+    -webkit-transform: transform;
+    -webkit-opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    -webkit-opacity: 1;
+  }
+
+  0% {
+    -webkit-transform: translateY(1rem);
+    -webkit-opacity: 0;
+  }
+}
+@-webkit-keyframes slide2 {
+  0% {
+    -webkit-transform: transform;
+    -webkit-opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    -webkit-opacity: 1;
+  }
+
+  0% {
+    -webkit-transform: translateY(1rem);
+    -webkit-opacity: 0;
+  }
+}
+
+.slideIn {
+  -webkit-animation-name: slideIn;
+  animation-name: slideIn;
+}
+.slide2 {
+  -webkit-animation-name: slide2;
+  animation-name: slide2;
+}
+
+/* Other styles for the page not related to the animated dropdown */
+select {
+  color: #a1ecfb;
+  margin: 0;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  outline: none;
+  box-shadow: none;
+  border-bottom: 1px solid #a1ecfb;
+  vertical-align: top;
+  background-color: transparent;    
+}
+select  option {
+  color: #a1ecfb;
+  background-color: #032026;
+}
+.xrp2{
+  width: 60px;
+}
+.xrp3{
+  width: 30px;
+  height: 30px;
+}
+.overflow-control{
+  overflow-x:hidden;
+}
+.nexus__img{
+  width: 60%;
+  margin: auto;
+}
+@media (max-width:991px) {
+  .overflow-control{
+    overflow-x:scroll;
+  }
+  .nexus__img{
+    width: 100%;
+    margin: auto;
+  } 
+}
