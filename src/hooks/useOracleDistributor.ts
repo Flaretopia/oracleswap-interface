@@ -1,5 +1,5 @@
 import { CurrencyAmount, JSBI, SUSHI, Token, ChainId } from '@sushiswap/core-sdk'
-import { OS } from 'app/config/tokens'
+import { ORACLE } from 'app/config/tokens'
 import { useSingleCallResult } from 'app/state/multicall/hooks'
 import { useTransactionAdder } from 'app/state/transactions/hooks'
 import { useCallback, useMemo } from 'react'

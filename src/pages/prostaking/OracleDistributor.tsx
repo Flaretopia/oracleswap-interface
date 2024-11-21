@@ -1,6 +1,6 @@
 import { ZERO } from '@sushiswap/core-sdk'
 import Button from 'app/components/Button'
-import { OS } from 'app/config/tokens'
+import { ORACLE } from 'app/config/tokens'
 import { PRO_ORALCE_DISTRIBUTOR_ADDRESS } from 'app/constants'
 import { useNextOracleDistributeTime, useProOracleDistributeAction } from 'app/hooks/useProOracleDistributor'
 import { useActiveWeb3React } from 'app/services/web3'
