@@ -67,11 +67,11 @@ export function useOracleDistributorCovertAmount() {
 
   return useMemo(() => {
     if (amount && amount1 && amount2 && amount3 && amount4) {
-      const foundry = CurrencyAmount.fromRawAmount(OS, amount)
+      const foundry = CurrencyAmount.fromRawAmount(ORACLE, amount)
       const treasury = CurrencyAmount.fromRawAmount(OS, amount1)
-      const burned = CurrencyAmount.fromRawAmount(OS, amount2)
-      const total = CurrencyAmount.fromRawAmount(OS, amount3)
-      const prophet = CurrencyAmount.fromRawAmount(OS, amount4)
+      const burned = CurrencyAmount.fromRawAmount(ORACLE, amount2)
+      const total = CurrencyAmount.fromRawAmount(ORACLE, amount3)
+      const prophet = CurrencyAmount.fromRawAmount(ORACLE, amount4)
       return [foundry, treasury, burned, prophet, total]
     }
     return [undefined, undefined, undefined, undefined, undefined]
