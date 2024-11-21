@@ -99,7 +99,7 @@ const OracleDistributor = () => {
     }
   }
 
-  const balance = useTokenBalance(PRO_ORALCE_DISTRIBUTOR_ADDRESS, OS)
+  const balance = useTokenBalance(PRO_ORALCE_DISTRIBUTOR_ADDRESS, ORACLE)
 
   return (
     <div className="flex flex-row items-center mt-3 space-x-2 text-lg font-normal text-left text-primary">
