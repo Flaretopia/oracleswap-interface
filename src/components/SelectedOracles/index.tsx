@@ -113,9 +113,9 @@ export const SelectedOracles = () => {
   )
 
   const depositError = !minXOracleAmount
-    ? 'Invalid xOracle'
+    ? 'Invalid xOS'
     : balance?.lessThan(minXOracleAmount?.multiply(selectedIDs.length)) && lockMode > 0
-      ? 'Insufficient xOracle balance'
+      ? 'Insufficient xOS balance'
       : lowProAmount
         ? 'Low Prophet Staked'
         : undefined
@@ -346,7 +346,7 @@ export const SelectedOracles = () => {
 
       <p className="mb-2">
         Select The Oracles you would like to deploy. Some Oracles wield more power than others, choose wisely! Each
-        Oracle selected must be paired with XORACLE. The highest PRO weight is 8500, the lowest PRO weight is 600, the average PRO Weight is 1073. Tap to
+        OS selected must be paired with XORACLE. The highest PRO weight is 8500, the lowest PRO weight is 600, the average PRO Weight is 1073. Tap to
         select or select max 40 at a time.
       </p>
       <button
@@ -427,7 +427,7 @@ export const SelectedOracles = () => {
               variant="sm"
               className={classNames(minXOracleAmount ? 'text-high-emphesis' : 'text-low-emphesis')}
             >
-              {i18n._(t`Min xOracle Amount:`)}
+              {i18n._(t`Min xOS Amount:`)}
             </Typography>
           </div>
           <Typography
@@ -463,7 +463,7 @@ export const SelectedOracles = () => {
         <div className={classNames('flex justify-between py-2 px-3 w-content')}>
           <div className="flex items-center gap-1.5 mr-1">
             <Typography variant="sm" className={'text-white'}>
-              {i18n._(t`xOracle Required For Multiplier:`)}
+              {i18n._(t`xOS Required For Multiplier:`)}
             </Typography>
           </div>
           <Typography
@@ -474,7 +474,7 @@ export const SelectedOracles = () => {
           >
             {minXOracleAmount && lockMode > 0
               ? `${minXOracleAmount.multiply(selectedIDs.length).toSignificant(6)} ${minXOracleAmount.currency.symbol}`
-              : '0 xORACLE'}
+              : '0 xOS'}
           </Typography>
         </div>
       </div>
@@ -492,7 +492,7 @@ export const SelectedOracles = () => {
             onClick={approve}
             disabled={approvalState !== ApprovalState.NOT_APPROVED}
           >
-            {i18n._(t`Approve xORACLE`)}
+            {i18n._(t`Approve xOS`)}
           </Button>
         ) : !isApprovedAll ? (
           <Button
@@ -501,7 +501,7 @@ export const SelectedOracles = () => {
             onClick={approveNFT}
             disabled={pendingTx || !account || selectedIDs?.length === 0}
           >
-            {i18n._(t`Approve Oracle NFT`)}
+            {i18n._(t`Approve OS NFT`)}
           </Button>
         ) : (
           <Button
@@ -596,7 +596,7 @@ export const SelectedOracles = () => {
               {i18n._(t`Warning you are about to break your time lock!`)}
             </Typography>
             <Typography variant="sm" weight={700} className="text-red">
-              {i18n._(t`You will lose: `)}  {withdrawXOracle?.toSignificant(5)}  {' xORACLE'}
+              {i18n._(t`You will lose: `)}  {withdrawXOracle?.toSignificant(5)}  {' xOS'}
             </Typography>
           </HeadlessUiModal.BorderedContent>
           <Button

@@ -179,7 +179,7 @@ export default function Borrow() {
             {i18n._(t`Collateral`)}
           </ListHeaderWithSort>
           <ListHeaderWithSort className="hidden lg:flex" sort={data} sortKey="oracle.name">
-            {i18n._(t`Oracle`)}
+            {i18n._(t`OS`)}
           </ListHeaderWithSort>
           <ListHeaderWithSort
             className="justify-end"

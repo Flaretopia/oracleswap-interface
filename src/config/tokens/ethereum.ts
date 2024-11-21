@@ -106,12 +106,12 @@ export const XSUSHI = new Token(
   'xSUSHI',
   'SushiBar'
 )
-export const XORACLE = new Token(ChainId.SGB, '0x5795377c85e0fdf6370fae1b74fe03b930c4a892', 18, 'xORACLE', 'OracleBar')
+export const XORACLE = new Token(ChainId.SGB, '0x5795377c85e0fdf6370fae1b74fe03b930c4a892', 18, 'xOS', 'OsBar')
 export const ORACLE = new Token(
   ChainId.SGB,
   '0xD7565b16b65376e2Ddb6c71E7971c7185A7Ff3Ff',
   18,
-  'ORACLE',
+  'OS',
   'OracleSwap.io'
 )
 

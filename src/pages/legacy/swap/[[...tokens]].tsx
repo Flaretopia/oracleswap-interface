@@ -356,7 +356,7 @@ const Swap = ({ banners }) => {
   return (
     <>
       <Head>
-        <title>Oracle Swap | DEX</title>
+        <title>OracleSwap | DEX</title>
         <meta key="description" name="description" content="OracleSwap AMM" />
         <meta key="twitter:description" name="twitter:description" content="OracleSwap AMM" />
         <meta key="og:description" property="og:description" content="OracleSwap AMM" />

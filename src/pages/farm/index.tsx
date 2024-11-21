@@ -8,7 +8,7 @@ import QuestionHelper from 'app/components/QuestionHelper'
 // import QuestionHelper from 'app/components/QuestionHelper'
 import Search from 'app/components/Search'
 import Typography from 'app/components/Typography'
-import { ORACLE } from 'app/config/tokens'
+import { OS } from 'app/config/tokens'
 import { PROPHET_SACRIFICE_ADDRESS } from 'app/constants'
 import { Chef, PairType } from 'app/features/onsen/enum'
 import FarmList from 'app/features/onsen/FarmList'
@@ -91,9 +91,9 @@ export default function Farm(): JSX.Element {
 
   const { account } = useActiveWeb3React()
 
-  const oracleBalance = useTokenBalance(account ?? undefined, ORACLE)
+  const oracleBalance = useTokenBalance(account ?? undefined, OS)
 
-  const sacrificeOracle = useTokenBalance(PROPHET_SACRIFICE_ADDRESS ?? undefined, ORACLE)
+  const sacrificeOracle = useTokenBalance(PROPHET_SACRIFICE_ADDRESS ?? undefined, OS)
 
   const enabled = sacrificeOracle ? sacrificeOracle.greaterThan(ZERO) : false
 
@@ -125,7 +125,7 @@ export default function Farm(): JSX.Element {
   return (
     <>
       <Head>
-        <title>Oracle Swap | Farm</title>
+        <title>OracleSwap | Farm</title>
         <meta key="description" name="description" content="OracleSwap AMM" />
         <meta key="twitter:description" name="twitter:description" content="OracleSwap AMM" />
         <meta key="og:description" property="og:description" content="OracleSwap AMM" />
@@ -169,20 +169,20 @@ export default function Farm(): JSX.Element {
 
                 <QuestionHelper
                   className="!bg-dark-800 !shadow-xl p-2"
-                  text={`The Prophet Sacrifice receives ORACLE from the Oracle Distributor and sacrifices it to buy and burn PRO. Some of the PRO could be distributed to stakers.`}
+                  text={`The Prophet Sacrifice receives OS from the OS Distributor and sacrifices it to buy and burn PRO. Some of the PRO could be distributed to stakers.`}
                 />
               </div>
 
               <div className="flex flex-col flex-grow text-base md:mb-3">
                 <p>
-                  <span>&#128293;</span> Oracle Sacrificed: <span>{prophet?.toSignificant(6)}</span>
+                  <span>&#128293;</span> OS Sacrificed: <span>{prophet?.toSignificant(6)}</span>
                 </p>
                 <p>
                   <span>&#128293;</span> PRO Burned: <span>{burnAmount?.toSignificant(6)}</span>
                 </p>
 
                 <p>
-                  <span>&#128512;</span> ORACLE Available:{' '}
+                  <span>&#128512;</span> OS Available:{' '}
                   <span className={classNames(enabled ? 'text-green' : 'text-red')}>{enabled ? 'Yes' : 'No'}</span>
                 </p>
 

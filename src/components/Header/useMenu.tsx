@@ -98,7 +98,7 @@ const useMenu: UseMenu = () => {
     const stakeMenu = [
       {
         key: 'oracle',
-        title: i18n._(t`Oracle`),
+        title: i18n._(t`OS`),
         link: '/stake',
       },
       {
@@ -169,7 +169,7 @@ const useMenu: UseMenu = () => {
     //   mainItems.push(stakeMenu)
     //   // exploreMenu.push({
     //   //   key: 'stake',
-    //   //   title: i18n._(t`xORACLE`),
+    //   //   title: i18n._(t`xOS`),
     //   //   link: '/stake',
     //   // })
     // }

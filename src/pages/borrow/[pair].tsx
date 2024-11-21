@@ -93,7 +93,7 @@ export default function Pair() {
                     <div className="mr-1 text-sm text-secondary">{i18n._(t`Collateral`)}:</div>
                     {/*@ts-ignore TYPE NEEDS FIXING*/}
                     <div className="mr-2 text-sm text-high-emphesis">{pair.collateral.tokenInfo.symbol}</div>
-                    <div className="mr-1 text-sm text-secondary">{i18n._(t`Oracle`)}:</div>
+                    <div className="mr-1 text-sm text-secondary">{i18n._(t`OS`)}:</div>
                     {/*@ts-ignore TYPE NEEDS FIXING*/}
                     <div className="text-sm text-high-emphesis">{pair.oracle.name}</div>
                   </div>
@@ -241,7 +241,7 @@ const PairLayout = ({ children }) => {
             <PairTools pair={pair} />
 
             <div className="flex justify-between pt-3">
-              <div className="text-xl text-high-emphesis">{i18n._(t`Oracle`)}</div>
+              <div className="text-xl text-high-emphesis">{i18n._(t`OS`)}</div>
             </div>
 
             <div className="flex justify-between">

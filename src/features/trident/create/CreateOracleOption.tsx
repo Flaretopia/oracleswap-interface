@@ -17,7 +17,7 @@ export const CreateOracleOption: FC = () => {
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-0.5">
         <Typography variant="lg" weight={700} className="text-high-emphesis">
-          {i18n._(t`Create Oracle for this Pair?`)}
+          {i18n._(t`Create OS for this Pair?`)}
         </Typography>
         <Typography variant="sm" className="text-secondary">
           {i18n._(t`Creating oracle enables the pool to store its price data and provides more accurate swap rate. However, the swap

@@ -9,12 +9,12 @@ import CAND from '../../../public/CAND.png'
 import CNYX from '../../../public/CNYX.png'
 import HS from '../../../public/HS.png'
 import COOT from '../../../public/COOT.png'
-import ORACLE from '../../../public/ORACLE.png'
+import OS from '../../../public/ORACLE.png'
 import SFIN from '../../../public/SFIN.png'
 import SGB from '../../../public/SGB.png'
 import WSGB from '../../../public/WSGB.png'
 import XFIN from '../../../public/XFIN.png'
-import xORACLE from '../../../public/xORACLE.png'
+import xOS from '../../../public/xORACLE.png'
 import EXFI from '../../../public/EXFI.png'
 import DOOD from '../../../public/DOOD.png'
 import PRO from '../../../public/PRO.png'
@@ -201,8 +201,8 @@ const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({ currency, size = '
   }
 
   if (currency?.chainId === ChainId.SGB) {
-    if (currency.symbol === 'ORACLE') {
-      return <img src={ORACLE.src} width={size} height={size} className={className} />
+    if (currency.symbol === 'OS') {
+      return <img src={OS.src} width={size} height={size} className={className} />
     }
 
     if (currency.symbol === 'LOVE') {
@@ -338,8 +338,8 @@ const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({ currency, size = '
       return <img src={XFIN.src} width={size} height={size} className={className} />
     }
 
-    if (currency.symbol === 'xORACLE') {
-      return <img src={xORACLE.src} width={size} height={size} className={className} />
+    if (currency.symbol === 'xOS') {
+      return <img src={xOS.src} width={size} height={size} className={className} />
     }
 
     if (currency.symbol === 'DOOD') {
@@ -349,8 +349,8 @@ const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({ currency, size = '
 
   if (currency instanceof Token) {
     if (currency.chainId === ChainId.SGB) {
-      if (currency.symbol === 'ORACLE') {
-        return <img src={ORACLE.src} width={size} height={size} className={className} />
+      if (currency.symbol === 'OS') {
+        return <img src={OS.src} width={size} height={size} className={className} />
       }
 
       if (currency.symbol === 'LOVE') {
@@ -470,8 +470,8 @@ const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({ currency, size = '
         return <img src={XFIN.src} width={size} height={size} className={className} />
       }
 
-      if (currency.symbol === 'xORACLE') {
-        return <img src={xORACLE.src} width={size} height={size} className={className} />
+      if (currency.symbol === 'xOS') {
+        return <img src={xOS.src} width={size} height={size} className={className} />
       }
 
       if (currency.symbol === 'PRO') {
@@ -506,8 +506,8 @@ const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({ currency, size = '
       if (currency.tokenInfo.symbol === 'COOT') {
         return <img src={COOT.src} width={size} height={size} className={className} />
       }
-      if (currency.tokenInfo.symbol === 'ORACLE') {
-        return <img src={ORACLE.src} width={size} height={size} className={className} />
+      if (currency.tokenInfo.symbol === 'OS') {
+        return <img src={OS.src} width={size} height={size} className={className} />
       }
       if (currency.tokenInfo.symbol === 'SFIN') {
         return <img src={SFIN.src} width={size} height={size} className={className} />
@@ -522,8 +522,8 @@ const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({ currency, size = '
         return <img src={XFIN.src} width={size} height={size} className={className} />
       }
 
-      if (currency.tokenInfo.symbol === 'xORACLE') {
-        return <img src={xORACLE.src} width={size} height={size} className={className} />
+      if (currency.tokenInfo.symbol === 'xOS') {
+        return <img src={xOS.src} width={size} height={size} className={className} />
       }
 
       if (currency.tokenInfo.symbol === 'PRO') {

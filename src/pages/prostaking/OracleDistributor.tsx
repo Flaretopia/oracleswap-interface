@@ -1,6 +1,6 @@
 import { ZERO } from '@sushiswap/core-sdk'
 import Button from 'app/components/Button'
-import { ORACLE } from 'app/config/tokens'
+import { OS } from 'app/config/tokens'
 import { PRO_ORALCE_DISTRIBUTOR_ADDRESS } from 'app/constants'
 import { useNextOracleDistributeTime, useProOracleDistributeAction } from 'app/hooks/useProOracleDistributor'
 import { useActiveWeb3React } from 'app/services/web3'
@@ -99,7 +99,7 @@ const OracleDistributor = () => {
     }
   }
 
-  const balance = useTokenBalance(PRO_ORALCE_DISTRIBUTOR_ADDRESS, ORACLE)
+  const balance = useTokenBalance(PRO_ORALCE_DISTRIBUTOR_ADDRESS, OS)
 
   return (
     <div className="flex flex-row items-center mt-3 space-x-2 text-lg font-normal text-left text-primary">
@@ -111,12 +111,12 @@ const OracleDistributor = () => {
           onClick={proDistribute}
           disabled={pendingTx || balance?.equalTo(ZERO) || !possible}
         >
-          <img src={ORACLEImage.src} alt="ORACLE" width={40} height={40} />
+          <img src={ORACLEImage.src} alt="OS" width={40} height={40} />
         </Button>
       </div>
       <div className="flex flex-col text-base">
         <div>
-          ORACLE LEFT: <span>{balance?.toSignificant(6)}</span>
+          OS LEFT: <span>{balance?.toSignificant(6)}</span>
         </div>
         <div>
           NEXT DIST:{' '}

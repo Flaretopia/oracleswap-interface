@@ -111,7 +111,7 @@ export const useProStakingActions = () => {
       try {
         const tx = await prostakingContract?.NFTStake(tokenId)
 
-        return addTransaction(tx, { summary: 'Stake Oracle NFT' })
+        return addTransaction(tx, { summary: 'Stake OS NFT' })
       } catch (e) {
         return e
       }
@@ -124,7 +124,7 @@ export const useProStakingActions = () => {
       try {
         const tx = await prostakingContract?.NFTWithdraw(tokenId)
 
-        return addTransaction(tx, { summary: 'Withdraw Oracle NFT' })
+        return addTransaction(tx, { summary: 'Withdraw OS NFT' })
       } catch (e) {
         return e
       }
@@ -137,7 +137,7 @@ export const useProStakingActions = () => {
       try {
         const tx = await prostakingContract?.batchNFTStake(tokenIds)
 
-        return addTransaction(tx, { summary: 'Stake Oracle NFT' })
+        return addTransaction(tx, { summary: 'Stake OS NFT' })
       } catch (e) {
         return e
       }
@@ -150,7 +150,7 @@ export const useProStakingActions = () => {
       try {
         const tx = await prostakingContract?.batchNFTWithdraw(tokenIds)
 
-        return addTransaction(tx, { summary: 'Withdraw Oracle NFT' })
+        return addTransaction(tx, { summary: 'Withdraw OS NFT' })
       } catch (e) {
         return e
       }
@@ -515,7 +515,7 @@ export function useOracleNFTApprove() {
   const approveAll = useCallback(async () => {
     try {
       const tx = await contract?.setApprovalForAll(PROSTAKING_ADDRESS, true)
-      return addTransaction(tx, { summary: 'Approve All Oracle NFTs For Multistaking' })
+      return addTransaction(tx, { summary: 'Approve All OS NFTs For Multistaking' })
     } catch (e) {
       return e
     }
@@ -525,7 +525,7 @@ export function useOracleNFTApprove() {
     async (tokenId: number) => {
       try {
         const tx = await contract?.approve(PROSTAKING_ADDRESS, tokenId)
-        return addTransaction(tx, { summary: 'Approve Oracle NFT For Multistaking' })
+        return addTransaction(tx, { summary: 'Approve OS NFT For Multistaking' })
       } catch (e) {
         return e
       }

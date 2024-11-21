@@ -75,7 +75,7 @@ export default function Lend() {
                   {i18n._(t`Collateral`)}
                 </ListHeaderWithSort>
                 <ListHeaderWithSort className="hidden lg:flex" sort={positions} sortKey="oracle.name">
-                  {i18n._(t`Oracle`)}
+                  {i18n._(t`OS`)}
                 </ListHeaderWithSort>
                 <ListHeaderWithSort
                   className="justify-end"
@@ -122,7 +122,7 @@ export default function Lend() {
               {i18n._(t`Collateral`)}
             </ListHeaderWithSort>
             <ListHeaderWithSort className="hidden lg:flex" sort={data} sortKey="oracle.name">
-              {i18n._(t`Oracle`)}
+              {i18n._(t`OS`)}
               <QuestionHelper text={i18n._(t`The onchain oracle that tracks the pricing for this pair `)} />
             </ListHeaderWithSort>
             <ListHeaderWithSort

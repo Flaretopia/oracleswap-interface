@@ -378,7 +378,7 @@ export const ProphetStaking: FC<ProphetStakingProps> = ({ totalPoolSize }) => {
     : userLockMode === 0 && lowProAmount
     ? 'More PRO Required to Extend NFT Staking'
     : xOracleApprovalState !== ApprovalState.APPROVED
-    ? 'xOracle Not Approved'
+    ? 'xOS Not Approved'
     : undefined
 
   const [showConfirmation, setShowConfirmation] = useState(false)
@@ -418,7 +418,7 @@ export const ProphetStaking: FC<ProphetStakingProps> = ({ totalPoolSize }) => {
                 <p className="text-lg font-semibold"></p>
               </div>
               <div className="flex justify-between p-2 rounded-md box-wrapper">
-                <p className="text-lg font-semibold">xORACLES SELECTED</p>
+                <p className="text-lg font-semibold">xOS SELECTED</p>
                 <p className="text-lg font-semibold"></p>
               </div> */}
               <div className="flex justify-between p-2 rounded-md box-wrapper">
@@ -429,7 +429,7 @@ export const ProphetStaking: FC<ProphetStakingProps> = ({ totalPoolSize }) => {
               </div>
               <p className="mt-2 font-bold text-red-500">
                 *If you withdraw your PRO before the time-lock period is over you will forfeit 50% of your staked
-                PRO/xORACLES!
+                PRO/xOS!
               </p>
             </div>
           ) : (
@@ -505,7 +505,7 @@ export const ProphetStaking: FC<ProphetStakingProps> = ({ totalPoolSize }) => {
                 <p className="text-lg font-semibold"></p>
               </div>
               <div className="flex justify-between p-2 rounded-md box-wrapper">
-                <p className="text-lg font-semibold">xORACLES SELECTED</p>
+                <p className="text-lg font-semibold">xOS SELECTED</p>
                 <p className="text-lg font-semibold"></p>
               </div> */}
             </div>
@@ -562,7 +562,7 @@ export const ProphetStaking: FC<ProphetStakingProps> = ({ totalPoolSize }) => {
                   onClick={xOralceApprove}
                   disabled={xOracleApprovalState !== ApprovalState.NOT_APPROVED}
                 >
-                  {i18n._(t`Approve xORACLE FOR NFT Staking`)}
+                  {i18n._(t`Approve xOS FOR NFT Staking`)}
                 </Button>
               )}
 
@@ -602,7 +602,7 @@ export const ProphetStaking: FC<ProphetStakingProps> = ({ totalPoolSize }) => {
             </div>
             <div className="flex items-center pb-1 balance2">
               <Image src="https://dex.oracleswap.io/profile_icon.webp" height={30} width={30} alt="true" />
-              <p className="ml-2">{`ORACLE NFT: ${nftCount}`}</p>
+              <p className="ml-2">{`OS NFT: ${nftCount}`}</p>
             </div>
             <div className="flex items-center pb-1 balance3">
               <Image src="https://dex.oracleswap.io/ORACLE_SilverLogo.png" height={30} width={30} alt="true" />
@@ -633,7 +633,7 @@ export const ProphetStaking: FC<ProphetStakingProps> = ({ totalPoolSize }) => {
 
               <QuestionHelper
                 className="!bg-dark-800 !shadow-xl p-2"
-                text={`You may notice some tokens called OLP. Each OLP is different and represents a pair. For example: PRO/WSGB, PRO/ORACLE & PRO/xORACLE. Go to Pool > Browse to visualize it.`}
+                text={`You may notice some tokens called OLP. Each OLP is different and represents a pair. For example: PRO/WSGB, PRO/OS & PRO/xOS. Go to Pool > Browse to visualize it.`}
               />
             </div>
 
