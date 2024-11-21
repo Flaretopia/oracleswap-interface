@@ -91,9 +91,9 @@ export default function Farm(): JSX.Element {
 
   const { account } = useActiveWeb3React()
 
-  const oracleBalance = useTokenBalance(account ?? undefined, OS)
+  const oracleBalance = useTokenBalance(account ?? undefined, ORACLE)
 
-  const sacrificeOracle = useTokenBalance(PROPHET_SACRIFICE_ADDRESS ?? undefined, OS)
+  const sacrificeOracle = useTokenBalance(PROPHET_SACRIFICE_ADDRESS ?? undefined, ORACLE)
 
   const enabled = sacrificeOracle ? sacrificeOracle.greaterThan(ZERO) : false
 
