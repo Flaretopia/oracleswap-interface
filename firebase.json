@@ -2,7 +2,7 @@
     "storage": {
       "rules": "storage.rules",
       "cors": [{
-        "origin": ["http://localhost:3005", "https://your-production-domain.com"],
+        "origin": ["http://localhost:3005", "https://dex.oracleswap.io"],
         "method": ["GET", "POST", "PUT", "DELETE", "HEAD"],
         "maxAgeSeconds": 3600,
         "responseHeader": ["Content-Type"]

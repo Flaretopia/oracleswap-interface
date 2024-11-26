@@ -23,7 +23,7 @@ const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  storageBucket: "oracleswap-launcher.firebasestorage.app",
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
@@ -31,6 +31,7 @@ const firebaseConfig = {
 
 console.log('🔥 Initializing Firebase...')
 const app = initializeApp(firebaseConfig)
+
 export const storage = getStorage(app)
 export const db = getFirestore(app)
 console.log('✅ Firebase initialized successfully')
@@ -59,14 +60,47 @@ export const saveTokenMetadata = async (tokenData: TokenMetadata) => {
   }
 }
 
-export const uploadLogo = async (file: File, tokenSymbol: string): Promise<string> => {
-  try {
-    const storageRef = ref(storage, `token-logos/${tokenSymbol.toLowerCase()}.png`)
-    const snapshot = await uploadBytes(storageRef, file)
-    const url = await getDownloadURL(snapshot.ref)
-    return url
-  } catch (error) {
-    console.error('Error uploading logo:', error)
-    throw error
+export const uploadLogo = async (file: File, tokenSymbol: string, maxRetries = 3): Promise<string> => {
+  let attempt = 0;
+  
+  while (attempt < maxRetries) {
+    try {
+      console.log(`Attempting to upload logo for ${tokenSymbol}, attempt ${attempt + 1}`);
+      
+      // Create a clean filename
+      const cleanSymbol = tokenSymbol.toLowerCase().replace(/[^a-z0-9]/g, '')
+      const fileName = `${cleanSymbol}_${Date.now()}.png`
+      
+      // Create storage reference
+      const storageRef = ref(storage, `token-logos/${fileName}`);
+      
+      // Add metadata
+      const metadata = {
+        contentType: file.type,
+        cacheControl: 'public,max-age=31536000', // Cache for 1 year
+      };
+
+      // Upload file with metadata
+      const snapshot = await uploadBytes(storageRef, file, metadata);
+      console.log('Upload successful:', snapshot);
+      
+      // Get download URL with cache busting
+      const url = await getDownloadURL(snapshot.ref);
+      console.log('Download URL obtained:', url);
+      
+      return url;
+    } catch (error) {
+      console.error(`Upload attempt ${attempt + 1} failed:`, error);
+      attempt++;
+      
+      if (attempt === maxRetries) {
+        console.error('Max retries reached, using fallback image');
+        return '/images/tokens/unknown.png';
+      }
+      
+      await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
+    }
   }
-}
+  
+  return '/images/tokens/unknown.png';
+};

@@ -745,9 +745,10 @@ export default function Tokens() {
                                 className="rounded-full object-cover"
                                 onError={(e) => {
                                   console.error('Error loading image:', token.logoUrl);
-                                  e.currentTarget.src = '/images/tokens/unknown.png'; // Add a fallback image
+                                  e.currentTarget.src = '/images/tokens/unknown.png';
                                 }}
-                                unoptimized={true} // Add this to bypass Next.js image optimization
+                                unoptimized={true}
+                                loading="lazy"
                               />
                             )}
                           </div>

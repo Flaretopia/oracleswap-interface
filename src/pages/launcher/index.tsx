@@ -11,12 +11,33 @@ import TransactionConfirmationModal from 'app/modals/TransactionConfirmationModa
 import { HeadlessUiModal } from 'app/components/Modal'
 import Container from 'app/components/Container'
 import Dots from 'app/components/Dots'
+import { JSBI, Token, TokenAmount, CurrencyAmount } from '@sushiswap/core-sdk'
+import { useTokenBalance } from 'app/state/wallet/hooks'
+import { useTokenContract } from 'app/hooks/useContract'
+import Image from 'next/image'
+import { Contract } from '@ethersproject/contracts'
+import { ethers } from 'ethers'
+import LAUNCHER_ABI from './launcher_abi.json'
+import ERC20_ABI from 'app/constants/abis/erc20.json'
+const LAUNCHER_ADDRESS = "0xb452cfcfbF012cF74fFe9A04e249f5F505a2b44B"
 
 const MIN_INITIAL_LIQUIDITY = '1'
 
+const OS_TOKEN = {
+  address: '0xD7565b16b65376e2Ddb6c71E7971c7185A7Ff3Ff',
+  symbol: 'OS',
+  decimals: 18
+}
+
+const PRO_TOKEN = {
+  address: '0xf810576A68C3731875BDe07404BE815b16fC0B4e',
+  symbol: 'PRO',
+  decimals: 18
+}
+
 export default function TokenLauncher() {
-  const { account, chainId } = useActiveWeb3React()
-  const { createToken, isLoading, nativeFee } = useLauncher()
+  const { account, chainId, library } = useActiveWeb3React()
+  const { createToken, isLoading, nativeFee, osBalance, proBalance } = useLauncher()
   const addTransaction = useTransactionAdder()
   
   const [activeView, setActiveView] = useState<'launcher' | 'tokens'>('launcher')
@@ -36,20 +57,88 @@ export default function TokenLauncher() {
   const [showConfirm, setShowConfirm] = useState<boolean>(false)
   const [txHash, setTxHash] = useState<string>('')
   const [pendingTx, setPendingTx] = useState(false)
+  const [approving, setApproving] = useState(false)
+
+  const [selectedPaymentToken, setSelectedPaymentToken] = useState<'SGB' | 'OS' | 'PRO'>('SGB')
+  const [tokenFees, setTokenFees] = useState({
+    nativeFee: '0',
+    osFee: '0',
+    proFee: '0'
+  })
+
+  const [osAllowance, setOsAllowance] = useState<CurrencyAmount<Token> | null>(null)
+  const [proAllowance, setProAllowance] = useState<CurrencyAmount<Token> | null>(null)
+
+  useEffect(() => {
+    const fetchFees = async () => {
+      if (!library) return
+      const contract = new Contract(LAUNCHER_ADDRESS, LAUNCHER_ABI, library)
+      const [nativeFee, osFee, proFee] = await Promise.all([
+        contract.nativeFee(),
+        contract.tokenFees(OS_TOKEN.address),
+        contract.tokenFees(PRO_TOKEN.address)
+      ])
+      setTokenFees({
+        nativeFee: ethers.utils.formatEther(nativeFee),
+        osFee: ethers.utils.formatEther(osFee),
+        proFee: ethers.utils.formatEther(proFee)
+      })
+    }
+    fetchFees()
+  }, [library])
+
+  useEffect(() => {
+    const checkAllowances = async () => {
+      if (!account || !library) return
+
+      try {
+        const osContract = new Contract(OS_TOKEN.address, ERC20_ABI, library)
+        const proContract = new Contract(PRO_TOKEN.address, ERC20_ABI, library)
+
+        const [osAllowanceRaw, proAllowanceRaw] = await Promise.all([
+          osContract.allowance(account, LAUNCHER_ADDRESS),
+          proContract.allowance(account, LAUNCHER_ADDRESS)
+        ])
+
+        setOsAllowance(CurrencyAmount.fromRawAmount(
+          new Token(chainId, OS_TOKEN.address, OS_TOKEN.decimals),
+          osAllowanceRaw.toString()
+        ))
+        setProAllowance(CurrencyAmount.fromRawAmount(
+          new Token(chainId, PRO_TOKEN.address, PRO_TOKEN.decimals),
+          proAllowanceRaw.toString()
+        ))
+      } catch (error) {
+        console.error('Error checking allowances:', error)
+      }
+    }
+
+    checkAllowances()
+  }, [account, library, chainId])
+
+  const osContract = useTokenContract(OS_TOKEN.address)
+  const proContract = useTokenContract(PRO_TOKEN.address)
+
+  const handleApprove = async () => {
+    if (!account || !library) return
+    setApproving(true)
+    try {
+      const contract = selectedPaymentToken === 'OS' ? osContract : proContract
+      if (!contract) throw new Error('Contract not found')
+      
+      const amount = ethers.utils.parseUnits('10000', 18)
+      
+      const tx = await contract.approve(LAUNCHER_ADDRESS, amount)
+      await tx.wait()
+    } catch (error) {
+      console.error('Error approving token:', error)
+    }
+    setApproving(false)
+  }
 
   const handleCreateToken = useCallback(async () => {
     if (!account) return
-    if (!formData.name || !formData.symbol || !formData.totalSupply || !formData.lpPercent || !formData.devPercent || !formData.logo || !formData.website || Number(formData.initialLiquidity) < Number(MIN_INITIAL_LIQUIDITY)) {
-      alert('Please fill in all required fields and ensure initial liquidity meets minimum requirement')
-      return
-    }
     
-    const urlPattern = /^https?:\/\/.+\..+/
-    if (!urlPattern.test(formData.website)) {
-      alert('Please enter a valid website URL (must start with http:// or https://)')
-      return
-    }
-
     setPendingTx(true)
     setShowConfirm(true)
 
@@ -63,18 +152,43 @@ export default function TokenLauncher() {
         initialLiquidity: formData.initialLiquidity,
         description: formData.description,
         website: formData.website,
-        logoFile: formData.logo // Make sure to pass the logo file
+        logoFile: formData.logo,
+        paymentToken: selectedPaymentToken
       })
 
-      setTxHash(result.hash)
+      if (result.success) {
+        // Token creation was successful
+        setTxHash(result.hash)
+        
+        // Reset form
+        setFormData({
+          name: '',
+          symbol: '',
+          totalSupply: '',
+          lpPercent: '95',
+          devPercent: '4',
+          initialLiquidity: MIN_INITIAL_LIQUIDITY,
+          description: '',
+          website: '',
+          logo: null,
+        })
 
-    } catch (error) {
-      console.error(error)
+        // Keep the confirmation modal open to show success
+        setPendingTx(false)
+        // Don't close the modal - let user see the success state
+        // setShowConfirm(false)
+      } else {
+        // Token creation failed
+        throw new Error(result.error)
+      }
+    } catch (error: any) {
+      console.error('Token creation error:', error)
+      setPendingTx(false)
       setShowConfirm(false)
+      // Remove alert and show error in the UI
+      // alert(error.message || 'Failed to create token. Please try again.')
     }
-
-    setPendingTx(false)
-  }, [account, formData, createToken, addTransaction])
+  }, [account, createToken, formData, selectedPaymentToken])
 
   const handleDismissConfirmation = useCallback(() => {
     setShowConfirm(false)
@@ -134,6 +248,67 @@ export default function TokenLauncher() {
 
     setFormData(prev => ({ ...prev, logo: file }))
   }
+
+  const needsApproval = (selectedToken: 'OS' | 'PRO') => {
+    if (!account) return false
+    
+    const requiredAmount = ethers.utils.parseUnits(
+      selectedToken === 'OS' ? tokenFees.osFee : tokenFees.proFee,
+      18
+    )
+    
+    const allowance = selectedToken === 'OS' ? osAllowance : proAllowance
+    
+    return !allowance || allowance.lessThan(requiredAmount.toString())
+  }
+
+  const hasEnoughBalance = useCallback(() => {
+    if (!account) return false
+    
+    try {
+      const requiredAmount = ethers.utils.parseEther(
+        selectedPaymentToken === 'SGB' 
+          ? (Number(formData.initialLiquidity) + Number(nativeFee)).toString()
+          : '10' // 10 tokens required for OS/PRO
+      )
+
+      if (selectedPaymentToken === 'SGB') {
+        // Handle SGB balance check
+        return library?.getBalance(account).then(balance => 
+          balance.gte(requiredAmount)
+        ) || false
+      } else {
+        // Handle OS/PRO balance check
+        const balance = selectedPaymentToken === 'OS' ? osBalance : proBalance
+        if (!balance) return false
+        
+        // Convert the required amount to match the SDK's format
+        const requiredCurrencyAmount = CurrencyAmount.fromRawAmount(
+          new Token(
+            chainId || 19,
+            selectedPaymentToken === 'OS' ? OS_TOKEN.address : PRO_TOKEN.address,
+            18
+          ),
+          requiredAmount.toString()
+        )
+        
+        return balance.greaterThan(requiredCurrencyAmount)
+      }
+    } catch (error) {
+      console.error('Error checking balance:', error)
+      return false
+    }
+  }, [account, selectedPaymentToken, formData.initialLiquidity, nativeFee, osBalance, proBalance, library, chainId])
+
+  const [canCreate, setCanCreate] = useState(false)
+
+  useEffect(() => {
+    const checkBalance = async () => {
+      const result = await hasEnoughBalance()
+      setCanCreate(result)
+    }
+    checkBalance()
+  }, [hasEnoughBalance])
 
   return (
     <Container id="launcher-page" className="py-4 md:py-8 lg:py-12" maxWidth="7xl">
@@ -353,13 +528,90 @@ export default function TokenLauncher() {
               <Typography variant="sm">💻 Dev: {formData.devPercent}% ({formData.totalSupply ? (Number(formData.totalSupply) * Number(formData.devPercent) / 100).toLocaleString() : '-'} tokens)</Typography>
               <Typography variant="sm">🏦 Fee: 1% ({formData.totalSupply ? (Number(formData.totalSupply) * 0.01).toLocaleString() : '-'} tokens)</Typography>
               <Typography variant="sm">Initial Liquidity: {formData.initialLiquidity} SGB</Typography>
-              <Typography variant="sm">Launch Fee: {nativeFee} SGB</Typography>
             </div>
 
-            <div className="border-t border-dark-700 pt-4">
-              <Typography variant="lg" className="text-high-emphesis">
-                Total Cost: {Number(formData.initialLiquidity) + Number(nativeFee)} SGB
-              </Typography>
+            <div className="border-t border-dark-700 pt-4 space-y-4">
+              <Typography variant="lg" className="text-grey">Payment Token</Typography>
+              
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setSelectedPaymentToken('SGB')}
+                  className={`flex items-center gap-2 p-2 rounded ${
+                    selectedPaymentToken === 'SGB' ? 'bg-blue' : 'bg-dark-800'
+                  }`}
+                >
+                  <Image 
+                    src="/SGB.png" 
+                    width={24} 
+                    height={24} 
+                    alt="SGB"
+                    unoptimized={true}
+                    onError={(e) => {
+                      console.error('Error loading SGB image');
+                      e.currentTarget.src = '/images/tokens/unknown.png';
+                    }}
+                  />
+                  <span>SGB</span>
+                </button>
+                
+                <button
+                  onClick={() => setSelectedPaymentToken('OS')}
+                  className={`flex items-center gap-2 p-2 rounded ${
+                    selectedPaymentToken === 'OS' ? 'bg-blue' : 'bg-dark-800'
+                  }`}
+                >
+                  <Image 
+                    src="/ORACLE.png" 
+                    width={24} 
+                    height={24} 
+                    alt="OS"
+                    unoptimized={true}
+                    onError={(e) => {
+                      console.error('Error loading OS image');
+                      e.currentTarget.src = '/images/tokens/unknown.png';
+                    }}
+                  />
+                  <span>OS</span>
+                </button>
+                
+                <button
+                  onClick={() => setSelectedPaymentToken('PRO')}
+                  className={`flex items-center gap-2 p-2 rounded ${
+                    selectedPaymentToken === 'PRO' ? 'bg-blue' : 'bg-dark-800'
+                  }`}
+                >
+                  <Image 
+                    src="/PRO.png" 
+                    width={24} 
+                    height={24} 
+                    alt="PRO"
+                    unoptimized={true}
+                    onError={(e) => {
+                      console.error('Error loading PRO image');
+                      e.currentTarget.src = '/images/tokens/unknown.png';
+                    }}
+                  />
+                  <span>PRO</span>
+                </button>
+              </div>
+
+              <div className="space-y-2">
+                <Typography variant="sm">
+                  Fee: {selectedPaymentToken === 'SGB' ? tokenFees.nativeFee : 
+                        selectedPaymentToken === 'OS' ? tokenFees.osFee :
+                        tokenFees.proFee} {selectedPaymentToken}
+                </Typography>
+                
+                {selectedPaymentToken !== 'SGB' && needsApproval(selectedPaymentToken) && (
+                  <Button
+                    color="blue"
+                    onClick={handleApprove}
+                    disabled={approving}
+                  >
+                    {approving ? 'Approving...' : 'Approve'}
+                  </Button>
+                )}
+              </div>
             </div>
 
             <div className="mt-4">
@@ -370,9 +622,14 @@ export default function TokenLauncher() {
                   fullWidth
                   color="blue"
                   onClick={handleCreateToken}
-                  disabled={pendingTx}
+                  disabled={pendingTx || !canCreate}
                 >
-                  {i18n._(t`Create Token`)}
+                  {!canCreate 
+                    ? `Insufficient ${selectedPaymentToken} Balance`
+                    : pendingTx 
+                      ? <Dots>Uploading Token Metadata</Dots>
+                      : 'Create Token'
+                  }
                 </Button>
               )}
             </div>
@@ -387,11 +644,15 @@ export default function TokenLauncher() {
             hash={txHash}
             content={() => (
               <HeadlessUiModal.Header
-                header={i18n._(t`Confirming Token Launch`)}
+                header={pendingTx 
+                  ? i18n._(t`Uploading Token Metadata...`) 
+                  : txHash 
+                    ? i18n._(t`Transaction Submitted`) 
+                    : i18n._(t`Confirm Token Creation`)}
                 onClose={handleDismissConfirmation}
               />
             )}
-            pendingText={"Creating Token..."}
+            pendingText={i18n._(t`Creating ${formData.symbol} token and uploading metadata please be patient...`)}
           />
         )}
       </div>

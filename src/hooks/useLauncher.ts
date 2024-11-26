@@ -4,8 +4,6 @@ import { ethers, Contract } from 'ethers';
 
 import { useActiveWeb3React } from 'app/services/web3';
 
-import LAUNCHER_ABI from '../pages/launcher/launcher_abi.json';
-
 import { storage, db } from '../config/firebase'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { collection, addDoc } from 'firebase/firestore'
@@ -13,6 +11,10 @@ import { collection, addDoc } from 'firebase/firestore'
 import { useTransactionAdder } from 'app/state/transactions/hooks'; // Add this import
 
 import axios from 'axios';
+
+import { useTokenContract } from 'app/hooks/useContract'
+import { useTokenBalance } from 'app/state/wallet/hooks'
+import { Token } from '@sushiswap/core-sdk'
 
 const LAUNCHER_ADDRESS = "0xb452cfcfbF012cF74fFe9A04e249f5F505a2b44B";
 
@@ -66,6 +68,40 @@ const debug = (step: string, data?: any) => {
   console.groupEnd();
 };
 
+// Add payment token type
+type PaymentToken = 'SGB' | 'OS' | 'PRO'
+
+// Add complete ERC20 ABI
+const ERC20_ABI = [
+  "function name() view returns (string)",
+  "function symbol() view returns (string)",
+  "function decimals() view returns (uint8)",
+  "function totalSupply() view returns (uint256)",
+  "function balanceOf(address) view returns (uint256)",
+  "function transfer(address to, uint256 amount) returns (bool)",
+  "function allowance(address owner, address spender) view returns (uint256)",
+  "function approve(address spender, uint256 amount) returns (bool)",
+  "function transferFrom(address from, address to, uint256 amount) returns (bool)",
+  "event Transfer(address indexed from, address indexed to, uint256 value)",
+  "event Approval(address indexed owner, address indexed spender, uint256 value)"
+];
+
+// Add PAIR ABI for price calculations
+const PAIR_ABI = [
+  "function token0() external view returns (address)",
+  "function token1() external view returns (address)",
+  "function getReserves() external view returns (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast)"
+];
+
+// Add LAUNCHER ABI
+const LAUNCHER_ABI = [
+  "function nativeFee() view returns (uint256)",
+  "function tokenFees(address) view returns (uint256)",
+  "function createToken(string memory name, string memory symbol, uint256 totalSupply, uint256 lpPercent, uint256 devPercent, address paymentToken, uint256 initialLiquidity, bool useNativeFee) payable",
+  "event TokenCreated(address tokenAddress, string name, string symbol, uint256 totalSupply)",
+  "event PairCreated(address indexed token0, address indexed token1, address pair)"
+];
+
 export const useLauncher = () => {
 
   const { account, chainId, library } = useActiveWeb3React();
@@ -73,6 +109,38 @@ export const useLauncher = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [nativeFee, setNativeFee] = useState<string>('1'); // Default value
+
+  // Add token contracts
+  const osContract = useTokenContract('0xD7565b16b65376e2Ddb6c71E7971c7185A7Ff3Ff')
+  const proContract = useTokenContract('0xf810576A68C3731875BDe07404BE815b16fC0B4e')
+
+  // Get token balances
+  const osBalance = useTokenBalance(
+    account ?? undefined,
+    new Token(chainId || 19, '0xD7565b16b65376e2Ddb6c71E7971c7185A7Ff3Ff', 18)
+  )
+  const proBalance = useTokenBalance(
+    account ?? undefined,
+    new Token(chainId || 19, '0xf810576A68C3731875BDe07404BE815b16fC0B4e', 18)
+  )
+
+  const checkBalance = useCallback(async (paymentToken: string, requiredAmount: ethers.BigNumber) => {
+    if (!account || !library) return false
+
+    try {
+      if (paymentToken === 'SGB') {
+        const balance = await library.getBalance(account)
+        return balance.gte(requiredAmount)
+      } else {
+        const balance = paymentToken === 'OS' ? osBalance : proBalance
+        if (!balance) return false
+        return balance.greaterThan(requiredAmount.toString())
+      }
+    } catch (error) {
+      console.error('Error checking balance:', error)
+      return false
+    }
+  }, [account, library, osBalance, proBalance])
 
   // Add useEffect to fetch nativeFee when component mounts
   useEffect(() => {
@@ -123,177 +191,209 @@ export const useLauncher = () => {
     initialLiquidity,
     description,
     website,
-    logoFile
+    logoFile,
+    paymentToken = 'SGB'
   }) => {
-    debug('Starting Token Creation Process');
+    debug('Starting Token Creation Process')
     
     if (!library || !account) {
-      debug('Error: Wallet Not Connected');
-      throw new Error('Wallet not connected');
+      throw new Error('Wallet not connected')
     }
     
-    setIsLoading(true);
-    debug('Initial Parameters', {
-      name,
-      symbol,
-      totalSupply,
-      lpPercent,
-      devPercent,
-      initialLiquidity,
-      description,
-      website,
-      hasLogoFile: !!logoFile
-    });
+    setIsLoading(true)
 
     try {
-      debug('Preparing Contract Interaction');
-      const signer = library.getSigner();
-      const contract = new Contract(LAUNCHER_ADDRESS, LAUNCHER_ABI, signer);
+      debug('Preparing Contract Interaction')
+      const signer = library.getSigner()
+      const contract = new Contract(LAUNCHER_ADDRESS, LAUNCHER_ABI, signer)
 
-      const totalSupplyInWei = ethers.utils.parseUnits(totalSupply, 18);
-      const liquidityInWei = ethers.utils.parseEther(initialLiquidity);
-      const nativeFeeInWei = ethers.utils.parseEther(nativeFee);
-      const totalRequiredValue = nativeFeeInWei.add(liquidityInWei);
+      const totalSupplyInWei = ethers.utils.parseUnits(totalSupply, 18)
+      const liquidityInWei = ethers.utils.parseEther(initialLiquidity)
+
+      let paymentTokenAddress = ethers.constants.AddressZero
+      let paymentAmount = '0'
+      let value = '0'
+      let requiredBalance = ethers.BigNumber.from('0')
+
+      if (paymentToken === 'SGB') {
+        value = liquidityInWei.add(ethers.utils.parseEther(nativeFee)).toString()
+        paymentTokenAddress = ethers.constants.AddressZero
+        requiredBalance = ethers.BigNumber.from(value)
+      } else {
+        paymentTokenAddress = paymentToken === 'OS' 
+          ? '0xD7565b16b65376e2Ddb6c71E7971c7185A7Ff3Ff'
+          : '0xf810576A68C3731875BDe07404BE815b16fC0B4e'
+        value = liquidityInWei.toString()
+        const tokenFee = await contract.tokenFees(paymentTokenAddress)
+        paymentAmount = tokenFee.toString()
+        requiredBalance = ethers.BigNumber.from(paymentAmount)
+      }
+
+      // Check balance before proceeding
+      const hasBalance = await checkBalance(paymentToken, requiredBalance)
+      if (!hasBalance) {
+        throw new Error(`Insufficient ${paymentToken} balance. Required: ${ethers.utils.formatEther(requiredBalance)} ${paymentToken}`)
+      }
 
       debug('Contract Parameters', {
+        name,
+        symbol,
         totalSupplyInWei: totalSupplyInWei.toString(),
+        lpPercent: Number(lpPercent),
+        devPercent: Number(devPercent),
+        paymentTokenAddress,
         liquidityInWei: liquidityInWei.toString(),
-        nativeFeeInWei: nativeFeeInWei.toString(),
-        totalRequiredValue: totalRequiredValue.toString()
-      });
+        useNativeFee: paymentToken === 'SGB',
+        value,
+        paymentAmount
+      })
 
-      debug('Sending Transaction');
+      // Estimate gas first
+      const gasEstimate = await contract.estimateGas.createToken(
+        name,
+        symbol,
+        totalSupplyInWei,
+        Number(lpPercent),
+        Number(devPercent),
+        paymentTokenAddress,
+        liquidityInWei,
+        paymentToken === 'SGB',
+        { value }
+      )
+
+      debug('Gas Estimate', { gasEstimate: gasEstimate.toString() })
+
+      // Add 20% to gas estimate
+      const gasLimit = gasEstimate.mul(120).div(100)
+
       const tx = await contract.createToken(
         name,
         symbol,
         totalSupplyInWei,
         Number(lpPercent),
         Number(devPercent),
-        ethers.constants.AddressZero,
+        paymentTokenAddress,
         liquidityInWei,
-        true,
-        { value: totalRequiredValue }
-      );
+        paymentToken === 'SGB',
+        { 
+          value,
+          gasLimit 
+        }
+      )
 
-      debug('Transaction Sent', { hash: tx.hash });
+      debug('Transaction Sent', { hash: tx.hash })
       
-      debug('Waiting for Transaction Receipt');
-      const receipt = await tx.wait();
-      debug('Transaction Receipt Received', { 
-        blockNumber: receipt.blockNumber,
-        gasUsed: receipt.gasUsed.toString(),
-        events: receipt.events?.map((e: { event: string }) => e.event)
-      });
+      // Add transaction to pending transactions
+      addTransaction(tx, {
+        summary: `Creating ${symbol} token`,
+      })
 
-      if (!logoFile) {
-        debug('Error: Missing Logo File');
-        throw new Error('Logo is required to complete token setup');
-      }
-
-      debug('Processing TokenCreated Event');
+      const receipt = await tx.wait()
+      
+      // Process events and get addresses
       const tokenCreatedEvent = receipt.events?.find(
         (e: any) => e.event === 'TokenCreated'
-      );
+      )
       
       if (!tokenCreatedEvent || !tokenCreatedEvent.args) {
-        debug('Error: TokenCreated Event Not Found');
-        throw new Error('TokenCreated event not found in transaction receipt');
+        throw new Error('TokenCreated event not found in transaction receipt')
       }
 
-      debug('Processing PairCreated Event');
-      let lpAddress;
+      const tokenAddress = tokenCreatedEvent.args.tokenAddress
+      const launchTime = tokenCreatedEvent.args.launchTime || Math.floor(Date.now() / 1000)
+
+      // Find LP address
+      let lpAddress
       const pairCreatedEvent = receipt.events?.find(
         (e: any) => e.event === 'PairCreated'
-      );
+      )
 
       if (pairCreatedEvent && pairCreatedEvent.args) {
-        lpAddress = pairCreatedEvent.args.pair;
-        debug('Found LP Address from Event', { lpAddress });
+        lpAddress = pairCreatedEvent.args.pair
       } else {
-        debug('Searching for PairCreated in Logs');
         const pairCreatedLog = receipt.logs?.find(
           (log: any) => log.topics[0] === '0x0d3648bd0f6ba80134a33ba9275ac585d9d315f0ad8355cddefde31afa28d0e9'
-        );
-
+        )
         if (pairCreatedLog) {
-          const abiCoder = new ethers.utils.AbiCoder();
-          const decodedData = abiCoder.decode(['address'], pairCreatedLog.data);
-          lpAddress = decodedData[0];
-          debug('Found LP Address from Logs', { lpAddress });
+          const abiCoder = new ethers.utils.AbiCoder()
+          const decodedData = abiCoder.decode(['address'], pairCreatedLog.data)
+          lpAddress = decodedData[0]
         }
       }
 
       if (!lpAddress) {
-        debug('Error: LP Address Not Found', { receipt });
-        throw new Error('Could not find LP address in transaction receipt');
+        throw new Error('Could not find LP address in transaction receipt')
       }
 
-      const tokenAddress = tokenCreatedEvent.args.tokenAddress;
-      const launchTime = tokenCreatedEvent.args.launchTime || Math.floor(Date.now() / 1000);
-
-      debug('Token Details', {
-        tokenAddress,
-        lpAddress,
-        launchTime
-      });
-
+      // Upload logo and save metadata
+      let logoUrl = ''
       try {
-        debug('Starting Logo Upload');
-        console.log('Logo File:', logoFile);
-        const logoUrl = await uploadLogo(logoFile, symbol);
-        debug('Logo Upload Complete', { logoUrl });
-
-        const metadata: TokenMetadata = {
-          name,
-          symbol,
-          tokenAddress,
-          lpAddress,
-          description: description || '',
-          website: website || '',
-          logoUrl,
-          launchDate: new Date(launchTime * 1000),
-          lpAllocation: lpPercent.toString(),
-          devAllocation: devPercent.toString(),
-          initialLiquidity: initialLiquidity.toString(),
-          chainId: chainId?.toString() || '19',
-          totalSupply: totalSupply.toString(),
-          creatorAddress: account
-        };
-
-        console.log('Attempting to save metadata:', metadata);
-        
-        try {
-          const docId = await saveTokenMetadata(metadata);
-          console.log('Successfully saved to Firestore with ID:', docId);
-        } catch (firestoreError) {
-          console.error('Firestore save error:', firestoreError);
-          // Consider showing an error message to the user
-          throw firestoreError;
-        }
-
-      } catch (firebaseError) {
-        console.error('Firebase operation failed:', firebaseError);
-        // Consider showing an error message to the user
-        throw firebaseError;
+        logoUrl = await uploadLogo(logoFile, symbol)
+        debug('Logo Upload Complete', { logoUrl })
+      } catch (uploadError) {
+        console.error('Logo upload failed:', uploadError)
+        logoUrl = '/images/tokens/unknown.png'
       }
 
-      debug('Token Creation Process Complete');
-      return {
-        hash: tx.hash,
-        receipt,
+      const metadata: TokenMetadata = {
+        name,
+        symbol,
         tokenAddress,
         lpAddress,
-        launchTime
-      };
+        description: description || '',
+        website: website || '',
+        logoUrl,
+        launchDate: new Date(launchTime * 1000),
+        lpAllocation: lpPercent.toString(),
+        devAllocation: devPercent.toString(),
+        initialLiquidity: initialLiquidity.toString(),
+        chainId: chainId?.toString() || '19',
+        totalSupply: totalSupply.toString(),
+        creatorAddress: account
+      }
 
-    } catch (error) {
-      debug('Error in Token Creation Process', error);
-      throw error;
+      let docId
+      try {
+        docId = await saveTokenMetadata(metadata)
+        debug('Metadata Saved', { docId })
+      } catch (firestoreError) {
+        console.error('Firestore save error:', firestoreError)
+        // Don't throw, just continue
+      }
+
+      // Return success result
+      return {
+        success: true,
+        hash: tx.hash,
+        tokenAddress,
+        lpAddress,
+        launchTime,
+        docId
+      }
+
+    } catch (error: any) {
+      debug('Error in Token Creation Process', error)
+      setIsLoading(false)
+      
+      // Format error message for user
+      let errorMessage = 'Failed to create token. '
+      if (error?.data?.message) {
+        errorMessage += error.data.message
+      } else if (error?.message) {
+        errorMessage += error.message
+      } else {
+        errorMessage += 'Please try again.'
+      }
+      
+      return {
+        success: false,
+        error: errorMessage
+      }
     } finally {
-      setIsLoading(false);
-      debug('Process Finished');
+      setIsLoading(false)
+      debug('Process Finished')
     }
-  }, [library, account, chainId, addTransaction]); // Add addTransaction to deps
+  }, [library, account, chainId, addTransaction, nativeFee, checkBalance])
 
   const fetchHoldersCount = async (tokenAddress: string) => {
     const maxRetries = 3
@@ -334,6 +434,8 @@ export const useLauncher = () => {
   return {
     createToken,
     isLoading,
-    nativeFee
+    nativeFee,
+    osBalance,
+    proBalance
   };
 };
