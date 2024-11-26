@@ -28,3 +28,4 @@ coverage
 
 # Sentry
 .sentryclirc
+.env.local

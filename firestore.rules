@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /tokens/{tokenId} {
+      // Allow reading tokens without any restrictions
+      allow read: if true;
+      
+      // Allow writing only with required fields
+      allow write: if 
+        request.resource.data.keys().hasAll([
+          'name', 
+          'symbol', 
+          'tokenAddress', 
+          'lpAddress', 
+          'totalSupply',
+          'lpAllocation',
+          'devAllocation',
+          'initialLiquidity',
+          'website',
+          'logoUrl',
+          'creatorAddress'
+        ]);
+    }
+  }
+} 

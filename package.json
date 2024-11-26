@@ -215,6 +215,7 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@mui/material": "^5.10.11",
+    "firebase": "^11.0.2",
     "react-countdown-hook": "^1.1.1"
   }
 }

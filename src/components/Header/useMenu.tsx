@@ -147,17 +147,9 @@ const useMenu: UseMenu = () => {
       icon: <CurrencyDollarIcon width={20} />,
     }
 
-    let nftMenu: MenuItem = {
-      key: 'nft',
-      title: i18n._(t`NFT`),
-      link: 'https://comingsoon.oracleswap.io/',
-      external: true,
-      icon: <CollectionIcon width={20} />,
-    }
-
     let analyticsMenu: MenuItem = {
       key: 'analytics',
-      title: i18n._(t`Analytics`),
+      title: i18n._(t`📈`),
       link: 'https://analytics.oracleswap.io/',
       external: true,
       icon: <PresentationChartBarIcon width={20} />,
@@ -244,7 +236,25 @@ const useMenu: UseMenu = () => {
       mainItems.push(farmItems)
     }
 
-    mainItems.push(nftMenu)
+    let launcherMenu: MenuItem = {
+      key: 'launcher',
+      title: i18n._(t`🚀Launcher`),
+      icon: <SwitchVerticalIcon width={20} className="rotate-90 filter" />,
+      items: [
+        {
+          key: 'launch',
+          title: i18n._(t`Launch`),
+          link: '/launcher',
+        },
+        {
+          key: 'tokens',
+          title: i18n._(t`Tokens`),
+          link: '/tokens',
+        },
+      ],
+    }
+
+    mainItems.push(launcherMenu)
     mainItems.push(analyticsMenu)
     mainItems.push(earnMenu)
     mainItems.push(bridgeMenu)
