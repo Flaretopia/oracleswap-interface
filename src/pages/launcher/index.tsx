@@ -11,7 +11,7 @@ import TransactionConfirmationModal from 'app/modals/TransactionConfirmationModa
 import { HeadlessUiModal } from 'app/components/Modal'
 import Container from 'app/components/Container'
 import Dots from 'app/components/Dots'
-import { JSBI, Token, TokenAmount, CurrencyAmount } from '@sushiswap/core-sdk'
+import { JSBI, Token, CurrencyAmount } from '@sushiswap/core-sdk'
 import { useTokenBalance } from 'app/state/wallet/hooks'
 import { useTokenContract } from 'app/hooks/useContract'
 import Image from 'next/image'
@@ -21,7 +21,7 @@ import LAUNCHER_ABI from './launcher_abi.json'
 import ERC20_ABI from 'app/constants/abis/erc20.json'
 const LAUNCHER_ADDRESS = "0xb452cfcfbF012cF74fFe9A04e249f5F505a2b44B"
 
-const MIN_INITIAL_LIQUIDITY = '1'
+const MIN_INITIAL_LIQUIDITY = '10000'
 
 const OS_TOKEN = {
   address: '0xD7565b16b65376e2Ddb6c71E7971c7185A7Ff3Ff',
@@ -101,11 +101,11 @@ export default function TokenLauncher() {
         ])
 
         setOsAllowance(CurrencyAmount.fromRawAmount(
-          new Token(chainId, OS_TOKEN.address, OS_TOKEN.decimals),
+          new Token(chainId || 19, OS_TOKEN.address, OS_TOKEN.decimals),
           osAllowanceRaw.toString()
         ))
         setProAllowance(CurrencyAmount.fromRawAmount(
-          new Token(chainId, PRO_TOKEN.address, PRO_TOKEN.decimals),
+          new Token(chainId || 19, PRO_TOKEN.address, PRO_TOKEN.decimals),
           proAllowanceRaw.toString()
         ))
       } catch (error) {
@@ -329,7 +329,7 @@ export default function TokenLauncher() {
               <Typography variant="sm" className="text-secondary">
                 Launch your own token! 
                 There is a {nativeFee} SGB fee to launch a token and there is a 1% fee on created token supply, min 10% of fees are distributed to OS stakers!
-                Minimum liquidity of 1000 SGB and 50% of the token supply is required.
+                Minimum liquidity of {MIN_INITIAL_LIQUIDITY} SGB and 50% of the token supply is required.
                 Liquidity is automatically added to OracleSwap and then burnt!
               </Typography>
 

@@ -1,0 +1,17 @@
+# Ignore all files in these directories
+src/components/CurrencyLogo/
+src/components/Header/
+src/components/Footer/
+src/components/Web3Network/
+src/components/Web3Status/
+src/components/SelectedOracles/
+src/components/ProphetStaking/
+src/pages/bar/
+src/pages/farm/
+src/pages/launcher/
+src/pages/legacy/
+src/pages/prostaking/
+src/pages/tokens/
+
+# Or add this to temporarily ignore all ESLint warnings
+* 

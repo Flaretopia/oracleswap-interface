@@ -36,20 +36,12 @@ interface TokenData {
   devAllocation: string
   initialLiquidity: string
   chainId: string
-  createdAt: Date
-  poolData?: {
-    marketCap: string | null
-    price: string | null
-    volume24h: string | null
-    priceChange24h: string | null
-    priceChange7d: string | null
-    priceChange30d: string | null
-  }
-  price?: number
-  marketCap?: number
   totalSupply: string
-  holders: number
   creatorAddress: string
+  createdAt: Date
+  price?: number | null
+  marketCap?: number | null
+  holders?: number
 }
 
 // Helper function to truncate address
@@ -58,17 +50,17 @@ const truncateAddress = (address: string) => {
   return `${address.slice(0, 6)}...${address.slice(-4)}`
 }
 
-// Update the formatPrice helper
-const formatPrice = (price: number | undefined) => {
-  if (!price) return '-'
+// Update the formatPrice helper to handle null values
+const formatPrice = (price: number | null | undefined) => {
+  if (price === null || price === undefined) return '-'
   return price < 0.01
     ? `$${price.toFixed(6)}`
     : `$${price.toFixed(2)}`
 }
 
-// Add formatMarketCap helper
-const formatMarketCap = (marketCap: number | undefined) => {
-  if (!marketCap) return '-'
+// Similarly, update formatMarketCap to handle null values
+const formatMarketCap = (marketCap: number | null | undefined) => {
+  if (marketCap === null || marketCap === undefined) return '-'
 
   if (marketCap >= 1e9) {
     return `$${(marketCap / 1e9).toFixed(1)}B`
@@ -478,14 +470,29 @@ export default function Tokens() {
         // Fetch tokens from Firestore first
         const tokensQuery = query(collection(db, 'tokens'), orderBy('createdAt', 'desc'))
         const snapshot = await getDocs(tokensQuery)
-        let tokensList = snapshot.docs.map(doc => ({
-          ...doc.data(),
-          createdAt: doc.data().createdAt?.toDate(),
-          launchDate: doc.data().launchDate?.toDate(),
-          price: null,
-          marketCap: null,
-          holders: 0
-        })) as TokenData[]
+        let tokensList = snapshot.docs.map(doc => {
+          const data = doc.data()
+          return {
+            name: data.name || '',
+            symbol: data.symbol || '',
+            tokenAddress: data.tokenAddress || '',
+            lpAddress: data.lpAddress || '',
+            description: data.description || '',
+            website: data.website || '',
+            logoUrl: data.logoUrl || '/images/tokens/unknown.png',
+            launchDate: data.launchDate?.toDate() || new Date(),
+            lpAllocation: data.lpAllocation || '0',
+            devAllocation: data.devAllocation || '0',
+            initialLiquidity: data.initialLiquidity || '0',
+            chainId: data.chainId || '19',
+            totalSupply: data.totalSupply || '0',
+            creatorAddress: data.creatorAddress || '',
+            createdAt: data.createdAt?.toDate() || new Date(),
+            price: null,
+            marketCap: null,
+            holders: 0
+          } as TokenData
+        })
 
         // Show tokens immediately
         setLoading(false)
