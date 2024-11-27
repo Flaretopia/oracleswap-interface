@@ -35,7 +35,6 @@ import XAC from '../../../public/XAC.png'
 import xATH from '../../../public/xATH.png'
 import GKB from '../../../public/GKB.png'
 import SDOOD from '../../../public/sDOOD.png'
-import SRIBBITS from '../../../public/SRIBBITS.png'
 import TRSH from '../../../public/TRSH.png'
 import CGLD from '../../../public/CGLD.png'
 import dFLR from '../../../public/dFLR.png'
@@ -293,9 +292,6 @@ const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({ currency, size = '
       return <img src={dFLR.src} width={size} height={size} className={className} />
     }
 
-    if (currency.symbol === 'SRIBBITS') {
-      return <img src={SRIBBITS.src} width={size} height={size} className={className} />
-    }
 
     if (currency.symbol === 'TRSH') {
       return <img src={TRSH.src} width={size} height={size} className={className} />
