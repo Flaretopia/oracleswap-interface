@@ -75,7 +75,8 @@
     "@sushiswap/bentobox-sdk": "1.0.0-canary.48",
     "@sushiswap/chainlink-whitelist": "0.2.8",
     "@sushiswap/core": "^2.0.0-canary.1",
-    "@sushiswap/core-sdk": "direct:https://github.com/agelessZeal/oracleswap-core-sdk.git#main",
+    "@sushiswap/core-sdk": "agelessZeal/oracleswap-core-sdk",
+    "@sushiswap/default-token-list": "agelessZeal/oracleswap-default-token-list",
     "@sushiswap/kashi-sdk": "1.0.0-canary.39",
     "@sushiswap/limit-order-pair-list": "0.2.15",
     "@sushiswap/limit-order-sdk": "1.0.0-canary.49",
@@ -215,7 +216,6 @@
     "@emotion/styled": "^11.10.4",
     "@mui/material": "^5.10.11",
     "firebase": "^11.0.2",
-    "react-countdown-hook": "^1.1.1",
-    "ethereumjs-abi": "0.6.8"
+    "react-countdown-hook": "^1.1.1"
   }
 }
