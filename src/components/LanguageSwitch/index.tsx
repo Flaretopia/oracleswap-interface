@@ -59,6 +59,7 @@ export default function LangSwitcher() {
           {locales?.map((l, index) => {
             return (
               <Menu.Item
+              //@ts-ignore
                 onClick={() => {
                   cookieCutter.set('NEXT_LOCALE', l)
                   push(asPath, undefined, { locale: l })

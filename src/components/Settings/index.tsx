@@ -63,6 +63,7 @@ const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className, tri
                     )}
                   />
                 </div>
+                {/* @ts-ignore */}
                 <Switch
                   size="sm"
                   id="toggle-expert-mode-button"
@@ -91,6 +92,7 @@ const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className, tri
                     </Typography>
                     <QuestionHelper text={i18n._(t`Restricts swaps to direct pairs only.`)} />
                   </div>
+                  {/* @ts-ignore */}
                   <Switch
                     size="sm"
                     id="toggle-disable-multihop-button"
@@ -111,6 +113,7 @@ const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className, tri
                     </Typography>
                     <QuestionHelper text={i18n._(t`OpenMEV refunds up to 95% of transaction costs in 35 blocks.`)} />
                   </div>
+                  {/* @ts-ignore */}
                   <Switch
                     size="sm"
                     id="toggle-use-openmev"

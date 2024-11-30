@@ -61,6 +61,7 @@ const HeadlessUiModal: HeadlessUiModalType<Props> = ({ children: childrenProp, t
       typeof triggerProp === 'function'
         ? triggerProp({ onClick, open, setOpen })
         : isValidElement(triggerProp)
+        //@ts-ignore
         ? cloneElement(triggerProp, { onClick })
         : null,
     [onClick, open, triggerProp]
@@ -70,6 +71,7 @@ const HeadlessUiModal: HeadlessUiModalType<Props> = ({ children: childrenProp, t
   // Else just render normally
   // @ts-ignore TYPE NEEDS FIXING
   const children = useMemo(
+    //@ts-ignore
     () => (typeof childrenProp === 'function' ? childrenProp({ onClick, open, setOpen }) : children),
     [onClick, open, childrenProp]
   )

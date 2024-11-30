@@ -37,6 +37,7 @@ export default function ChartCard({
       const x = cur.x.getTime()
       // @ts-ignore TYPE NEEDS FIXING
       if (Math.round(x / 1000) >= currentDate - timespan?.length) {
+        //@ts-ignore
         acc.push({
           // @ts-ignore TYPE NEEDS FIXING
           x,

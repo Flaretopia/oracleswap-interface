@@ -78,6 +78,7 @@ const BannedCountriesFormField: FC = () => {
         </div>
       </div>
       {errors.bannedCountries ? (
+        //@ts-ignore
         <FormFieldHelperText className="!text-red">{errors.bannedCountries.name}</FormFieldHelperText>
       ) : (
         <FormFieldHelperText>

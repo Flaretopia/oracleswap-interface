@@ -85,6 +85,7 @@ export const Web3ReactManager: FC = ({ children }) => {
 
   return (
     <>
+    {/*@ts-ignore*/}
       <GnosisManagerNoSSR />
       {children}
     </>

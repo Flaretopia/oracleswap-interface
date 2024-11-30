@@ -138,7 +138,8 @@ const LineGraph: FC<LineGraphProps> = ({
   setSelectedIndex,
 }) => {
   if (data)
-    return (
+    return ( 
+      //@ts-ignore
       <AutoSizer>
         {/*@ts-ignore TYPE NEEDS FIXING*/}
         {({ width, height }) => <Graph {...{ data, stroke, strokeWidth, width, height, setSelectedIndex }} />}

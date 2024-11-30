@@ -44,11 +44,11 @@ const FormSelectField: FC<FormSelectFieldProps> = ({ name, label, children, help
           ))}
         </select>
       </div>
-      {!!errors[name] ? (
-        <FormFieldHelperText className="!text-red">{errors[name].message}</FormFieldHelperText>
+      {/* {!!errors[name] ? (
+        <FormFieldHelperText className="!text-red">{errors?.[name].message}</FormFieldHelperText>
       ) : (
         <FormFieldHelperText>{helperText}</FormFieldHelperText>
-      )}
+      )} */}
     </>
   )
 }

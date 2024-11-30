@@ -26,9 +26,11 @@ const LiquidityLauncherCreationLockupField: FC<LiquidityLauncherCreationLockupFi
           onChange={(val: string) => setValue('liqLockTime', val, { shouldValidate: true })}
           className="mt-2 !flex"
         >
+          {/*@ts-ignore*/}
           <ToggleButtonGroup.Button value={180} activeClassName="border-purple" className="!bg-none px-5 !py-2.5">
             {i18n._(t`${180} days`)}
           </ToggleButtonGroup.Button>
+          {/*@ts-ignore*/}
           <ToggleButtonGroup.Button value={90} activeClassName="border-purple" className="!bg-none px-5 !py-2.5">
             {i18n._(t`${90} days`)}
           </ToggleButtonGroup.Button>

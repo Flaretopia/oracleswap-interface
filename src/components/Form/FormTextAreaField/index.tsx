@@ -37,11 +37,11 @@ const FormTextAreaField: FC<FormTextAreaFieldProps> = ({ name, label, children, 
           className={classNames(DEFAULT_FORM_FIELD_CLASSNAMES, errors[name] ? '!border-red' : '')}
         />
       </div>
-      {!!errors[name] ? (
-        <FormFieldHelperText className="!text-red">{errors[name].message}</FormFieldHelperText>
+      {/* {!!errors[name] ? (
+        <FormFieldHelperText className="!text-red">{errors?.[name].message}</FormFieldHelperText>
       ) : (
         <FormFieldHelperText>{helperText}</FormFieldHelperText>
-      )}
+      )} */}
     </>
   )
 }

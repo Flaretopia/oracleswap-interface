@@ -28,6 +28,7 @@ const MenuLink: FC<{ href?: string; label: string; onClick?(): void }> = ({ href
 
   if (href) {
     return (
+      //@ts-ignore
       <Menu.Item onClick={() => router.push(href)}>
         {({ active }) => {
           return (

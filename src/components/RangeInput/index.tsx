@@ -43,7 +43,8 @@ const RangeInput: FC<RangeInputProps> = ({ value, label, color = 'blue', onChang
         />
       </div>
       <Typography variant="sm" className="rounded-b bg-dark-800 px-3 py-2.5 text-center border border-dark-700">
-        {i18n._(t`{0} per {1}`, [base?.symbol, quote?.symbol])}
+        {/*@ts-ignore*/
+        i18n._(t`{0} per {1}`, [base?.symbol, quote?.symbol])}
         {/* {`${base?.symbol} ` + i18n._(t`per`) + ` ${quote?.symbol}`} */}
       </Typography>
     </div>

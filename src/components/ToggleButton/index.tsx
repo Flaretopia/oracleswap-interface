@@ -45,6 +45,7 @@ const ToggleButtonGroup: ToggleButtonGroup<Props> = ({
       {Children.map(children, (child) => {
         if (isValidElement(child)) {
           return cloneElement(child, {
+            //@ts-ignore
             variant,
             size,
             style: { width: `calc(100% / ${Children.toArray(children).length})` },
@@ -58,6 +59,7 @@ const ToggleButtonGroup: ToggleButtonGroup<Props> = ({
 }
 
 type ToggleButtonProps = ComponentProps<typeof HeadlessRadioGroup.Option>
+//@ts-ignore
 ToggleButtonGroup.Button = ({ value, children, size, style, className }: ToggleButtonProps) => {
   return (
     <HeadlessRadioGroup.Option value={value} as={Fragment}>

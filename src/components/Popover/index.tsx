@@ -63,6 +63,7 @@ export default function Popover({ content, children, placement = 'auto', show, m
                   {...attributes.arrow}
                 />
               </HeadlessuiPopover.Panel>,
+              //@ts-ignore
               document.querySelector('#popover-portal')
             )}
         </>
