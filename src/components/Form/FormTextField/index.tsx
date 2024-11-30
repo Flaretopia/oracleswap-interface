@@ -75,7 +75,7 @@ const FormTextField: FC<FormTextFieldProps> = ({
           </span>
         )}
       </div>
-      {/* {!!errors[name] ? (
+      {!!errors[name] ? (
         <FormFieldHelperText className="!text-red">{errors?.[name].message}</FormFieldHelperText>
       ) : error ? (
         <FormFieldHelperText className="!text-red">{error}</FormFieldHelperText>
@@ -83,7 +83,7 @@ const FormTextField: FC<FormTextFieldProps> = ({
         <FormFieldHelperText>{helperText}</FormFieldHelperText>
       ) : (
         helperText
-      )} */}
+      )}
     </>
   )
 }
