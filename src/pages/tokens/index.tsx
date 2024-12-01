@@ -22,6 +22,7 @@ import { Fragment } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ethers } from 'ethers'
+import { useRouter } from 'next/router'
 
 interface TokenData {
   name: string
@@ -198,18 +199,27 @@ interface DescriptionModalProps {
 
 // Update the DescriptionModal component
 const DescriptionModal = ({ isOpen, onClose, token }: DescriptionModalProps) => {
-  const [showCopied, setShowCopied] = useState(false);
+  const [showAddressCopied, setShowAddressCopied] = useState(false);
+  const [showUrlCopied, setShowUrlCopied] = useState(false);
 
   if (!isOpen || !token) return null;
 
   const handleCopy = (e: React.MouseEvent) => {
     e.stopPropagation();
     copyToClipboard(token.tokenAddress);
-    setShowCopied(true);
-    setTimeout(() => setShowCopied(false), 2000); // Hide after 2 seconds
+    setShowAddressCopied(true);
+    setTimeout(() => setShowAddressCopied(false), 2000);
   };
 
-  // Update the address and copy button section
+  const handleShare = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const shareUrl = `${window.location.origin}/tokens?token=${token?.tokenAddress}`
+    copyToClipboard(shareUrl);
+    setShowUrlCopied(true);
+    setTimeout(() => setShowUrlCopied(false), 2000);
+  };
+
+  // Update the header section JSX
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
       <div
@@ -222,49 +232,68 @@ const DescriptionModal = ({ isOpen, onClose, token }: DescriptionModalProps) => 
           <div className="p-5">
             {/* Header with Logo */}
             <div className="flex items-center gap-4 mb-5">
-              {token.logoUrl && (
-                <Image
-                  src={token.logoUrl}
-                  alt={token.name}
-                  width={48}
-                  height={48}
-                  className="rounded-full object-cover"
-                  onError={(e) => {
-                    console.error('Error loading image:', token.logoUrl);
-                    e.currentTarget.src = '/images/tokens/unknown.png';
-                  }}
-                  unoptimized={true}
-                />
-              )}
-              <div>
-                <h3 className="text-2xl font-bold text-grey mb-1">
-                  {token.name} <span className="text-secondary">({token.symbol})</span>
-                </h3>
-                <div className="flex items-center gap-2">
-                  <a
-                    href={`https://songbird-explorer.flare.network/address/${token.tokenAddress}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue hover:text-high-emphesis text-sm"
-                  >
-                    {truncateAddress(token.tokenAddress)}
-                  </a>
-                  <div className="relative flex items-center gap-1">
-                    <button
-                      onClick={handleCopy}
-                      className="text-secondary hover:text-high-emphesis transition-colors"
+              {/* Logo and name section */}
+              <div className="flex items-center gap-4 flex-grow">
+                {token.logoUrl && (
+                  <Image
+                    src={token.logoUrl}
+                    alt={token.name}
+                    width={48}
+                    height={48}
+                    className="rounded-full object-cover"
+                    onError={(e) => {
+                      console.error('Error loading image:', token.logoUrl);
+                      e.currentTarget.src = '/images/tokens/unknown.png';
+                    }}
+                    unoptimized={true}
+                  />
+                )}
+                <div>
+                  <h3 className="text-2xl font-bold text-grey mb-1">
+                    {token.name} <span className="text-secondary">({token.symbol})</span>
+                  </h3>
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={`https://songbird-explorer.flare.network/address/${token.tokenAddress}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue hover:text-high-emphesis text-sm"
                     >
-                      <span role="img" aria-label="copy" className="text-sm">
-                        📋
-                      </span>
-                    </button>
-                    {showCopied && (
-                      <span className="absolute left-full ml-2 whitespace-nowrap text-xs text-green animate-fade-in-out">
-                        Copied!
-                      </span>
-                    )}
+                      {truncateAddress(token.tokenAddress)}
+                    </a>
+                    <div className="relative flex items-center gap-1">
+                      <button
+                        onClick={handleCopy}
+                        className="text-secondary hover:text-high-emphesis transition-colors"
+                      >
+                        <span role="img" aria-label="copy" className="text-sm">
+                          📋
+                        </span>
+                      </button>
+                      {showAddressCopied && (
+                        <span className="absolute left-full ml-2 whitespace-nowrap text-xs text-green animate-fade-in-out">
+                          Copied!
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
+              </div>
+              {/* Share button */}
+              <div className="relative">
+                <button
+                  onClick={handleShare}
+                  className="text-blue hover:text-high-emphesis transition-colors"
+                >
+                  <span role="img" aria-label="share" className="text-lg">
+                    📤
+                  </span>
+                </button>
+                {showUrlCopied && (
+                  <span className="absolute right-full mr-2 whitespace-nowrap text-xs text-green animate-fade-in-out">
+                    Copied!
+                  </span>
+                )}
               </div>
             </div>
 
@@ -461,6 +490,9 @@ export default function Tokens() {
       holders: boolean;
     }
   }>({})
+  const router = useRouter()
+  const { token } = router.query // Get token address from URL if present
+  const [initialLoad, setInitialLoad] = useState(true)
 
   useEffect(() => {
     const fetchTokens = async () => {
@@ -573,6 +605,39 @@ export default function Tokens() {
   const handleTokenClick = (token: TokenData) => {
     setSelectedToken(token)
     setIsDescriptionModalOpen(true)
+    // Add the token address to the URL without page reload
+    router.replace(`/tokens?token=${token.tokenAddress}`, undefined, { shallow: true })
+  }
+
+  // Add this effect to handle direct links to tokens
+  useEffect(() => {
+    const handleInitialToken = async () => {
+      if (token && typeof token === 'string' && initialLoad) {
+        // Find the token in the list
+        const tokenData = tokens.find(t => 
+          t.tokenAddress.toLowerCase() === token.toLowerCase()
+        )
+        
+        if (tokenData) {
+          setSelectedToken(tokenData)
+          setIsDescriptionModalOpen(true)
+        }
+        
+        setInitialLoad(false)
+      }
+    }
+
+    if (tokens.length > 0) {
+      handleInitialToken()
+    }
+  }, [token, tokens, initialLoad])
+
+  // Update your modal close handler to update the URL
+  const handleModalClose = () => {
+    setIsDescriptionModalOpen(false)
+    setSelectedToken(null)
+    // Remove the token query parameter when closing the modal
+    router.replace('/tokens', undefined, { shallow: true })
   }
 
   return (
@@ -585,7 +650,10 @@ export default function Tokens() {
       </Head>
 
       <div className="max-w-4xl mx-auto mb-8">
-        <Typography variant="hero" className="text-high-emphesis text-center text-2xl md:text-4xl font-bold">
+        <Typography 
+          variant="hero" 
+          className="text-high-emphesis text-center text-sm sm:text-lg md:text-2xl lg:text-4xl font-bold"
+        >
           🎇Launched Tokens
         </Typography>
       </div>
@@ -951,10 +1019,7 @@ export default function Tokens() {
 
       <DescriptionModal
         isOpen={isDescriptionModalOpen}
-        onClose={() => {
-          setIsDescriptionModalOpen(false);
-          setSelectedToken(null);
-        }}
+        onClose={handleModalClose}
         token={selectedToken}
       />
     </Container>

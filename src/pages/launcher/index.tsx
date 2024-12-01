@@ -139,6 +139,16 @@ export default function TokenLauncher() {
   const handleCreateToken = useCallback(async () => {
     if (!account) return
     
+    if (!formData.website || !formData.website.trim()) {
+      alert('Website link is required')
+      return
+    }
+
+    if (!formData.website.startsWith('http://') && !formData.website.startsWith('https://')) {
+      alert('Website must start with http:// or https://')
+      return
+    }
+    
     setPendingTx(true)
     setShowConfirm(true)
 
@@ -313,7 +323,10 @@ export default function TokenLauncher() {
   return (
     <Container id="launcher-page" className="py-4 md:py-8 lg:py-12" maxWidth="7xl">
       <div className="max-w-4xl mx-auto mb-8">
-        <Typography variant="hero" className="text-high-emphesis text-center text-2xl md:text-4xl font-bold">
+        <Typography 
+          variant="hero" 
+          className="text-high-emphesis text-center text-sm sm:text-lg md:text-2xl lg:text-4xl font-bold"
+        >
           🎇Token Launcher BETA
         </Typography>
       </div>
