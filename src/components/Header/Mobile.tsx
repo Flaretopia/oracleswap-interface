@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { MenuIcon } from '@heroicons/react/outline'
+import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { NATIVE } from '@sushiswap/core-sdk'
 import useMenu from 'app/components/Header/useMenu'
 import Web3Network from 'app/components/Web3Network'
@@ -16,6 +16,7 @@ import { NavigationItem } from './NavigationItem'
 // import { XIcon } from '@heroicons/react/outline'
 // import Typography from 'app/components/Typography'
 import ExternalLink from '../ExternalLink'
+import Typography from 'app/components/Typography'
 
 const Mobile: FC = () => {
   const menu = useMenu()
@@ -29,31 +30,29 @@ const Mobile: FC = () => {
 
   return (
     <>
-      {/* {showUseDexWarning && (
-        <div className="py-2 px-4 text-[1rem] text-high-emphesis bg-[#eb4326] relative">
-          <div className="absolute right-1 top-1">
+      {showUseDexWarning && (
+        <div className="py-2 text-[1rem] text-white bg-[#e62058] relative text-center rounded-b-lg mx-4">
+          <div className="absolute right-4 top-1/2 -translate-y-1/2">
             <div
-              className="flex items-center justify-center w-6 h-6 cursor-pointer hover:text-white"
+              className="flex items-center justify-center w-6 h-6 cursor-pointer hover:text-white/80"
               onClick={toggleWarning}
             >
-              <XIcon width={24} height={24} className="text-high-emphesis" />
+              <XIcon width={24} height={24} className="text-white" />
             </div>
           </div>
-          <Typography variant="xs" weight={700} className="py-0 px-4 text-[1rem] text-high-emphesis bg-[#eb4326]">
-          {`You are using the OracleSwap Beta platform on the Songbird Canary Network. OracleSwap is
-  a brand new DEX on the Songbird Network. Liquidity is decentralized and added by users. Please be aware of the associated risks with using DeFi
-  platforms.`}
+          <Typography variant="xs" weight={700} className="text-[1rem] text-white">
+            OracleSwap is being rebranded to Owl Swap powered by Flaretopia!
           </Typography>
         </div>
-      )} */}
+      )}
       <header className="w-full flex items-center justify-between min-h-[64px] h-[64px] px-4">
         <div className="flex justify-between flex-grow">
           <div className="p-2 rounded-full hover:bg-white/10">
-            <MenuIcon width={28} className="text-white cursor-pointer hover:text-white" onClick={() => setOpen(true)} />
+            <MenuIcon width={28} className="text-black cursor-pointer hover:text-[#cba135]" onClick={() => setOpen(true)} />
           </div>
           <div className="flex items-center mr-1">
             <ExternalLink href="https://www.oracleswap.io">
-              <img src={LogoImage.src} className={'w-[30px] h-[30px]'} alt="Logo" />
+              <img src={LogoImage.src} className={'w-[40px] h-[40px]'} alt="Logo" />
             </ExternalLink>
           </div>
         </div>

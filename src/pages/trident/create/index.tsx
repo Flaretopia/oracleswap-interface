@@ -37,7 +37,7 @@ const CreateNewPool = () => {
               {i18n._(t`Create Liquidity Pool`)}
             </Typography>
             <Typography variant="sm" weight={400}>
-              {i18n._(t`Select a pool type, deposit assets, and create your pool on OracleSwap.`)}
+              {i18n._(t`Select a pool type, deposit assets, and create your pool on OwlSwap.`)}
             </Typography>
           </div>
         </div>

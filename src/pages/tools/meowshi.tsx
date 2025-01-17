@@ -135,10 +135,10 @@ export default function Meowshi() {
   return (
     <Container id="meowshi-page" className="py-4 md:py-8 lg:py-12" maxWidth="2xl">
       <Head>
-        <title>Meowshi | OracleSwap</title>
-        <meta key="description" name="description" content="OracleSwap Meowshi..." />
-        <meta key="twitter:description" name="twitter:description" content="OracleSwap Meowshi..." />
-        <meta key="og:description" property="og:description" content="OracleSwap Meowshi..." />
+        <title>Meowshi | OwlSwap</title>
+        <meta key="description" name="description" content="OwlSwap Meowshi..." />
+        <meta key="twitter:description" name="twitter:description" content="OwlSwap Meowshi..." />
+        <meta key="og:description" property="og:description" content="OwlSwap Meowshi..." />
       </Head>
 
       <div className="z-0 relative mb-[-38px] md:mb-[-54px] ml-0 md:ml-4 flex justify-between gap-6 items-center">

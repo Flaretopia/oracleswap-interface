@@ -79,7 +79,7 @@ export default function PoolFinder() {
   return (
     <Container id="find-pool-page" className="py-4 space-y-6 md:py-8 lg:py-12" maxWidth="2xl">
       <Head>
-        <title>{i18n._(t`Find Pool`)} | OracleSwap</title>
+        <title>{i18n._(t`Find Pool`)} | OwlSwap</title>
         <meta key="description" name="description" content="Find pool" />
         <meta key="twitter:description" name="twitter:description" content="Find pool" />
         <meta key="og:description" property="og:description" content="Find pool" />

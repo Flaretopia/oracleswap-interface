@@ -37,7 +37,7 @@ const BentoBoxFundingSourceModal: FC = () => {
             <div className="flex flex-col gap-2">
               <Typography variant="lg" weight={700} className="text-center text-high-emphesis">
                 {i18n._(
-                  t`OracleSwap utilizes a token vault called BentoBox that has balances separate from your wallet.`
+                  t`OwlSwap utilizes a token vault called BentoBox that has balances separate from your wallet.`
                 )}
               </Typography>
               <Typography variant="sm" className="text-center text-secondary">

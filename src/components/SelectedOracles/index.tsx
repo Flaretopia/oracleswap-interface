@@ -341,19 +341,19 @@ export const SelectedOracles = () => {
     <div className="mt-5 select-oracles">
 
       <div className="self-end text-2xl md:text-2xl text-high-emphesis md:mb-1">
-        {i18n._(t`Select Your Oracles`)}
+        {i18n._(t`Select Your OS NFTs`)}
       </div>
 
       <p className="mb-2">
-        Select The Oracles you would like to deploy. Some Oracles wield more power than others, choose wisely! Each
-        OS selected must be paired with XORACLE. The highest PRO weight is 8500, the lowest PRO weight is 600, the average PRO Weight is 1073. Tap to
+        Select The OS NFTs you would like to deploy. Some NFTs wield more power than others, choose wisely! Each
+        NFT selected must be paired with xOWL. The highest PRO weight is 8500, the lowest PRO weight is 600, the average PRO Weight is 1073. Tap to
         select or select max 40 at a time.
       </p>
       <button
         onClick={() => {
           handleAllSelect(true)
         }}
-        className="inline-block px-2 py-1 mr-2 text-xs text-white rounded-md bg-green/50"
+        className="inline-block px-2 py-1 mr-2 text-xs text-white rounded-md bg-blue"
       >
         SELECT MAX
       </button>
@@ -361,7 +361,7 @@ export const SelectedOracles = () => {
         onClick={() => {
           handleAllSelect(false)
         }}
-        className="inline-block px-2 py-1 text-xs text-white rounded-md bg-green/50"
+        className="inline-block px-2 py-1 text-xs text-white rounded-md bg-blue"
       >
         UNSELECT ALL
       </button>
@@ -427,7 +427,7 @@ export const SelectedOracles = () => {
               variant="sm"
               className={classNames(minXOracleAmount ? 'text-high-emphesis' : 'text-low-emphesis')}
             >
-              {i18n._(t`Min xOS Amount:`)}
+              {i18n._(t`Min xOWL Amount:`)}
             </Typography>
           </div>
           <Typography
@@ -462,8 +462,8 @@ export const SelectedOracles = () => {
       <div className="grid justify-center grid-cols-1 sm:flex">
         <div className={classNames('flex justify-between py-2 px-3 w-content')}>
           <div className="flex items-center gap-1.5 mr-1">
-            <Typography variant="sm" className={'text-white'}>
-              {i18n._(t`xOS Required For Multiplier:`)}
+            <Typography variant="sm" className={'text-high-emphesis'}>
+              {i18n._(t`xOWL Required For Multiplier:`)}
             </Typography>
           </div>
           <Typography
@@ -474,7 +474,7 @@ export const SelectedOracles = () => {
           >
             {minXOracleAmount && lockMode > 0
               ? `${minXOracleAmount.multiply(selectedIDs.length).toSignificant(6)} ${minXOracleAmount.currency.symbol}`
-              : '0 xOS'}
+              : '0 xOWL'}
           </Typography>
         </div>
       </div>
@@ -492,7 +492,7 @@ export const SelectedOracles = () => {
             onClick={approve}
             disabled={approvalState !== ApprovalState.NOT_APPROVED}
           >
-            {i18n._(t`Approve xOS`)}
+            {i18n._(t`Approve xOWL`)}
           </Button>
         ) : !isApprovedAll ? (
           <Button
@@ -501,7 +501,7 @@ export const SelectedOracles = () => {
             onClick={approveNFT}
             disabled={pendingTx || !account || selectedIDs?.length === 0}
           >
-            {i18n._(t`Approve OS NFT`)}
+            {i18n._(t`Approve OWL NFT`)}
           </Button>
         ) : (
           <Button
@@ -529,14 +529,14 @@ export const SelectedOracles = () => {
       {stakedNFT?.length > 0 && (
         <div>
           <div className="self-end text-2xl md:text-2xl text-high-emphesis md:mb-1">
-            {i18n._(t`Select Your Staked Oracles`)}
+            {i18n._(t`Select Your Staked NFTs`)}
           </div>
 
           <button
             onClick={() => {
               handleStakedAllSelect(true)
             }}
-            className="inline-block px-2 py-1 mr-2 text-xs text-white rounded-md bg-green/50"
+            className="inline-block px-2 py-1 mr-2 text-xs text-white rounded-md bg-blue"
           >
             SELECT MAX
           </button>
@@ -544,7 +544,7 @@ export const SelectedOracles = () => {
             onClick={() => {
               handleStakedAllSelect(false)
             }}
-            className="inline-block px-2 py-1 text-xs text-white rounded-md bg-green/50"
+            className="inline-block px-2 py-1 text-xs text-white rounded-md bg-blue"
           >
             UNSELECT ALL
           </button>

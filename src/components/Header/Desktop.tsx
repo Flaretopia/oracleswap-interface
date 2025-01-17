@@ -2,7 +2,6 @@ import { NATIVE } from '@sushiswap/core-sdk'
 import Container from 'app/components/Container'
 import { NAV_CLASS } from 'app/components/Header/styles'
 import useMenu from 'app/components/Header/useMenu'
-import LanguageSwitch from 'app/components/LanguageSwitch'
 import Web3Network from 'app/components/Web3Network'
 import Web3Status from 'app/components/Web3Status'
 import useIsCoinbaseWallet from 'app/hooks/useIsCoinbaseWallet'
@@ -18,6 +17,9 @@ import LogoImage from '../../../public/icons/icon-72x72.png'
 import { useDexWarningOpen, useToggleDexWarning } from 'app/state/application/hooks'
 import ExternalLink from '../ExternalLink'
 import { classNames } from 'app/functions'
+import { XIcon } from '@heroicons/react/outline'
+import Typography from 'app/components/Typography'
+
 const HEADER_HEIGHT = 64
 
 const Desktop: FC = () => {
@@ -33,32 +35,29 @@ const Desktop: FC = () => {
   return (
     <>
       <header className="fixed z-20 hidden w-full lg:block" style={{ height: HEADER_HEIGHT }}>
-        <nav className={classNames( NAV_CLASS,showUseDexWarning && 'before:backdrop-blur-[20px]')}>
-          <Container maxWidth="7xl" className="mx-auto">
-            {/* {showUseDexWarning && (
-              <div className="py-2 px-4 text-[1rem] text-high-emphesis bg-[#eb4326] relative">
-                <div className="absolute right-1 top-1">
-                  <div
-                    className="flex items-center justify-center w-6 h-6 cursor-pointer hover:text-white"
-                    onClick={toggleWarning}
-                  >
-                    <XIcon width={24} height={24} className="text-high-emphesis" />
-                  </div>
-                </div>
-                <Typography variant="xs" weight={700} className="py-0 px-4 text-[1rem] text-high-emphesis bg-[#eb4326]">
-                  {`You are using the OracleSwap Beta platform on the Songbird Canary Network. OracleSwap is
-  a brand new DEX on the Songbird Network. Liquidity is decentralized and added by users. Please be aware of the associated risks with using DeFi
-  platforms.`}
-                </Typography>
+        {showUseDexWarning && (
+          <div className="py-2 text-[1rem] text-white bg-[#e62058] relative text-center rounded-b-lg mx-4">
+            <div className="absolute right-4 top-1/2 -translate-y-1/2">
+              <div
+                className="flex items-center justify-center w-6 h-6 cursor-pointer hover:text-white/80"
+                onClick={toggleWarning}
+              >
+                <XIcon width={24} height={24} className="text-white" />
               </div>
-            )} */}
-
+            </div>
+            <Typography variant="xs" weight={700} className="text-[1rem] text-white">
+              OracleSwap is being rebranded to Owl Swap powered by Flaretopia!
+            </Typography>
+          </div>
+        )}
+        <nav className={classNames(NAV_CLASS, showUseDexWarning && 'before:backdrop-blur-[20px]')}>
+          <Container maxWidth="7xl" className="mx-auto">
             <div className="flex items-center justify-between gap-4 px-6">
               <div className="flex gap-4">
                 <div className="flex items-center mr-4">
                   <ExternalLink href="https://www.oracleswap.io">
-                    <img src={LogoImage.src} className={'w-[30px] h-[30px]'} alt="Logo" />
-                    {/* <Image src="/logo.png" alt="OracleSwap logo" width="24px" height="24px" /> */}
+                    <img src={LogoImage.src} className={'w-[40px] h-[40px]'} alt="Logo" />
+                    {/* <Image src="/logo.png" alt="OwlSwap logo" width="24px" height="24px" /> */}
                   </ExternalLink>
                 </div>
 
@@ -83,9 +82,6 @@ const Desktop: FC = () => {
                     </Link>
                   )}
                   <Web3Status />
-                </div>
-                <div className="hidden lg:flex">
-                  <LanguageSwitch />
                 </div>
               </div>
             </div>

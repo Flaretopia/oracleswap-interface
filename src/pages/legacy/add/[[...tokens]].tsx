@@ -308,21 +308,21 @@ export default function Add() {
   return (
     <>
       <Head>
-        <title>Add Liquidity | OracleSwap</title>
+        <title>Add Liquidity | OwlSwap</title>
         <meta
           key="description"
           name="description"
-          content="Add liquidity to the OracleSwap AMM to enable gas optimised and low slippage trades across countless networks"
+          content="Add liquidity to the OwlSwap AMM to enable gas optimised and low slippage trades across countless networks"
         />
         <meta
           key="twitter:description"
           name="twitter:description"
-          content="Add liquidity to the OracleSwap AMM to enable gas optimised and low slippage trades across countless networks"
+          content="Add liquidity to the OwlSwap AMM to enable gas optimised and low slippage trades across countless networks"
         />
         <meta
           key="og:description"
           property="og:description"
-          content="Add liquidity to the OracleSwap AMM to enable gas optimised and low slippage trades across countless networks"
+          content="Add liquidity to the OwlSwap AMM to enable gas optimised and low slippage trades across countless networks"
         />
       </Head>
 

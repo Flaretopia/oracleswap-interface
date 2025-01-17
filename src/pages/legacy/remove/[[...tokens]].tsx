@@ -422,10 +422,10 @@ export default function Remove() {
   return (
     <Container id="remove-liquidity-page" className="py-4 space-y-4 md:py-8 lg:py-12" maxWidth="2xl">
       <Head>
-        <title>Remove Liquidity | OracleSwap</title>
-        <meta key="description" name="description" content="Remove liquidity from the OracleSwap AMM" />
-        <meta key="twitter:description" name="twitter:description" content="Remove liquidity from the OracleSwap AMM" />
-        <meta key="og:description" property="og:description" content="Remove liquidity from the OracleSwap AMM" />
+        <title>Remove Liquidity | OwlSwap</title>
+        <meta key="description" name="description" content="Remove liquidity from the OwlSwap AMM" />
+        <meta key="twitter:description" name="twitter:description" content="Remove liquidity from the OwlSwap AMM" />
+        <meta key="og:description" property="og:description" content="Remove liquidity from the OwlSwap AMM" />
       </Head>
       <div className="px-4 mb-5">
         <NavLink href="/pool">

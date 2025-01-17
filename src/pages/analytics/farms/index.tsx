@@ -18,7 +18,7 @@ export default function Farms(): JSX.Element {
             token1: farm.pair.token1,
             id: farm.pair.id,
             name: farm.pair.symbol ?? `${farm.pair.token0.symbol}-${farm.pair.token1.symbol}`,
-            type: farm.pair.symbol ? 'Kashi Farm' : 'OracleSwap Farm',
+            type: farm.pair.symbol ? 'Kashi Farm' : 'OwlSwap Farm',
           },
           rewards: farm.rewards,
           liquidity: farm.tvl,

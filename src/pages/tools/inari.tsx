@@ -39,7 +39,7 @@ const Inari = () => {
   return (
     <>
       <Head>
-        <title>Inari | OracleSwap</title>
+        <title>Inari | OwlSwap</title>
         <meta name="description" content="Inari..." />
         <meta key="twitter:description" name="twitter:description" content="Inari..." />
         <meta key="og:description" property="og:description" content="Inari..." />

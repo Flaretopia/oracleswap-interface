@@ -25,7 +25,7 @@ type FarmListNameProps = {
       id: string
     }
     name: string
-    type: 'OracleSwap Farm' | 'Kashi Farm'
+    type: 'OwlSwap Farm' | 'Kashi Farm'
   }
 }
 

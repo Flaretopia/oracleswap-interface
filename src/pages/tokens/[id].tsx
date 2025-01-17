@@ -8,10 +8,10 @@ export default function Token() {
   return (
     <Container id={`token-${id}-page`} className="py-4 md:py-8 lg:py-12" maxWidth="2xl">
       <Head>
-        <title>Token {id} | OracleSwap</title>
-        <meta key="description" name="description" content="OracleSwap tokens." />
-        <meta key="twitter:description" name="twitter:description" content="OracleSwap tokens." />
-        <meta key="og:description" property="og:description" content="OracleSwap tokens." />
+        <title>Token {id} | OwlSwap</title>
+        <meta key="description" name="description" content="OwlSwap tokens." />
+        <meta key="twitter:description" name="twitter:description" content="OwlSwap tokens." />
+        <meta key="og:description" property="og:description" content="OwlSwap tokens." />
       </Head>
     </Container>
   )

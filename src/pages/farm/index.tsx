@@ -125,10 +125,10 @@ export default function Farm(): JSX.Element {
   return (
     <>
       <Head>
-        <title>OracleSwap | Farm</title>
-        <meta key="description" name="description" content="OracleSwap AMM" />
-        <meta key="twitter:description" name="twitter:description" content="OracleSwap AMM" />
-        <meta key="og:description" property="og:description" content="OracleSwap AMM" />
+        <title>OwlSwap | Farm</title>
+        <meta key="description" name="description" content="OwlSwap AMM" />
+        <meta key="twitter:description" name="twitter:description" content="OwlSwap AMM" />
+        <meta key="og:description" property="og:description" content="OwlSwap AMM" />
       </Head>
       {/* <TridentHeader className="sm:!flex-row justify-between items-center" pattern="bg-bubble">
         <div>
@@ -164,25 +164,25 @@ export default function Farm(): JSX.Element {
 
               <div className="flex flex-row mb-3">
                 <p className="text-lg font-bold md:text-2xl md:font-medium text-high-emphesis">
-                  {i18n._(t`Prophet Sacrifice`)}
+                  {i18n._(t`PRO Sacrifice`)}
                 </p>
 
                 <QuestionHelper
                   className="!bg-dark-800 !shadow-xl p-2"
-                  text={`The Prophet Sacrifice receives OS from the OS Distributor and sacrifices it to buy and burn PRO. Some of the PRO could be distributed to stakers.`}
+                  text={`The Prophetic Bird Sacrifice receives OS from the OS Distributor and sacrifices it to buy and burn PRO. Some of the PRO could be distributed to stakers.`}
                 />
               </div>
 
               <div className="flex flex-col flex-grow text-base md:mb-3">
                 <p>
-                  <span>&#128293;</span> OS Sacrificed: <span>{prophet?.toSignificant(6)}</span>
+                  <span>&#128293;</span> OWL Sacrificed: <span>{prophet?.toSignificant(6)}</span>
                 </p>
                 <p>
                   <span>&#128293;</span> PRO Burned: <span>{burnAmount?.toSignificant(6)}</span>
                 </p>
 
                 <p>
-                  <span>&#128512;</span> OS Available:{' '}
+                  <span>&#128512;</span> OWL Available:{' '}
                   <span className={classNames(enabled ? 'text-green' : 'text-red')}>{enabled ? 'Yes' : 'No'}</span>
                 </p>
 
@@ -204,6 +204,12 @@ export default function Farm(): JSX.Element {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="py-2 px-4 text-[1rem] text-white bg-[#e62058] relative text-center rounded-lg mb-4">
+            <Typography variant="sm" weight={700} className="text-[1rem] text-white">
+              PRO rewards will be cut in half soon. V1 farm will distribute 0.25 PRO per block and V2 Multifarm will distribute 0.25 per block. Stay tuned.
+            </Typography>
           </div>
 
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">

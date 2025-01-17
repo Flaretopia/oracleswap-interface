@@ -334,7 +334,7 @@ const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({ currency, size = '
       return <img src={XFIN.src} width={size} height={size} className={className} />
     }
 
-    if (currency.symbol === 'xOS') {
+    if (currency.symbol === 'xOWL') {
       return <img src={xOS.src} width={size} height={size} className={className} />
     }
 
@@ -345,7 +345,7 @@ const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({ currency, size = '
 
   if (currency instanceof Token) {
     if (currency.chainId === ChainId.SGB) {
-      if (currency.symbol === 'OS') {
+      if (currency.symbol === 'OWL') {
         return <img src={OS.src} width={size} height={size} className={className} />
       }
 
@@ -466,7 +466,7 @@ const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({ currency, size = '
         return <img src={XFIN.src} width={size} height={size} className={className} />
       }
 
-      if (currency.symbol === 'xOS') {
+      if (currency.symbol === 'xOWL') {
         return <img src={xOS.src} width={size} height={size} className={className} />
       }
 
@@ -502,7 +502,7 @@ const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({ currency, size = '
       if (currency.tokenInfo.symbol === 'COOT') {
         return <img src={COOT.src} width={size} height={size} className={className} />
       }
-      if (currency.tokenInfo.symbol === 'OS') {
+      if (currency.tokenInfo.symbol === 'OWL') {
         return <img src={OS.src} width={size} height={size} className={className} />
       }
       if (currency.tokenInfo.symbol === 'SFIN') {
@@ -518,7 +518,7 @@ const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({ currency, size = '
         return <img src={XFIN.src} width={size} height={size} className={className} />
       }
 
-      if (currency.tokenInfo.symbol === 'xOS') {
+      if (currency.tokenInfo.symbol === 'xOWL') {
         return <img src={xOS.src} width={size} height={size} className={className} />
       }
 

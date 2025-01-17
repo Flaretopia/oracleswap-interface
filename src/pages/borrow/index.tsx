@@ -39,7 +39,7 @@ export default function Borrow() {
   return (
     <BorrowLayout>
       <Head>
-        <title>{i18n._(t`Borrow`)} | OracleSwap</title>
+        <title>{i18n._(t`Borrow`)} | OwlSwap</title>
         <meta
           key="description"
           name="description"

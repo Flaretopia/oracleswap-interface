@@ -492,7 +492,7 @@ export default function useFarmRewards() {
       token1: {
         derivedETH: 0.0003068283960261003490764609134664169,
         id: '0xd7565b16b65376e2ddb6c71e7971c7185a7ff3ff',
-        name: 'OracleSwap.io',
+        name: 'OwlSwap.io',
         symbol: 'OS',
         totalSupply: 1680,
       },
@@ -545,7 +545,7 @@ export default function useFarmRewards() {
       token0: {
         derivedETH: 0.0003068283960261003490764609134664169,
         id: '0xd7565b16b65376e2ddb6c71e7971c7185a7ff3ff',
-        name: 'OracleSwap.io',
+        name: 'OwlSwap.io',
         symbol: 'OS',
         totalSupply: 1680,
       },
@@ -607,7 +607,7 @@ export default function useFarmRewards() {
       token0: {
         derivedETH: 0.0003068283960261003490764609134664169,
         id: '0xd7565b16b65376e2ddb6c71e7971c7185a7ff3ff',
-        name: 'OracleSwap.io',
+        name: 'OwlSwap.io',
         symbol: 'OS',
         totalSupply: 1680,
       },
@@ -637,7 +637,7 @@ export default function useFarmRewards() {
       token0: {
         derivedETH: 0.0003068283960261003490764609134664169,
         id: '0xd7565b16b65376e2ddb6c71e7971c7185a7ff3ff',
-        name: 'OracleSwap.io',
+        name: 'OwlSwap.io',
         symbol: 'OS',
         totalSupply: 1680,
       },
@@ -667,7 +667,7 @@ export default function useFarmRewards() {
       token0: {
         derivedETH: 0.0003068283960261003490764609134664169,
         id: '0xd7565b16b65376e2ddb6c71e7971c7185a7ff3ff',
-        name: 'OracleSwap.io',
+        name: 'OwlSwap.io',
         symbol: 'OS',
         totalSupply: 1680,
       },
@@ -697,7 +697,7 @@ export default function useFarmRewards() {
       token0: {
         derivedETH: 0.0003068283960261003490764609134664169,
         id: '0xd7565b16b65376e2ddb6c71e7971c7185a7ff3ff',
-        name: 'OracleSwap.io',
+        name: 'OwlSwap.io',
         symbol: 'OS',
         totalSupply: 1680,
       },
@@ -727,7 +727,7 @@ export default function useFarmRewards() {
       token0: {
         derivedETH: 0.0003068283960261003490764609134664169,
         id: '0xd7565b16b65376e2ddb6c71e7971c7185a7ff3ff',
-        name: 'OracleSwap.io',
+        name: 'OwlSwap.io',
         symbol: 'OS',
         totalSupply: 1680,
       },
@@ -757,7 +757,7 @@ export default function useFarmRewards() {
       token0: {
         derivedETH: 0.0003068283960261003490764609134664169,
         id: '0xd7565b16b65376e2ddb6c71e7971c7185a7ff3ff',
-        name: 'OracleSwap.io',
+        name: 'OwlSwap.io',
         symbol: 'OS',
         totalSupply: 1680,
       },
@@ -968,7 +968,7 @@ export default function useFarmRewards() {
       token0: {
         derivedETH: 0.0003068283960261003490764609134664169,
         id: '0xd7565b16b65376e2ddb6c71e7971c7185a7ff3ff',
-        name: 'OracleSwap.io',
+        name: 'OwlSwap.io',
         symbol: 'OS',
         totalSupply: 1680,
       },
@@ -1077,7 +1077,7 @@ export default function useFarmRewards() {
       //   rewardPrice: sushiPrice,
       // }
 
-      const oracleTOken = new Token(ChainId.SGB, SUSHI_ADDRESS[ChainId.SGB], 18, 'ORACEL', 'OracleSwap.io')
+      const oracleTOken = new Token(ChainId.SGB, SUSHI_ADDRESS[ChainId.SGB], 18, 'ORACEL', 'OwlSwap.io')
 
       const defaultReward = {
         token: 'PRO',

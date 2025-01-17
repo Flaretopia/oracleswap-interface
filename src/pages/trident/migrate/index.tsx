@@ -15,7 +15,7 @@ const MigrateLiquidity = () => {
   return (
     <>
       <Head>
-        <title>{i18n._(t`Migrate Liquidity | OracleSwap`)}</title>
+        <title>{i18n._(t`Migrate Liquidity | OwlSwap`)}</title>
       </Head>
       <DebugObserver />
       <TridentHeader pattern="bg-binary" className="!gap-2">
@@ -24,7 +24,7 @@ const MigrateLiquidity = () => {
         </Typography>
         <div className="max-w-2xl">
           <Typography className="text-high-emphesis" weight={700}>
-            {i18n._(t`Select and migrate your liquidity positions from OracleSwap v1 to the Trident AMM`)}
+            {i18n._(t`Select and migrate your liquidity positions from OwlSwap v1 to the Trident AMM`)}
           </Typography>
           <Typography variant="sm" className="mt-4" weight={400}>
             {i18n._(

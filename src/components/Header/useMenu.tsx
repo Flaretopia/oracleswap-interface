@@ -150,7 +150,7 @@ const useMenu: UseMenu = () => {
     let analyticsMenu: MenuItem = {
       key: 'analytics',
       title: i18n._(t`📈`),
-      link: 'https://analytics.oracleswap.io/',
+      link: 'https://www.geckoterminal.com/songbird/oracleswap/pools',
       external: true,
       icon: <PresentationChartBarIcon width={20} />,
     }

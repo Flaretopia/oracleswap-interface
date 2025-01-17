@@ -29,7 +29,7 @@ describe('kashi functions', () => {
       isNative: false,
       isToken: true,
       list: {
-        name: 'OracleSwap Menu',
+        name: 'OwlSwap Menu',
         timestamp: '2021-09-08T01:59:50.068Z',
         version: {
           major: 15,

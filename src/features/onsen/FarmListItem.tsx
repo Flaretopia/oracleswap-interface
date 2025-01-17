@@ -30,13 +30,13 @@ const FarmListItem: FC<FarmListItem> = ({ farm, onClick }) => {
 
         <div className="flex flex-col items-start">
           <Typography weight={700} className="flex gap-1 text-high-emphesis">
-            {farm?.pair?.token0?.symbol}
+            {farm?.pair?.token0?.symbol === 'OS' ? 'OWL' : (farm?.pair?.token0?.symbol === 'xOS' ? 'xOWL' : farm?.pair?.token0?.symbol)}
             {farm?.pair?.token1 && <span className="text-low-emphesis">/</span>}
-            {farm?.pair?.token1?.symbol}
+            {farm?.pair?.token1?.symbol === 'OS' ? 'OWL' : (farm?.pair?.token1?.symbol === 'xOS' ? 'xOWL' : farm?.pair?.token1?.symbol)}
           </Typography>
           {farm?.pair?.type === PairType.SWAP && (
             <Typography variant="xs" className="text-low-emphesis">
-              {i18n._(t`OracleSwap Farm`)}
+              {/* {i18n._(t`OwlSwap Farm`)} */}
             </Typography>
           )}
           {farm?.pair?.type === PairType.KASHI && (

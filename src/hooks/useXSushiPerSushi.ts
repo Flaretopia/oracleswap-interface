@@ -10,7 +10,7 @@ const QUERY = `{
 // @ts-ignore TYPE NEEDS FIXING
 const fetcher = (query) => request('https://api.thegraph.com/subgraphs/name/matthewlilley/bar', query)
 
-// Returns ratio of XSushi:OracleSwap
+// Returns ratio of XSushi:OwlSwap
 export default function useSushiPerXSushi(parse = true) {
   const { data } = useSWR(QUERY, fetcher)
   return parse ? parseFloat(data?.bar?.ratio) : data?.bar?.ratio

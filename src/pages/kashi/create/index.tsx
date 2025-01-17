@@ -190,14 +190,14 @@ export default function Create() {
   return (
     <CreateLayout>
       <Head>
-        <title>Create Lending Pair | Kashi by OracleSwap</title>
-        <meta key="description" name="description" content="Create Lending Pair on Kashi by OracleSwap" />
+        <title>Create Lending Pair | Kashi by OwlSwap</title>
+        <meta key="description" name="description" content="Create Lending Pair on Kashi by OwlSwap" />
         <meta
           key="twitter:description"
           name="twitter:description"
-          content="Create Lending Pair on Kashi by OracleSwap"
+          content="Create Lending Pair on Kashi by OwlSwap"
         />
-        <meta key="og:description" property="og:description" content="Create Lending Pair on Kashi by OracleSwap" />
+        <meta key="og:description" property="og:description" content="Create Lending Pair on Kashi by OwlSwap" />
       </Head>
       <Card
         className="h-full bg-dark-900"

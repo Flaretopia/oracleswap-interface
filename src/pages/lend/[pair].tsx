@@ -30,7 +30,7 @@ export default function Pair() {
     <PairLayout>
       <Head>
         {/*@ts-ignore TYPE NEEDS FIXING*/}
-        <title>Lend {pair.asset.tokenInfo.symbol} | OracleSwap</title>
+        <title>Lend {pair.asset.tokenInfo.symbol} | OwlSwap</title>
         {/*@ts-ignore TYPE NEEDS FIXING*/}
         <meta key="description" name="description" content={`Lend ${pair.asset.tokenInfo.symbol} on Kashi`} />
         <meta

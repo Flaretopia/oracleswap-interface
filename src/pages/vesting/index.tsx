@@ -46,7 +46,7 @@ const Vesting = () => {
   return (
     <>
       <Head>
-        <title>Vesting | OracleSwap</title>
+        <title>Vesting | OwlSwap</title>
         <meta name="description" content="Vesting..." />
         <meta key="twitter:description" name="twitter:description" content="Vesting..." />
         <meta key="og:description" property="og:description" content="Vesting..." />

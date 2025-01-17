@@ -181,7 +181,7 @@ export function toV2LiquidityToken([tokenA, tokenB]: [Token, Token]): Token {
     computePairAddress({ factoryAddress: FACTORY_ADDRESS[tokenA.chainId], tokenA, tokenB }),
     18,
     'OLP',
-    'OracleSwap LP Token'
+    'OwlSwap LP Token'
   )
 }
 

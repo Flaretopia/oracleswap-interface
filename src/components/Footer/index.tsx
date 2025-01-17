@@ -32,10 +32,10 @@ const Footer = () => {
           <div className="flex flex-col col-span-2 gap-3 sm:col-span-1">
             {/* <div className="flex items-center justify-start gap-2">
               <div className="">
-                <Image src="https://app.sushi.com/images/logo.svg" alt="OracleSwap logo" width="28px" height="28px" />
+                <Image src="https://app.sushi.com/images/logo.svg" alt="OwlSwap logo" width="28px" height="28px" />
               </div>
               <Typography variant="h2" weight={700} className="tracking-[0.02em] scale-y-90 hover:text-high-emphesis">
-                OracleSwap
+                OwlSwap
               </Typography>
             </div> */}
             {/* <Typography variant="xs" className="text-low-emphesis">
@@ -145,7 +145,7 @@ const Footer = () => {
             </Typography> */}
           {/* <a href="https://docs.sushi.com" target="_blank" rel="noreferrer">
               <Typography variant="xs" className="text-low-emphesis hover:text-high-emphesis">
-                {i18n._(t`What is OracleSwap?`)}
+                {i18n._(t`What is OwlSwap?`)}
               </Typography>
             </a>
             <a href="https://discord.gg/NVPXN4e" target="_blank" rel="noreferrer">
@@ -185,7 +185,7 @@ const Footer = () => {
             </a>
             <a href="https://docs.openmev.org" target="_blank" rel="noreferrer">
               <Typography variant="xs" className="text-low-emphesis hover:text-high-emphesis">
-                {i18n._(t`OracleSwap Relay`)}
+                {i18n._(t`OwlSwap Relay`)}
               </Typography>
             </a>
           </div> */}
@@ -207,7 +207,7 @@ const Footer = () => {
 
           <div className="flex flex-row justify-start gap-1 text-right sm:justify-end">
             <div className="flex items-center ">
-              <a href="https://flare.xyz/" target="_blank" rel="noreferrer">
+              <a href="https://flare.network/" target="_blank" rel="noreferrer">
                 <img src={LogoImage.src} className={'h-[50px]'} alt="Logo" />
               </a>
             </div>

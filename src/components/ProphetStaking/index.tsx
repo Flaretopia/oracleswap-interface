@@ -427,9 +427,9 @@ export const ProphetStaking: FC<ProphetStakingProps> = ({ totalPoolSize }) => {
                   <CountDown time={unlockTime} hidden={!userTotalWeight || userTotalWeight?.equalTo(ZERO)} />
                 </div>
               </div>
-              <p className="mt-2 font-bold text-red-500">
+              <p className="mt-2 font-bold text-white bg-[#e62058] p-2 rounded">
                 *If you withdraw your PRO before the time-lock period is over you will forfeit 50% of your staked
-                PRO/xOS!
+                PRO/xOWL!
               </p>
             </div>
           ) : (
@@ -486,9 +486,9 @@ export const ProphetStaking: FC<ProphetStakingProps> = ({ totalPoolSize }) => {
                     }
                   }}
                   sx={{
-                    color: 'yellow',
+                    color: '#3b82f6',
                     '& .MuiSlider-markLabel': {
-                      color: 'yellow',
+                      color: '#3b82f6',
                       fontWeight: 700,
                     },
                   }}
@@ -558,11 +558,11 @@ export const ProphetStaking: FC<ProphetStakingProps> = ({ totalPoolSize }) => {
                   fullWidth
                   className="mb-2"
                   loading={xOracleApprovalState === ApprovalState.PENDING}
-                  color="gradient"
+                  color="blue"
                   onClick={xOralceApprove}
                   disabled={xOracleApprovalState !== ApprovalState.NOT_APPROVED}
                 >
-                  {i18n._(t`Approve xOS FOR NFT Staking`)}
+                  {i18n._(t`Approve xOWL FOR NFT Staking`)}
                 </Button>
               )}
 
@@ -602,16 +602,16 @@ export const ProphetStaking: FC<ProphetStakingProps> = ({ totalPoolSize }) => {
             </div>
             <div className="flex items-center pb-1 balance2">
               <Image src="https://dex.oracleswap.io/profile_icon.webp" height={30} width={30} alt="true" />
-              <p className="ml-2">{`OS NFT: ${nftCount}`}</p>
+              <p className="ml-2">{`OWL NFT: ${nftCount}`}</p>
             </div>
             <div className="flex items-center pb-1 balance3">
               <Image src="https://dex.oracleswap.io/ORACLE_SilverLogo.png" height={30} width={30} alt="true" />
-              <p className="ml-2">{`XORACLE: ${lockXOracle ? lockXOracle.toSignificant(6) : ''}`}</p>
+              <p className="ml-2">{`xOWL: ${lockXOracle ? lockXOracle.toSignificant(6) : ''}`}</p>
             </div>
             <p>
               YOUR TOTAL POOL SHARE:
               <br />{' '}
-              <span className="text-green-600">
+              <span className="text-[#1a9e44]">
                 {' '}
                 {`${userTotalWeight ? userTotalWeight.toSignificant(6) : ''} = ${rate.toFixed(6)}%`}
               </span>
@@ -633,7 +633,7 @@ export const ProphetStaking: FC<ProphetStakingProps> = ({ totalPoolSize }) => {
 
               <QuestionHelper
                 className="!bg-dark-800 !shadow-xl p-2"
-                text={`You may notice some tokens called OLP. Each OLP is different and represents a pair. For example: PRO/WSGB, PRO/OS & PRO/xOS. Go to Pool > Browse to visualize it.`}
+                text={`You may notice some tokens called OLP. Each OLP is different and represents a pair. For example: PRO/WSGB, PRO/OWL & PRO/xOWL. Go to Pool > Browse to visualize it.`}
               />
             </div>
 

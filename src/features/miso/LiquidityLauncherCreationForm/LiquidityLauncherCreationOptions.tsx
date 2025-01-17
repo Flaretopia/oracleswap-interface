@@ -33,7 +33,7 @@ const LiquidityLauncherCreationOptions: FC<LiquidityLauncherCreationOptionsProps
           label={i18n._(t`Liquidity Launch Percentage*`)}
           placeholder="50"
           helperText={i18n._(
-            t`The amount raised from the auction, pairing with tokens to be launched on OracleSwap with equal weighting in the liquidity pool.`
+            t`The amount raised from the auction, pairing with tokens to be launched on OwlSwap with equal weighting in the liquidity pool.`
           )}
         />
       </div>

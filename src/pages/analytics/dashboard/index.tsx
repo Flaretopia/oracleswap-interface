@@ -118,7 +118,7 @@ export default function Dashboard(): JSX.Element {
             token1: farm.pair.token1,
             id: farm.pair.id,
             name: farm.pair.symbol ?? `${farm.pair.token0.symbol}-${farm.pair.token1.symbol}`,
-            type: farm.pair.symbol ? 'Kashi Farm' : 'OracleSwap Farm',
+            type: farm.pair.symbol ? 'Kashi Farm' : 'OwlSwap Farm',
           },
           rewards: farm.rewards,
           liquidity: farm.tvl,
@@ -232,7 +232,7 @@ export default function Dashboard(): JSX.Element {
       <Background background="dashboard">
         <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-2">
           <div>
-            <div className="text-3xl font-bold text-high-emphesis">OracleSwap Analytics</div>
+            <div className="text-3xl font-bold text-high-emphesis">OwlSwap Analytics</div>
             <div className="">
               Dive deeper in the analytics of sushi bar,
               <br /> pools, pairs and tokens.

@@ -2,8 +2,8 @@
 // pages/_document.js
 import { Head, Html, Main, NextScript } from 'next/document'
 
-const APP_NAME = 'OracleSwap'
-const APP_DESCRIPTION = 'OracleSwap | The premiere Decentralized Exchange on the Songbird Network.'
+const APP_NAME = 'OwlSwap'
+const APP_DESCRIPTION = 'OwlSwap | The premiere Decentralized Exchange on the Songbird Network.'
 
 export default function Document() {
   return (

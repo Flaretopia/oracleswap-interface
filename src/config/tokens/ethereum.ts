@@ -112,7 +112,7 @@ export const ORACLE = new Token(
   '0xD7565b16b65376e2Ddb6c71E7971c7185A7Ff3Ff',
   18,
   'OS',
-  'OracleSwap.io'
+  'OwlSwap.io'
 )
 
 

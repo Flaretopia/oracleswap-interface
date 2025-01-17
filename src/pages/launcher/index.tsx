@@ -343,7 +343,7 @@ export default function TokenLauncher() {
                 Launch your own token! 
                 There is a {nativeFee} SGB fee to launch a token and there is a 1% fee on created token supply, min 10% of fees are distributed to OS stakers!
                 Minimum liquidity of {MIN_INITIAL_LIQUIDITY} SGB and 50% of the token supply is required.
-                Liquidity is automatically added to OracleSwap and then burnt!
+                Liquidity is automatically added to OwlSwap and then burnt!
               </Typography>
 
               <div className="flex flex-col gap-4">

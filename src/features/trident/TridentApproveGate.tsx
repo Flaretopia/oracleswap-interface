@@ -23,7 +23,7 @@ const TokenApproveButton: FC<TokenApproveButtonProps> = memo(
     const { i18n } = useLingui()
     const [approveState, approveCallback] = useApproveCallback(inputAmount?.wrapped, tokenApproveOn)
     const { gatherPermitSignature, signatureData } = useTridentLiquidityTokenPermit(
-      ['Uniswap V2', 'OracleSwap LP Token'].includes(inputAmount?.currency.name ?? '')
+      ['Uniswap V2', 'OwlSwap LP Token'].includes(inputAmount?.currency.name ?? '')
         ? inputAmount?.wrapped
         : undefined,
       tokenApproveOn

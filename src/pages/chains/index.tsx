@@ -12,7 +12,7 @@ export default function Status({ fallbackData }) {
   return (
     <Container id="chains-page" className="py-4 space-y-6 md:py-8 lg:py-12" maxWidth="6xl">
       <Head>
-        <title>Chains | OracleSwap</title>
+        <title>Chains | OwlSwap</title>
         <meta key="description" name="description" content="Chains..." />
         <meta key="twitter:description" name="twitter:description" content="Chains..." />
         <meta key="og:description" property="og:description" content="Chains..." />

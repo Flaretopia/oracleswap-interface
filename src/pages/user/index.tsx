@@ -64,7 +64,7 @@ export default function Me() {
   return (
     <Container id="user-page" className="py-4 space-y-3 md:py-8 lg:py-12" maxWidth="2xl">
       <Head>
-        <title>My SUSHI | OracleSwap</title>
+        <title>My SUSHI | OwlSwap</title>
         <meta key="description" name="description" content="My SUSHI" />
         <meta key="twitter:description" name="twitter:description" content="My SUSHI" />
         <meta key="og:description" property="og:description" content="My SUSHI" />

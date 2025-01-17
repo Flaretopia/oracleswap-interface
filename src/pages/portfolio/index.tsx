@@ -18,11 +18,11 @@ const Portfolio = () => {
   return (
     <>
       <Head>
-        <title>{i18n._(t`Portfolio`)} | OracleSwap</title>
+        <title>{i18n._(t`Portfolio`)} | OwlSwap</title>
         <meta
           key="description"
           name="description"
-          content="Get a summary of all of the balances in your portfolio on OracleSwap."
+          content="Get a summary of all of the balances in your portfolio on OwlSwap."
         />
       </Head>
       <div className="flex flex-col items-center gap-4 mt-32">

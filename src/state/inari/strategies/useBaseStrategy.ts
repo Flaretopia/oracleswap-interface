@@ -85,7 +85,7 @@ const useBaseStrategy = ({ id, general, tokenDefinitions }: useBaseStrategyInter
   )
 
   // Default function for calculating the output based on the input
-  // This one is converting OracleSwap to xSushi and vice-versa.
+  // This one is converting OwlSwap to xSushi and vice-versa.
   // Function can be overridden or enhanced if you need custom input to output calculations
   const calculateOutputFromInput = useCallback(
     (zapIn: boolean, inputValue: string, inputToken: Token, outputToken: Token) => {

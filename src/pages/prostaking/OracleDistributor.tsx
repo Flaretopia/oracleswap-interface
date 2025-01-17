@@ -116,11 +116,11 @@ const OracleDistributor = () => {
       </div>
       <div className="flex flex-col text-base">
         <div>
-          OS LEFT: <span>{balance?.toSignificant(6)}</span>
+          OWL LEFT: <span>{balance?.toSignificant(6)}</span>
         </div>
         <div>
           NEXT DIST:{' '}
-          <span className="ml-1 font-medium text-white">{timeLeft === 0 ? 'Now' : harvestScheduleDateString}</span>
+          <span className="ml-1 font-medium text-[#e62058]">{timeLeft === 0 ? 'Now' : harvestScheduleDateString}</span>
         </div>
       </div>
     </div>

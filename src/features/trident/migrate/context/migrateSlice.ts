@@ -6,7 +6,7 @@ import { TridentPool } from 'app/services/graph'
 import { AppState } from 'app/state'
 
 export enum MigrationSource {
-  SUSHI_V2 = 'OracleSwap v2',
+  SUSHI_V2 = 'OwlSwap v2',
 }
 
 export interface v2Migration {

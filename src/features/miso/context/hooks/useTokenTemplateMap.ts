@@ -13,7 +13,7 @@ const useTokenTemplateMap = () => {
     (id: TokenType) => {
       return {
         [TokenType.FIXED]: i18n._(t`Fixed`),
-        [TokenType.SUSHI]: i18n._(t`OracleSwap`),
+        [TokenType.SUSHI]: i18n._(t`OwlSwap`),
         [TokenType.MINTABLE]: i18n._(t`Mintable`),
       }[id]
     },

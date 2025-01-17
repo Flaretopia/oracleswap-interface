@@ -1,6 +1,6 @@
 # Oracles
 
-Currently there is two types of oracles which the sushi interface supports, Chainlink & OracleSwap TWAP.
+Currently there is two types of oracles which the sushi interface supports, Chainlink & OwlSwap TWAP.
 
 ## Chainlink
 
@@ -45,7 +45,7 @@ Each mapping is keyed by the price feed proxy address, and contains and object w
 
 Tip: USD address is 0x0000000000000000000000000000000000000001 and decimals 8
 
-<!-- ## OracleSwap TWAP
+<!-- ## OwlSwap TWAP
 
 - Requires two exchange rate updates to start.
 - On creation both current & oracle exchange rate will be set to zero.
