@@ -58,7 +58,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     name: 'MetaMask',
     iconName: 'metamask.png',
     description: 'Open in MetaMask app.',
-    href: 'https://metamask.app.link/dapp/dex.oracleswap.io',
+    href: 'https://metamask.app.link/dapp/owlswap.io',
     color: '#E8831D',
     mobile: true,
     mobileOnly: true,

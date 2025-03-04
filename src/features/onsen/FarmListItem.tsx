@@ -34,6 +34,18 @@ const FarmListItem: FC<FarmListItem> = ({ farm, onClick }) => {
             {farm?.pair?.token1 && <span className="text-low-emphesis">/</span>}
             {farm?.pair?.token1?.symbol === 'OS' ? 'OWL' : (farm?.pair?.token1?.symbol === 'xOS' ? 'xOWL' : farm?.pair?.token1?.symbol)}
           </Typography>
+          {farm?.pair?.id && (
+            <Typography variant="xs" className="text-blue hover:text-blue/80">
+              <a 
+                href={`https://www.geckoterminal.com/songbird/pools/${farm?.pair?.id}`} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+              >
+                View on Gecko Terminal
+              </a>
+            </Typography>
+          )}
           {farm?.pair?.type === PairType.SWAP && (
             <Typography variant="xs" className="text-low-emphesis">
               {/* {i18n._(t`OwlSwap Farm`)} */}

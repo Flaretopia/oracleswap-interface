@@ -113,9 +113,9 @@ export const SelectedOracles = () => {
   )
 
   const depositError = !minXOracleAmount
-    ? 'Invalid xOS'
+    ? 'Invalid xOWL'
     : balance?.lessThan(minXOracleAmount?.multiply(selectedIDs.length)) && lockMode > 0
-      ? 'Insufficient xOS balance'
+      ? 'Insufficient xOWL balance'
       : lowProAmount
         ? 'Low Prophet Staked'
         : undefined
@@ -434,10 +434,9 @@ export const SelectedOracles = () => {
             variant="sm"
             weight={700}
             className={classNames(minXOracleAmount ? 'text-high-emphesis' : 'text-low-emphesis', 'truncate')}
-            // onClick={() => onClick(balance)}
             id={'xoracle approve'}
           >
-            {minXOracleAmount ? `${minXOracleAmount.toSignificant(6)} ${minXOracleAmount.currency.symbol}` : '0.0000'}
+            {minXOracleAmount ? `${minXOracleAmount.toSignificant(6)} xOWL` : '0.0000'}
           </Typography>
         </div>
 
@@ -596,7 +595,7 @@ export const SelectedOracles = () => {
               {i18n._(t`Warning you are about to break your time lock!`)}
             </Typography>
             <Typography variant="sm" weight={700} className="text-red">
-              {i18n._(t`You will lose: `)}  {withdrawXOracle?.toSignificant(5)}  {' xOS'}
+              {i18n._(t`You will lose: `)}  {withdrawXOracle?.toSignificant(5)}  {' xOWL'}
             </Typography>
           </HeadlessUiModal.BorderedContent>
           <Button

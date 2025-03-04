@@ -46,7 +46,7 @@ const Desktop: FC = () => {
               </div>
             </div>
             <Typography variant="xs" weight={700} className="text-[1rem] text-white">
-              OracleSwap is being rebranded to Owl Swap powered by Flaretopia!
+              OracleSwap is being rebranded to <a href="https://owlswap.io" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/80">OwlSwap</a> by <a href="https://flaretopia.com" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/80">Flaretopia</a>!
             </Typography>
           </div>
         )}
@@ -55,7 +55,7 @@ const Desktop: FC = () => {
             <div className="flex items-center justify-between gap-4 px-6">
               <div className="flex gap-4">
                 <div className="flex items-center mr-4">
-                  <ExternalLink href="https://www.oracleswap.io">
+                  <ExternalLink href="#">
                     <img src={LogoImage.src} className={'w-[40px] h-[40px]'} alt="Logo" />
                     {/* <Image src="/logo.png" alt="OwlSwap logo" width="24px" height="24px" /> */}
                   </ExternalLink>

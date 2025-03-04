@@ -36,6 +36,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
 import Head from 'next/head'
 import LogoImage from '../../../../public/icons/icon-152x152.png'
+import FlaretopiaLogo from '../../../../public/flaretopia.png'
 
 import { fetchAPI } from '../../../lib/api'
 import ExternalLink from 'app/components/ExternalLink'
@@ -381,9 +382,8 @@ const Swap = ({ banners }) => {
         onConfirm={handleConfirmTokenWarning}
       />
       <div className="flex items-center justify-center">
-        <ExternalLink href="https://www.oracleswap.io">
+        <ExternalLink href="https://www.owlswap.io">
           <div className="flex flex-col items-center mb-4">
-            {/* <div className="font-bold">1 SGB = $0.0645</div> */}
             <img src={LogoImage.src} className={'w-[100px] h-[100px]'} alt="Logo" />
           </div>
         </ExternalLink>
@@ -552,6 +552,15 @@ const Swap = ({ banners }) => {
           {swapIsUnsupported ? <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} /> : null}
         </div>
       </SwapLayoutCard>
+
+      <div className="flex items-center justify-center mt-8">
+        <ExternalLink href="https://flaretopia.com">
+          <div className="flex items-center gap-2">
+            <img src={FlaretopiaLogo.src} className={'w-[40px] h-[40px]'} alt="Flaretopia Logo" />
+            <span className="text-lg font-semibold">Flaretopia</span>
+          </div>
+        </ExternalLink>
+      </div>
 
       <div
         className="mt-3 coinmarketcap-currency-widget"

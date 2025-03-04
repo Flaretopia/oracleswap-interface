@@ -98,7 +98,7 @@ const useMenu: UseMenu = () => {
     const stakeMenu = [
       {
         key: 'oracle',
-        title: i18n._(t`OS`),
+        title: i18n._(t`OWL`),
         link: '/stake',
       },
       {
@@ -123,13 +123,13 @@ const useMenu: UseMenu = () => {
     //   icon: <GlobeIcon width={20} />,
     // }
 
-    let earnMenu: MenuItem = {
-      key: 'earn',
-      title: i18n._(t`💲Earn`),
-      link: 'https://earn.oracleswap.io/',
-      external: true,
-      icon: <CurrencyDollarIcon width={20} />,
-    }
+    // let earnMenu: MenuItem = {
+    //   key: 'earn',
+    //   title: i18n._(t`💲Earn`),
+    //   link: 'https://earn.owlswap.io/',
+    //   external: true,
+    //   icon: <CurrencyDollarIcon width={20} />,
+    // }
 
     let bridgeMenu: MenuItem = {
       key: 'earn',
@@ -141,8 +141,8 @@ const useMenu: UseMenu = () => {
 
     let v2Menu: MenuItem = {
       key: 'earn',
-      title: i18n._(t`V2`),
-      link: 'https://oracleswap.io/',
+      title: i18n._(t`🕊️Flaretopia🏝️`),
+      link: 'https://flaretopia.com/',
       external: true,
       icon: <CurrencyDollarIcon width={20} />,
     }
@@ -256,7 +256,7 @@ const useMenu: UseMenu = () => {
 
     mainItems.push(launcherMenu)
     mainItems.push(analyticsMenu)
-    mainItems.push(earnMenu)
+    // mainItems.push(earnMenu)
     mainItems.push(bridgeMenu)
     mainItems.push(v2Menu)
 

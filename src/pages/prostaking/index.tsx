@@ -89,11 +89,11 @@ function ProStaking() {
       <Head>
         <title key="title">OwlSwap | ProStaking</title>
         <meta key="description" name="description" content="ProStaking" />
-        <meta key="twitter:url" name="twitter:url" content="https://dex.oracleswap.io/stake" />
-        <meta key="twitter:title" name="twitter:title" content="STAKE OS" />
+        <meta key="twitter:url" name="twitter:url" content="https://owlswap.io/stake" />
+        <meta key="twitter:title" name="twitter:title" content="STAKE OWL" />
         <meta key="twitter:description" name="twitter:description" content="ProStaking" />
         {/* <meta key="twitter:image" name="twitter:image" content="https://app.sushi.com/images/xsushi-sign.png" /> */}
-        <meta key="og:title" property="og:title" content="STAKE OS" />
+        <meta key="og:title" property="og:title" content="STAKE OWL" />
         {/* <meta key="og:url" property="og:url" content="https://app.sushi.com/stake" /> */}
         {/* <meta key="og:image" property="og:image" content="https://app.sushi.com/images/xsushi-sign.png" /> */}
         <meta key="og:description" property="og:description" content="ProStaking" />
@@ -133,7 +133,7 @@ USE AT YOUR OWN RISK!`}
                   xOWL, OWL OLPs and more. Main examples of OLPs are PRO pairs like PRO/SGB, PRO/OWL. OLPs from
                   future pairs with PRO will be distributed here.
                 </p>
-                <a href="https://docs.oracleswap.io/guides/multistaking-pro-the-oracles-nfts" target="_blank" rel="noreferrer">
+                <a href="https://docs.flaretopia.com/" target="_blank" rel="noreferrer">
                   <span className="text-lg font-bold md:text-xl text-blue"> LEARN MORE </span>
                 </a>
               </div>

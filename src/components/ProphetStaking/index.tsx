@@ -33,6 +33,8 @@ import QuestionHelper from 'app/components/QuestionHelper'
 import Web3Connect from '../Web3Connect'
 
 import PROLOGO from '../../../public/PRO_Logo3Gold.png'
+import ProfileIcon from '../../../public/profile_icon.webp'
+import OracleSilverLogo from '../../../public/ORACLE_SilverLogo.png'
 
 const moment = require('moment')
 const sendTx = async (txFunc: () => Promise<any>): Promise<boolean> => {
@@ -601,11 +603,11 @@ export const ProphetStaking: FC<ProphetStakingProps> = ({ totalPoolSize }) => {
               <p className="ml-2">{`PRO: ${stakedAmount ? stakedAmount.toSignificant(6) : ''}`}</p>
             </div>
             <div className="flex items-center pb-1 balance2">
-              <Image src="https://dex.oracleswap.io/profile_icon.webp" height={30} width={30} alt="true" />
+              <img src={ProfileIcon.src} height={30} width={30} alt="Profile Icon" />
               <p className="ml-2">{`OWL NFT: ${nftCount}`}</p>
             </div>
             <div className="flex items-center pb-1 balance3">
-              <Image src="https://dex.oracleswap.io/ORACLE_SilverLogo.png" height={30} width={30} alt="true" />
+              <img src={OracleSilverLogo.src} height={30} width={30} alt="Oracle Silver Logo" />
               <p className="ml-2">{`xOWL: ${lockXOracle ? lockXOracle.toSignificant(6) : ''}`}</p>
             </div>
             <p>

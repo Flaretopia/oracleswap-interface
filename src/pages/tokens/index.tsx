@@ -103,11 +103,11 @@ const calculateTokenPrice = async (lpAddress: string, tokenAddress: string, libr
 
     // Get token decimals
     const tokenDecimals = await token.decimals()
-    
+
     // Get reserves and token order
     const reserves = await pair.getReserves()
     const token0 = await pair.token0()
-    
+
     // Determine which reserve is token and which is WSGB
     const [tokenReserve, wsgbReserve] = token0.toLowerCase() === tokenAddress.toLowerCase()
       ? [reserves[0], reserves[1]]
@@ -141,11 +141,11 @@ const calculateTokenPrice = async (lpAddress: string, tokenAddress: string, libr
 const calculateMarketCap = async (tokenAddress: string, price: number | null, library: any) => {
   try {
     if (!price) return null
-    
+
     const token = new Contract(tokenAddress, ERC20_ABI, library)
     const decimals = await token.decimals()
     const totalSupply = await token.totalSupply()
-    
+
     // Convert totalSupply to a proper number considering decimals
     const adjustedSupply = Number(ethers.utils.formatUnits(totalSupply, decimals))
     const marketCap = adjustedSupply * price
@@ -458,7 +458,7 @@ const formatPriceWithFallback = (price: number | undefined | null, isLoading: bo
 const formatMarketCapWithFallback = (marketCap: number | undefined | null, isLoading: boolean) => {
   if (isLoading) return '🔄'  // Loading
   if (!marketCap) return '❓'  // Failed or not available
-  
+
   if (marketCap >= 1e9) return `$${(marketCap / 1e9).toFixed(1)}B`
   if (marketCap >= 1e6) return `$${(marketCap / 1e6).toFixed(1)}M`
   if (marketCap >= 1e3) return `$${(marketCap / 1e3).toFixed(1)}K`
@@ -533,11 +533,11 @@ export default function Tokens() {
         // Then fetch additional data in the background
         if (library) {
           console.log('Starting to fetch additional data for tokens...')
-          
+
           for (const token of tokensList) {
             try {
               console.log(`Fetching data for token ${token.symbol}...`)
-              
+
               // Get holders count first since it's independent of web3
               const holders = await fetchHoldersCount(token.tokenAddress)
               console.log(`Got holders for ${token.symbol}:`, holders)
@@ -551,9 +551,9 @@ export default function Tokens() {
               console.log(`Got market cap for ${token.symbol}:`, marketCap)
 
               // Update the token with new data
-              setTokens(prevTokens => 
-                prevTokens.map(t => 
-                  t.tokenAddress === token.tokenAddress 
+              setTokens(prevTokens =>
+                prevTokens.map(t =>
+                  t.tokenAddress === token.tokenAddress
                     ? { ...t, price, marketCap, holders }
                     : t
                 )
@@ -614,15 +614,15 @@ export default function Tokens() {
     const handleInitialToken = async () => {
       if (token && typeof token === 'string' && initialLoad) {
         // Find the token in the list
-        const tokenData = tokens.find(t => 
+        const tokenData = tokens.find(t =>
           t.tokenAddress.toLowerCase() === token.toLowerCase()
         )
-        
+
         if (tokenData) {
           setSelectedToken(tokenData)
           setIsDescriptionModalOpen(true)
         }
-        
+
         setInitialLoad(false)
       }
     }
@@ -650,8 +650,8 @@ export default function Tokens() {
       </Head>
 
       <div className="max-w-4xl mx-auto mb-8">
-        <Typography 
-          variant="hero" 
+        <Typography
+          variant="hero"
           className="text-high-emphesis text-center text-sm sm:text-lg md:text-2xl lg:text-4xl font-bold"
         >
           🎇Launched Tokens
@@ -867,14 +867,13 @@ export default function Tokens() {
                                   </span>
                                 </a>
                               )}
-                              <a href={`https://analytics.oracleswap.io/tokens/${token.tokenAddress}`}
+                              <a
+                                href={`https://www.geckoterminal.com/songbird/pools/${token.lpAddress}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-blue hover:text-high-emphesis"
+                                className="text-blue hover:text-high-emphesis text-sm flex items-center gap-1"
                               >
-                                <span role="img" aria-label="chart" className="text-base">
-                                  📊
-                                </span>
+                                📊 Chart
                               </a>
                               <a
                                 href={`/swap?inputCurrency=SGB&outputCurrency=${token.tokenAddress}`}

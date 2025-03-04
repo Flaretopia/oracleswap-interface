@@ -41,7 +41,7 @@ const Mobile: FC = () => {
             </div>
           </div>
           <Typography variant="xs" weight={700} className="text-[1rem] text-white">
-            OracleSwap is being rebranded to Owl Swap powered by Flaretopia!
+            OracleSwap is being rebranded to <a href="https://owlswap.io" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/80">OwlSwap</a> by <a href="https://flaretopia.com" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/80">Flaretopia</a>!
           </Typography>
         </div>
       )}
@@ -51,7 +51,7 @@ const Mobile: FC = () => {
             <MenuIcon width={28} className="text-black cursor-pointer hover:text-[#cba135]" onClick={() => setOpen(true)} />
           </div>
           <div className="flex items-center mr-1">
-            <ExternalLink href="https://www.oracleswap.io">
+            <ExternalLink href="#">
               <img src={LogoImage.src} className={'w-[40px] h-[40px]'} alt="Logo" />
             </ExternalLink>
           </div>

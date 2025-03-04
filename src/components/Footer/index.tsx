@@ -14,6 +14,7 @@ import Container from '../Container'
 import LogoImage from '../../../public/songbird.png'
 import useIsCoinbaseWallet from 'app/hooks/useIsCoinbaseWallet'
 import { useNetworkModalToggle } from 'app/state/application/hooks'
+import FlaretopiaLogo from '../../../public/flaretopia.png'
 // import Image from 'next/image'
 // import SGB from '../../../public/SGB.png'
 // import { ChainId } from '@sushiswap/core-sdk'
@@ -43,7 +44,7 @@ const Footer = () => {
               us!`)}
             </Typography> */}
             <div className="flex items-center gap-4">
-              <a href="https://twitter.com/Oracle_Swap" target="_blank" rel="noreferrer">
+              <a href="https://x.com/flaretopia" target="_blank" rel="noreferrer">
                 <TwitterIcon width={16} className="text-low-emphesis" />
               </a>
               <a href="https://t.me/OracleSwapOffical" target="_blank" rel="noreferrer">
@@ -55,7 +56,7 @@ const Footer = () => {
               <a href="https://discord.gg/WbDnWcRBxw" target="_blank" rel="noreferrer">
                 <DiscordIcon width={16} className="text-low-emphesis" />
               </a>
-              <a href="https://github.com/Oracle-Swap" target="_blank" rel="noreferrer">
+              <a href="https://github.com/flaretopia" target="_blank" rel="noreferrer">
                 <GithubIcon width={16} className="text-low-emphesis" />
               </a>
 
@@ -92,11 +93,11 @@ const Footer = () => {
                 </div>
               )}
 
-              <a href="https://docs.oracleswap.io/" target="_blank" rel="noreferrer">
+              <a href="https://docs.flaretopia.com/" target="_blank" rel="noreferrer">
                 <span className="text-low-emphesis">{i18n._(t`Docs`)}</span>
               </a>
 
-              <a href="https://docs.oracleswap.io/about/privacy" target="_blank" rel="noreferrer">
+              <a href="https://docs.flaretopia.com/about/privacy" target="_blank" rel="noreferrer">
                 <span className="text-low-emphesis"> {i18n._(t`Privacy`)} </span>
               </a>
               <a href="https://www.geckoterminal.com/songbird/oracleswap/pools" target="_blank" rel="noreferrer">
@@ -206,10 +207,15 @@ const Footer = () => {
           </div> */}
 
           <div className="flex flex-row justify-start gap-1 text-right sm:justify-end">
-            <div className="flex items-center ">
+            <div className="flex items-center gap-4">
+              <a href="https://flaretopia.com" target="_blank" rel="noreferrer">
+                <img src={FlaretopiaLogo.src} className={'h-[50px]'} alt="Flaretopia Logo" />
+              </a>
+
               <a href="https://flare.network/" target="_blank" rel="noreferrer">
                 <img src={LogoImage.src} className={'h-[50px]'} alt="Logo" />
               </a>
+
             </div>
             {/* <Typography variant="xs" weight={700} className="mt-2.5 hover:text-high-emphesis">
               {i18n._(t`Protocol`)}

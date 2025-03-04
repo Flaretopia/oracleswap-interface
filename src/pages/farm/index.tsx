@@ -208,7 +208,7 @@ export default function Farm(): JSX.Element {
 
           <div className="py-2 px-4 text-[1rem] text-white bg-[#e62058] relative text-center rounded-lg mb-4">
             <Typography variant="sm" weight={700} className="text-[1rem] text-white">
-              PRO rewards will be cut in half soon. V1 farm will distribute 0.25 PRO per block and V2 Multifarm will distribute 0.25 per block. Stay tuned.
+              PRO rewards will be cut in half soon. V1 farm will distribute 0.25 PRO per block and V2 Multifarm on <a href="https://flaretopia.com/farm" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/80">Flaretopia</a> will distribute 0.25 per block. Stay tuned.
             </Typography>
           </div>
 
