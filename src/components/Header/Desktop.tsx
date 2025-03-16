@@ -55,7 +55,7 @@ const Desktop: FC = () => {
             <div className="flex items-center justify-between gap-4 px-6">
               <div className="flex gap-4">
                 <div className="flex items-center mr-4">
-                  <ExternalLink href="#">
+                  <ExternalLink href="https://www.flaretopia.com/">
                     <img src={LogoImage.src} className={'w-[40px] h-[40px]'} alt="Logo" />
                     {/* <Image src="/logo.png" alt="OwlSwap logo" width="24px" height="24px" /> */}
                   </ExternalLink>

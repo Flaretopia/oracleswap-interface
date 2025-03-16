@@ -51,7 +51,7 @@ const Mobile: FC = () => {
             <MenuIcon width={28} className="text-black cursor-pointer hover:text-[#cba135]" onClick={() => setOpen(true)} />
           </div>
           <div className="flex items-center mr-1">
-            <ExternalLink href="#">
+            <ExternalLink href="https://www.flaretopia.com/">
               <img src={LogoImage.src} className={'w-[40px] h-[40px]'} alt="Logo" />
             </ExternalLink>
           </div>

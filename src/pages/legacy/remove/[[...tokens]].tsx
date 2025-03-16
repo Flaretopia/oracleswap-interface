@@ -39,6 +39,11 @@ import { useRouter } from 'next/router'
 import React, { useCallback, useMemo, useState } from 'react'
 import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'
+import { i18n } from '@lingui/core'
+import { en } from 'make-plural/plurals'
+
+// Add locale data
+i18n.loadLocaleData('en', { plurals: en })
 
 const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(5, 100)
 
@@ -103,22 +108,36 @@ export default function Remove() {
   const [approval, approveCallback] = useApproveCallback(parsedAmounts[Field.LIQUIDITY], routerContract?.address)
 
   async function onAttemptToApprove() {
-    if (!pairContract || !pair || !library || !deadline) throw new Error('missing dependencies')
+    if (!pairContract || !pair || !library || !deadline) {
+      console.error('Missing dependencies for approval:', {
+        pairContract: !!pairContract,
+        pair: !!pair,
+        library: !!library,
+        deadline: !!deadline
+      })
+      throw new Error('missing dependencies')
+    }
     const liquidityAmount = parsedAmounts[Field.LIQUIDITY]
-    if (!liquidityAmount) throw new Error('missing liquidity amount')
+    if (!liquidityAmount) {
+      console.error('Missing liquidity amount for approval')
+      throw new Error('missing liquidity amount')
+    }
 
-    if (chainId !== ChainId.HARMONY && gatherPermitSignature) {
-      try {
-        await gatherPermitSignature()
-      } catch (error) {
-        // try to approve if gatherPermitSignature failed for any reason other than the user rejecting it
-        /* @ts-ignore TYPE NEEDS FIXING */
-        if (error?.code !== USER_REJECTED_TX) {
-          await approveCallback()
-        }
-      }
-    } else {
+    console.log('Starting approval process...')
+    console.log('Liquidity amount:', liquidityAmount.toExact())
+    console.log('Router address:', routerContract?.address)
+    console.log('Pair address:', pair?.liquidityToken?.address)
+
+    try {
+      console.log('Executing approval transaction...')
       await approveCallback()
+      console.log('Approval transaction executed')
+    } catch (error: any) {
+      console.error('Approval transaction failed:', error)
+      if (error?.code === 4001) {
+        throw new Error('Transaction rejected by user')
+      }
+      throw new Error(`Approval failed: ${error?.message || 'Unknown error'}`)
     }
   }
 
@@ -168,80 +187,43 @@ export default function Remove() {
     if (!tokenA || !tokenB) throw new Error('could not wrap')
 
     let methodNames: string[], args: Array<string | string[] | number | boolean>
-    // we have approval, use normal remove liquidity
-    if (approval === ApprovalState.APPROVED) {
-      // removeLiquidityETH
-      if (oneCurrencyIsETH) {
-        methodNames = ['removeLiquidityETH', 'removeLiquidityETHSupportingFeeOnTransferTokens']
-        args = [
-          currencyBIsETH ? tokenA.address : tokenB.address,
-          liquidityAmount.quotient.toString(),
-          amountsMin[currencyBIsETH ? Field.CURRENCY_A : Field.CURRENCY_B].toString(),
-          amountsMin[currencyBIsETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(),
-          account,
-          deadline.toHexString(),
-        ]
-      }
-      // removeLiquidity
-      else {
-        methodNames = ['removeLiquidity']
-        args = [
-          tokenA.address,
-          tokenB.address,
-          liquidityAmount.quotient.toString(),
-          amountsMin[Field.CURRENCY_A].toString(),
-          amountsMin[Field.CURRENCY_B].toString(),
-          account,
-          deadline.toHexString(),
-        ]
-      }
-    }
-    // we have a signature, use permit versions of remove liquidity
-    else if (signatureData !== null) {
-      // removeLiquidityETHWithPermit
-      if (oneCurrencyIsETH) {
-        methodNames = ['removeLiquidityETHWithPermit', 'removeLiquidityETHWithPermitSupportingFeeOnTransferTokens']
-        args = [
-          currencyBIsETH ? tokenA.address : tokenB.address,
-          liquidityAmount.quotient.toString(),
-          amountsMin[currencyBIsETH ? Field.CURRENCY_A : Field.CURRENCY_B].toString(),
-          amountsMin[currencyBIsETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(),
-          account,
-          signatureData.deadline,
-          false,
-          signatureData.v,
-          signatureData.r,
-          signatureData.s,
-        ]
-      }
-      // removeLiquidityETHWithPermit
-      else {
-        methodNames = ['removeLiquidityWithPermit']
-        args = [
-          tokenA.address,
-          tokenB.address,
-          liquidityAmount.quotient.toString(),
-          amountsMin[Field.CURRENCY_A].toString(),
-          amountsMin[Field.CURRENCY_B].toString(),
-          account,
-          signatureData.deadline,
-          false,
-          signatureData.v,
-          signatureData.r,
-          signatureData.s,
-        ]
-      }
+    
+    // Always use normal remove liquidity methods (no permits) on Songbird
+    if (oneCurrencyIsETH) {
+      methodNames = ['removeLiquidityETH', 'removeLiquidityETHSupportingFeeOnTransferTokens']
+      args = [
+        currencyBIsETH ? tokenA.address : tokenB.address,
+        liquidityAmount.quotient.toString(),
+        amountsMin[currencyBIsETH ? Field.CURRENCY_A : Field.CURRENCY_B].toString(),
+        amountsMin[currencyBIsETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(),
+        account,
+        deadline.toHexString(),
+      ]
     } else {
-      throw new Error('Attempting to confirm without approval or a signature. Please contact support.')
+      methodNames = ['removeLiquidity']
+      args = [
+        tokenA.address,
+        tokenB.address,
+        liquidityAmount.quotient.toString(),
+        amountsMin[Field.CURRENCY_A].toString(),
+        amountsMin[Field.CURRENCY_B].toString(),
+        account,
+        deadline.toHexString(),
+      ]
     }
+
+    console.log('Attempting to remove liquidity with methods:', methodNames)
+    console.log('Arguments:', args)
 
     const safeGasEstimates: (BigNumber | undefined)[] = await Promise.all(
       methodNames.map((methodName) =>
-        /* @ts-ignore TYPE NEEDS FIXING */
-        routerContract.estimateGas[methodName](...args)
-          .then(calculateGasMargin)
+        routerContract?.estimateGas[methodName](...args)
+          .then((estimate) => {
+            console.log(`Gas estimate for ${methodName}:`, estimate.toString())
+            return calculateGasMargin(estimate)
+          })
           .catch((error) => {
-            console.error(`estimateGas failed`, methodName, args, error)
+            console.error(`estimateGas failed for ${methodName}:`, error)
             return undefined
           })
       )
@@ -259,7 +241,7 @@ export default function Remove() {
       const safeGasEstimate = safeGasEstimates[indexOfSuccessfulEstimation]
 
       setAttemptingTxn(true)
-      /* @ts-ignore TYPE NEEDS FIXING */
+      if (!routerContract) throw new Error('Router contract is null')
       await routerContract[methodName](...args, {
         gasLimit: safeGasEstimate,
       })
@@ -283,7 +265,7 @@ export default function Remove() {
         .catch((error: Error) => {
           setAttemptingTxn(false)
           // we only care if the error is something _other_ than the user rejected the tx
-          console.log(error)
+          console.error('Remove liquidity failed:', error)
         })
     }
   }
@@ -313,7 +295,7 @@ export default function Remove() {
           <div className="ml-3 text-2xl font-medium text-high-emphesis">{currencyB?.symbol}</div>
         </div>
       </div>
-      <div className="justify-start text-sm text-secondary">
+      <div className="justify-start text-sm text-high-emphesis">
         {t`Output is estimated. If the price changes by more than ${allowedSlippage.toSignificant(
           4
         )}% your transaction will revert.`}
@@ -347,7 +329,7 @@ export default function Remove() {
       )}
       <div className="grid gap-1 pb-6">
         <div className="flex items-center justify-between">
-          <div className="text-sm text-secondary">{i18n._(t`${currencyA?.symbol}/${currencyB?.symbol} Burned`)}</div>
+          <div className="text-sm text-high-emphesis">{i18n._(t`${currencyA?.symbol}/${currencyB?.symbol} Burned`)}</div>
           <div className="text-sm font-bold justify-center items-center flex right-align pl-1.5 text-high-emphasis">
             {parsedAmounts[Field.LIQUIDITY]?.toSignificant(6)}
           </div>
@@ -490,9 +472,9 @@ export default function Remove() {
 
                 <div id="remove-liquidity-output" className="p-5 rounded bg-dark-800">
                   <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row">
-                    <div className="w-full text-white sm:w-2/5" style={{ margin: 'auto 0px' }}>
+                    <div className="w-full sm:w-2/5" style={{ margin: 'auto 0px' }}>
                       <AutoColumn>
-                        <div>You Will Receive:</div>
+                        <div className="font-bold text-lg text-black dark:text-white">You Will Receive:</div>
                         {chainId && (oneCurrencyIsWETH || oneCurrencyIsETH) ? (
                           <RowBetween className="text-sm">
                             {oneCurrencyIsETH ? (
@@ -527,15 +509,15 @@ export default function Remove() {
                       <div className="flex flex-row items-center w-full p-3 pr-8 space-x-3 rounded bg-dark-900">
                         <CurrencyLogo currency={currencyA} size="46px" />
                         <AutoColumn>
-                          <div className="text-white truncate">{formattedAmounts[Field.CURRENCY_A] || '-'}</div>
-                          <div className="text-sm">{currencyA?.symbol}</div>
+                          <div className="font-bold text-lg text-black dark:text-white truncate">{formattedAmounts[Field.CURRENCY_A] || '-'}</div>
+                          <div className="text-sm font-medium text-black dark:text-white">{currencyA?.symbol}</div>
                         </AutoColumn>
                       </div>
                       <div className="flex flex-row items-center w-full p-3 pr-8 space-x-3 rounded bg-dark-900">
                         <CurrencyLogo currency={currencyB} size="46px" />
                         <AutoColumn>
-                          <div className="text-white truncate">{formattedAmounts[Field.CURRENCY_B] || '-'}</div>
-                          <div className="text-sm">{currencyB?.symbol}</div>
+                          <div className="font-bold text-lg text-black dark:text-white truncate">{formattedAmounts[Field.CURRENCY_B] || '-'}</div>
+                          <div className="text-sm font-medium text-black dark:text-white">{currencyB?.symbol}</div>
                         </AutoColumn>
                       </div>
                     </div>
