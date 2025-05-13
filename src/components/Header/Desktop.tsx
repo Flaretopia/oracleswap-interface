@@ -48,6 +48,9 @@ const Desktop: FC = () => {
             <Typography variant="xs" weight={700} className="text-[1rem] text-white">
               OracleSwap is being rebranded to <a href="https://owlswap.io" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/80">OwlSwap</a> by <a href="https://flaretopia.com" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/80">Flaretopia</a>!
             </Typography>
+            <Typography variant="xs" weight={700} className="text-[1rem] text-white">
+              🔥 THE BURN MIGRATION EXCHANGE IS NOW LIVE <a href="https://docs.flaretopia.com/flaretopia/tge" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/80">LEARN MORE!</a>
+            </Typography>
           </div>
         )}
         <nav className={classNames(NAV_CLASS, showUseDexWarning && 'before:backdrop-blur-[20px]')}>
