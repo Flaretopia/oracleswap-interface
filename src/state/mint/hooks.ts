@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency, CurrencyAmount, JSBI, Pair, Percent, Price, Token } from '@oracleswap/core-sdk'
+import { Currency, CurrencyAmount, JSBI, Pair, Percent, Price, Token } from '@sushiswap/core-sdk'
 import { tryParseAmount } from 'app/functions/parse'
 import { useTotalSupply } from 'app/hooks/useTotalSupply'
 import { PairState, useV2Pair } from 'app/hooks/useV2Pairs'

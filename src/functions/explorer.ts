@@ -1,4 +1,4 @@
-import { ChainId } from '@oracleswap/core-sdk'
+import { ChainId } from '@sushiswap/core-sdk'
 
 const explorers = {
   etherscan: (link: string, data: string, type: 'transaction' | 'token' | 'address' | 'block') => {

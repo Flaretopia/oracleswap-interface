@@ -1,4 +1,4 @@
-import { Currency, JSBI, Rebase } from '@oracleswap/core-sdk'
+import { Currency, JSBI, Rebase } from '@sushiswap/core-sdk'
 import { useMemo } from 'react'
 
 import { useSingleContractMultipleData } from '../state/multicall/hooks'

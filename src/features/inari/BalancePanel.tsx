@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { CurrencyAmount, Token } from '@oracleswap/core-sdk'
+import { CurrencyAmount, Token } from '@sushiswap/core-sdk'
 import { CurrencyLogo } from 'app/components/CurrencyLogo'
 import Input from 'app/components/Input'
 import Typography from 'app/components/Typography'

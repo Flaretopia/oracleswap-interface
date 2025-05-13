@@ -1,7 +1,7 @@
 import { ArrowDownIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ZERO } from '@oracleswap/core-sdk'
+import { ZERO } from '@sushiswap/core-sdk'
 import AssetInput from 'app/components/AssetInput'
 import Button from 'app/components/Button'
 import { WalletIcon } from 'app/components/Icon'

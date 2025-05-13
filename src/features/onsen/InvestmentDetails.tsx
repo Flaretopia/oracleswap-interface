@@ -2,7 +2,7 @@ import { getAddress } from '@ethersproject/address'
 import { BigNumber } from '@ethersproject/bignumber'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, CurrencyAmount, JSBI, Token, USD, ZERO } from '@oracleswap/core-sdk'
+import { ChainId, CurrencyAmount, JSBI, Token, USD, ZERO } from '@sushiswap/core-sdk'
 import Button from 'app/components/Button'
 
 import { CurrencyLogo } from 'app/components/CurrencyLogo'

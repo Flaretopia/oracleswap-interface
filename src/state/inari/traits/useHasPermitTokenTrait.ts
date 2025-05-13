@@ -1,4 +1,4 @@
-import { CurrencyAmount, Token } from '@oracleswap/core-sdk'
+import { CurrencyAmount, Token } from '@sushiswap/core-sdk'
 import { useInariContract } from 'app/hooks/useContract'
 import { useERC20Permit } from 'app/hooks/useERC20Permit'
 import { useActiveWeb3React } from 'app/services/web3'

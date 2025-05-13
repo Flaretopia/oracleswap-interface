@@ -1,5 +1,5 @@
 import { parseUnits } from '@ethersproject/units'
-import { ChainId } from '@oracleswap/core-sdk'
+import { ChainId } from '@sushiswap/core-sdk'
 import { useActiveWeb3React } from 'app/services/web3'
 import { useIsTransactionPending, useTransactionAdder } from 'app/state/transactions/hooks'
 import { useCallback, useEffect, useState } from 'react'

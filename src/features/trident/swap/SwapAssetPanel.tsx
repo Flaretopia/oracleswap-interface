@@ -1,7 +1,7 @@
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency, Percent, ZERO } from '@oracleswap/core-sdk'
+import { Currency, Percent, ZERO } from '@sushiswap/core-sdk'
 import Button from 'app/components/Button'
 import { CurrencyLogo } from 'app/components/CurrencyLogo'
 import NumericalInput from 'app/components/Input/Numeric'

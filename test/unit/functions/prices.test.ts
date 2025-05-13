@@ -1,5 +1,5 @@
-import { ChainId, CurrencyAmount, JSBI, Token, TradeType } from '@oracleswap/core-sdk'
-import { Pair, Route, Trade } from '@oracleswap/core-sdk'
+import { ChainId, CurrencyAmount, JSBI, Token, TradeType } from '@sushiswap/core-sdk'
+import { Pair, Route, Trade } from '@sushiswap/core-sdk'
 import { computeRealizedLPFeeAmount } from 'app/functions/prices'
 
 describe('prices', () => {

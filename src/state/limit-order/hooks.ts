@@ -11,7 +11,7 @@ import {
   TradeType,
   WNATIVE_ADDRESS,
   ZERO,
-} from '@oracleswap/core-sdk'
+} from '@sushiswap/core-sdk'
 import { isAddress, tryParseAmount } from 'app/functions'
 import { useCurrency } from 'app/hooks/Tokens'
 import { useBentoOrWalletBalance } from 'app/hooks/useBentoOrWalletBalance'

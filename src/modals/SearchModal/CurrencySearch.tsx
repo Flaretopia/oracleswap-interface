@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, Currency, NATIVE, Token } from '@oracleswap/core-sdk'
+import { ChainId, Currency, NATIVE, Token } from '@sushiswap/core-sdk'
 import Button from 'app/components/Button'
 import HeadlessUiModal from 'app/components/Modal/HeadlessUIModal'
 import Typography from 'app/components/Typography'

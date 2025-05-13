@@ -1,7 +1,7 @@
 import { ArrowDownIcon } from '@heroicons/react/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, TradeVersion } from '@oracleswap/core-sdk'
+import { ChainId, TradeVersion } from '@sushiswap/core-sdk'
 import Chip from 'app/components/Chip'
 import Container from 'app/components/Container'
 import DoubleGlowShadow from 'app/components/DoubleGlowShadow'

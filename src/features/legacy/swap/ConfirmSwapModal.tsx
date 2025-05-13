@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Percent } from '@oracleswap/core-sdk'
+import { Percent } from '@sushiswap/core-sdk'
 import TransactionConfirmationModal, {
   ConfirmationModalContent,
   TransactionErrorContent,

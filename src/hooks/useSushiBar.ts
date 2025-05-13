@@ -1,4 +1,4 @@
-import { CurrencyAmount, Token } from '@oracleswap/core-sdk'
+import { CurrencyAmount, Token } from '@sushiswap/core-sdk'
 import { useTransactionAdder } from 'app/state/transactions/hooks'
 import { useCallback } from 'react'
 

@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-//  import { ChainId } from '@oracleswap/core-sdk'
+//  import { ChainId } from '@sushiswap/core-sdk'
 import Button from 'app/components/Button'
 import { usePoolContext } from 'app/features/trident/PoolContext'
 import { classNames, isWrappedReturnNativeSymbol } from 'app/functions'

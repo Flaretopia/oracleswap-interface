@@ -1,7 +1,7 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { BENTOBOX_ADDRESS, CurrencyAmount, WNATIVE } from '@oracleswap/core-sdk'
+import { BENTOBOX_ADDRESS, CurrencyAmount, WNATIVE } from '@sushiswap/core-sdk'
 import AssetInput from 'app/components/AssetInput'
 import Button from 'app/components/Button'
 import { HeadlessUiModal } from 'app/components/Modal'

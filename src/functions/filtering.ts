@@ -1,4 +1,4 @@
-import { Token } from '@oracleswap/core-sdk'
+import { Token } from '@sushiswap/core-sdk'
 import { TokenInfo } from '@uniswap/token-lists'
 import { useMemo } from 'react'
 

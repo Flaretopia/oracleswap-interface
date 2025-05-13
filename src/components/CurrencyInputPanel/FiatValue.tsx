@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Percent } from '@oracleswap/core-sdk'
+import { Currency, CurrencyAmount, Percent } from '@sushiswap/core-sdk'
 import { warningSeverity } from 'app/functions/prices'
 import React, { useMemo } from 'react'
 

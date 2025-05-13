@@ -1,4 +1,4 @@
-import { Currency } from '@oracleswap/core-sdk'
+import { Currency } from '@sushiswap/core-sdk'
 import { selectBalancesCurrency } from 'app/features/portfolio/portfolioSlice'
 import { useCurrency } from 'app/hooks/Tokens'
 import { useSelector } from 'react-redux'

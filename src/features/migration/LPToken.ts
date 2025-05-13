@@ -1,5 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber'
-import { Currency, CurrencyAmount, Token } from '@oracleswap/core-sdk'
+import { Currency, CurrencyAmount, Token } from '@sushiswap/core-sdk'
 
 export default interface LPToken {
   id?: number

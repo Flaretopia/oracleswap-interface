@@ -1,4 +1,4 @@
-import { ChainId } from '@oracleswap/core-sdk'
+import { ChainId } from '@sushiswap/core-sdk'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { NetworkConnector } from 'app/entities/connectors'

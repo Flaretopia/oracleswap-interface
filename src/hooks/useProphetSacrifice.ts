@@ -1,4 +1,4 @@
-import { CurrencyAmount, JSBI, SUSHI, Token, ChainId } from '@oracleswap/core-sdk'
+import { CurrencyAmount, JSBI, SUSHI, Token, ChainId } from '@sushiswap/core-sdk'
 import { PROPHET } from 'app/config/tokens'
 import { useSingleCallResult } from 'app/state/multicall/hooks'
 import { useTransactionAdder } from 'app/state/transactions/hooks'

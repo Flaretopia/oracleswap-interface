@@ -1,4 +1,4 @@
-import { ChainId, CurrencyAmount, Token } from '@oracleswap/core-sdk'
+import { ChainId, CurrencyAmount, Token } from '@sushiswap/core-sdk'
 
 import { BaseStrategyHook } from './strategies/useBaseStrategy'
 import { BaseStrategyWithBentoBoxTraitHook } from './traits/useBentoBoxTrait'

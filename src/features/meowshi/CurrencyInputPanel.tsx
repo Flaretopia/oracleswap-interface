@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, SUSHI } from '@oracleswap/core-sdk'
+import { ChainId, SUSHI } from '@sushiswap/core-sdk'
 import Input from 'app/components/Input'
 import Typography from 'app/components/Typography'
 import { XSUSHI } from 'app/config/tokens'

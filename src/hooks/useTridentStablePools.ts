@@ -1,5 +1,5 @@
 import { Interface } from '@ethersproject/abi'
-import { Currency, CurrencyAmount, JSBI } from '@oracleswap/core-sdk'
+import { Currency, CurrencyAmount, JSBI } from '@sushiswap/core-sdk'
 import HybridPoolArtifact from '@sushiswap/trident/artifacts/contracts/pool/HybridPool.sol/HybridPool.json'
 import { computeHybridPoolAddress, Fee, HybridPool } from '@sushiswap/trident-sdk'
 import { PoolAtomType } from 'app/features/trident/types'

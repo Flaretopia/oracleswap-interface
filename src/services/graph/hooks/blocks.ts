@@ -1,4 +1,4 @@
-import { ChainId } from '@oracleswap/core-sdk'
+import { ChainId } from '@sushiswap/core-sdk'
 import { getAverageBlockTime, getBlock, getMassBlocks } from 'app/services/graph/fetchers'
 import { useActiveWeb3React } from 'app/services/web3'
 import { addSeconds, getUnixTime, startOfHour, startOfMinute, startOfSecond, subDays, subWeeks } from 'date-fns'

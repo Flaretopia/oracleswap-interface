@@ -1,4 +1,4 @@
-import { ChainId } from '@oracleswap/core-sdk'
+import { ChainId } from '@sushiswap/core-sdk'
 import { NETWORK_ICON } from 'app/config/networks'
 import NetworkModel from 'app/modals/NetworkModal'
 import { useActiveWeb3React } from 'app/services/web3'

@@ -1,7 +1,7 @@
 import { I18n } from '@lingui/core'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, SUSHI, SUSHI_ADDRESS } from '@oracleswap/core-sdk'
+import { ChainId, SUSHI, SUSHI_ADDRESS } from '@sushiswap/core-sdk'
 import { XSUSHI } from 'app/config/tokens'
 import { useActiveWeb3React } from 'app/services/web3'
 import { useBentoBalanceV2 } from 'app/state/bentobox/hooks'

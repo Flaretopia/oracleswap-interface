@@ -1,5 +1,5 @@
 import { Web3Provider } from '@ethersproject/providers'
-import { CurrencyAmount, JSBI, Rebase, Token, ZERO } from '@oracleswap/core-sdk'
+import { CurrencyAmount, JSBI, Rebase, Token, ZERO } from '@sushiswap/core-sdk'
 import { Web3ReactContextInterface } from '@web3-react/core/dist/types'
 import { isAddress, toAmountCurrencyAmount } from 'app/functions'
 import { useAllTokens } from 'app/hooks/Tokens'

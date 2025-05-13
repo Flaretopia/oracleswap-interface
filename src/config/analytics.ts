@@ -1,4 +1,4 @@
-import { ChainId } from '@oracleswap/core-sdk'
+import { ChainId } from '@sushiswap/core-sdk'
 
 const analytics = {
   [ChainId.ETHEREUM]: 'https://analytics.sushi.com',

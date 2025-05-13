@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency, CurrencyAmount, NATIVE, ZERO } from '@oracleswap/core-sdk'
+import { Currency, CurrencyAmount, NATIVE, ZERO } from '@sushiswap/core-sdk'
 import Typography, { TypographyVariant } from 'app/components/Typography'
 import SumUSDCValues from 'app/features/trident/SumUSDCValues'
 import { currencyFormatter } from 'app/functions'

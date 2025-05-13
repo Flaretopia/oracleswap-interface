@@ -9,7 +9,7 @@ import {
   Token,
   Trade as V2Trade,
   TradeType,
-} from '@oracleswap/core-sdk'
+} from '@sushiswap/core-sdk'
 import { DAI, USDC } from 'app/config/tokens'
 import { useActiveWeb3React } from 'app/services/web3'
 import { useMemo, useState } from 'react'

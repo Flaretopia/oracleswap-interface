@@ -1,4 +1,4 @@
-import { Pair } from '@oracleswap/core-sdk'
+import { Pair } from '@sushiswap/core-sdk'
 import { CurrencyLogo } from 'app/components/CurrencyLogo'
 import React, { FC } from 'react'
 

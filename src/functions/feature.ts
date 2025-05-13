@@ -1,4 +1,4 @@
-import { ChainId } from '@oracleswap/core-sdk'
+import { ChainId } from '@sushiswap/core-sdk'
 import features from 'app/config/features'
 import { Feature } from 'app/enums'
 

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ChainId } from '@oracleswap/core-sdk'
+import { ChainId } from '@sushiswap/core-sdk'
 import { Web3ReactContextInterface } from '@web3-react/core/dist/types'
 import { AppState } from 'app/state'
 

@@ -1,5 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber'
-import { ChainId, CurrencyAmount, JSBI, Token, ZERO } from '@oracleswap/core-sdk'
+import { ChainId, CurrencyAmount, JSBI, Token, ZERO } from '@sushiswap/core-sdk'
 import { PROPHET, XORACLE } from 'app/config/tokens'
 import { PROSTAKING_ADDRESS } from 'app/constants'
 import { useActiveWeb3React } from 'app/services/web3'

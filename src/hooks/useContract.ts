@@ -18,7 +18,7 @@ import {
   SUSHI_ADDRESS,
   TIMELOCK_ADDRESS,
   WNATIVE_ADDRESS,
-} from '@oracleswap/core-sdk'
+} from '@sushiswap/core-sdk'
 
 
 import TRIDENT from '@sushiswap/trident/exports/all.json'

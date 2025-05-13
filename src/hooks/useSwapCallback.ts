@@ -15,7 +15,7 @@ import {
   toHex,
   Trade as LegacyTrade,
   TradeType,
-} from '@oracleswap/core-sdk'
+} from '@sushiswap/core-sdk'
 import { getBigNumber, MultiRoute } from '@sushiswap/tines'
 import {
   ComplexPathParams,

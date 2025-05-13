@@ -1,5 +1,5 @@
-import { Currency, TradeType } from '@oracleswap/core-sdk'
-import { Trade as LegacyTrade } from '@oracleswap/core-sdk/dist/entities/Trade'
+import { Currency, TradeType } from '@sushiswap/core-sdk'
+import { Trade as LegacyTrade } from '@sushiswap/core-sdk/dist/entities/Trade'
 import { PoolState, Trade } from '@sushiswap/trident-sdk'
 
 export type TradeUnion =

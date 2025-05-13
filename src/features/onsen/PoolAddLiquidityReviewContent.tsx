@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency, CurrencyAmount, Percent, Token } from '@oracleswap/core-sdk'
+import { Currency, CurrencyAmount, Percent, Token } from '@sushiswap/core-sdk'
 import Button from 'app/components/Button'
 import ListPanel from 'app/components/ListPanel'
 import { HeadlessUiModal } from 'app/components/Modal'

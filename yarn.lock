@@ -3141,22 +3141,6 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oracleswap/core-sdk@1.0.0-canary.63":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@oracleswap/core-sdk/-/core-sdk-1.0.0.tgz#16a00271e3ffba83d56e5844ae559ae155827c5c"
-  integrity sha512-u1Ngg6GNNv1hn2M1mPHUpojfWXh2QV+EXZT0apbgFFEjDQzSeNTQQll38Jsb4amQ3slcUbxo/oDTPaPEvhRUIw==
-  dependencies:
-    "@ethersproject/address" "^5.4.0"
-    "@ethersproject/bignumber" "^5.4.0"
-    "@ethersproject/providers" "^5.4.0"
-    "@ethersproject/solidity" "^5.4.0"
-    big.js "^6.1.1"
-    decimal.js-light "^2.5.0"
-    jsbi "^4.1.0"
-    tiny-invariant "^1.1.0"
-    tiny-warning "^1.0.0"
-    toformat "^2.0.0"
-
 "@pedrouid/environment@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@pedrouid/environment/-/environment-1.0.1.tgz#858f0f8a057340e0b250398b75ead77d6f4342ec"
@@ -3586,6 +3570,37 @@
   integrity sha512-PKj6OWgeOcNMdkqoCU2zCzMdSOISa1Uy80KO4WCqhscNBLdEKLLIjhJCFfYAfDBl7byPO/D9xGKCJKNZSNF3WA==
   dependencies:
     "@sushiswap/core-sdk" "1.0.0-canary.63"
+
+"@sushiswap/core-sdk@1.0.0-canary.63":
+  version "1.0.0-canary.63"
+  resolved "https://registry.yarnpkg.com/@sushiswap/core-sdk/-/core-sdk-1.0.0-canary.63.tgz#4352ab9afc5bbd786f775a6352f47044f386d33c"
+  integrity sha512-BCvyhquF/6pzNFwZ7W3V9f2qKQ1HMFSi6x4EJ6MeBXbXGgNRwFuRlOvVddRYBP6gMM6bYM3XD6xUQS2jm3N5Kw==
+  dependencies:
+    "@ethersproject/address" "^5.4.0"
+    "@ethersproject/bignumber" "^5.4.0"
+    "@ethersproject/providers" "^5.4.0"
+    "@ethersproject/solidity" "^5.4.0"
+    big.js "^6.1.1"
+    decimal.js-light "^2.5.0"
+    jsbi "^4.1.0"
+    tiny-invariant "^1.1.0"
+    tiny-warning "^1.0.0"
+    toformat "^2.0.0"
+
+"@sushiswap/core-sdk@agelessZeal/oracleswap-core-sdk":
+  version "1.0.0-canary.63"
+  resolved "https://codeload.github.com/agelessZeal/oracleswap-core-sdk/tar.gz/a2a3d0539d42deaeab9c8715642be8ea95912317"
+  dependencies:
+    "@ethersproject/address" "^5.4.0"
+    "@ethersproject/bignumber" "^5.4.0"
+    "@ethersproject/providers" "^5.4.0"
+    "@ethersproject/solidity" "^5.4.0"
+    big.js "^6.1.1"
+    decimal.js-light "^2.5.0"
+    jsbi "^4.1.0"
+    tiny-invariant "^1.1.0"
+    tiny-warning "^1.0.0"
+    toformat "^2.0.0"
 
 "@sushiswap/core@^2.0.0-canary.1":
   version "2.0.0-canary.1"

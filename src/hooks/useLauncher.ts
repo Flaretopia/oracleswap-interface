@@ -14,7 +14,7 @@ import axios from 'axios';
 
 import { useTokenContract } from 'app/hooks/useContract'
 import { useTokenBalance } from 'app/state/wallet/hooks'
-import { Token } from '@oracleswap/core-sdk'
+import { Token } from '@sushiswap/core-sdk'
 
 const LAUNCHER_ADDRESS = "0xb452cfcfbF012cF74fFe9A04e249f5F505a2b44B";
 

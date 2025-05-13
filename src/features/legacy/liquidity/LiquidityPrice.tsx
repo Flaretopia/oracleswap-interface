@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency, Percent, Price } from '@oracleswap/core-sdk'
+import { Currency, Percent, Price } from '@sushiswap/core-sdk'
 import Typography from 'app/components/Typography'
 import { ONE_BIPS } from 'app/constants'
 import { classNames } from 'app/functions'

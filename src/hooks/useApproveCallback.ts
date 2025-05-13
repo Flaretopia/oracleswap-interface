@@ -1,6 +1,6 @@
 import { MaxUint256 } from '@ethersproject/constants'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Currency, CurrencyAmount, Percent, ROUTER_ADDRESS, Trade as V2Trade, TradeType } from '@oracleswap/core-sdk'
+import { Currency, CurrencyAmount, Percent, ROUTER_ADDRESS, Trade as V2Trade, TradeType } from '@sushiswap/core-sdk'
 import { calculateGasMargin } from 'app/functions/trade'
 import { useActiveWeb3React } from 'app/services/web3'
 import { useHasPendingApproval, useTransactionAdder } from 'app/state/transactions/hooks'

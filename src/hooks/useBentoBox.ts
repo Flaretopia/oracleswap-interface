@@ -1,7 +1,7 @@
 import { getAddress } from '@ethersproject/address'
 import { BigNumber } from '@ethersproject/bignumber'
 import { AddressZero } from '@ethersproject/constants'
-import { JSBI, WNATIVE_ADDRESS } from '@oracleswap/core-sdk'
+import { JSBI, WNATIVE_ADDRESS } from '@sushiswap/core-sdk'
 import { useActiveWeb3React } from 'app/services/web3'
 import { useTransactionAdder } from 'app/state/transactions/hooks'
 import { useCallback } from 'react'

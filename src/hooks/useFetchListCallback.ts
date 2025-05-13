@@ -1,5 +1,5 @@
 import { nanoid } from '@reduxjs/toolkit'
-import { ChainId } from '@oracleswap/core-sdk'
+import { ChainId } from '@sushiswap/core-sdk'
 import { TokenList } from '@uniswap/token-lists'
 import { resolveENSContentHash } from 'app/functions/ens'
 import { getNetworkLibrary } from 'app/functions/getNetworkLibrary'

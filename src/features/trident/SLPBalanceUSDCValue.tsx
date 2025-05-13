@@ -1,4 +1,4 @@
-import { CurrencyAmount, Token, USDC } from '@oracleswap/core-sdk'
+import { CurrencyAmount, Token, USDC } from '@sushiswap/core-sdk'
 import { ConstantProductPool } from '@sushiswap/trident-sdk'
 import { useTotalSupply } from 'app/hooks/useTotalSupply'
 import { useUSDCValue } from 'app/hooks/useUSDCPrice'

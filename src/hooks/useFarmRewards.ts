@@ -1,5 +1,5 @@
 import { getAddress } from '@ethersproject/address'
-import { ChainId, Currency, JSBI, NATIVE, SUSHI, SUSHI_ADDRESS, Token } from '@oracleswap/core-sdk'
+import { ChainId, Currency, JSBI, NATIVE, SUSHI, SUSHI_ADDRESS, Token } from '@sushiswap/core-sdk'
 import { ARBITRUM_TOKENS, MATIC_TOKENS, XDAI_TOKENS, XORACLE, PROPHET } from 'app/config/tokens'
 import { Chef, PairType } from 'app/features/onsen/enum'
 import { usePositions, useProphetPoolInfos, useUserInfo } from 'app/features/onsen/hooks'

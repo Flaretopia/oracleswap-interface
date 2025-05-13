@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { Contract } from '@ethersproject/contracts'
-import { WNATIVE } from '@oracleswap/core-sdk'
+import { WNATIVE } from '@sushiswap/core-sdk'
 import ERC20_ABI from 'app/constants/abis/erc20.json'
 import { isAddress } from 'app/functions'
 import { useContract } from 'app/hooks/useContract'
