@@ -74,6 +74,7 @@
     "@sentry/tracing": "^6.15.0",
     "@sushiswap/bentobox-sdk": "1.0.0-canary.48",
     "@sushiswap/core": "^2.0.0-canary.1",
+    "@oracleswap/core-sdk": "^1.0.0",
     "@sushiswap/default-token-list": "agelessZeal/oracleswap-default-token-list",
     "@sushiswap/sdk": "^5.0.0-canary.109",
     "@sushiswap/tines": "1.0.0-canary.46",
