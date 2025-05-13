@@ -1,8 +1,7 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency, CurrencyAmount, NATIVE, ZERO } from '@sushiswap/core-sdk'
+import { Currency, CurrencyAmount, NATIVE, ZERO } from '@oracleswap/core-sdk'
 import Typography, { TypographyVariant } from 'app/components/Typography'
-import { reduceBalances } from 'app/features/portfolio/AssetBalances/kashi/hooks'
 import SumUSDCValues from 'app/features/trident/SumUSDCValues'
 import { currencyFormatter } from 'app/functions'
 import { useTridentLiquidityPositions } from 'app/services/graph'
@@ -64,14 +63,14 @@ export const BalancesSum: FC<{ account: string }> = ({ account }) => {
   const { i18n } = useLingui()
   const { data: walletBalances, loading: wLoading } = useWalletBalances(account)
   const { data: bentoBalances, loading: bLoading } = useBentoBalancesV2ForAccount(account)
-  // const { borrowed, collateral, lent } = useKashiPositions(account)
+
 
   const allAssets = useMemo(() => {
     // const combined = [...walletBalances, ...bentoBalances, ...collateral, ...lent]
     const combined = [...walletBalances, ...bentoBalances]
     return {
       total: combined.length,
-      balances: reduceBalances(combined),
+      balances:combined,
     }
   }, [bentoBalances, walletBalances])
 

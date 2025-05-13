@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, Currency, Percent } from '@sushiswap/core-sdk'
+import { ChainId, Currency, Percent } from '@oracleswap/core-sdk'
 import Gas from 'app/components/Gas'
 import NavLink from 'app/components/NavLink'
 import Settings from 'app/components/Settings'

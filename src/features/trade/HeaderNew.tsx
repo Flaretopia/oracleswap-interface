@@ -1,10 +1,10 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency } from '@sushiswap/core-sdk'
+import { Currency } from '@oracleswap/core-sdk'
 import NavLink from 'app/components/NavLink'
 import Settings from 'app/components/Settings'
 import Typography from 'app/components/Typography'
-import MyOrders from 'app/features/legacy/limit-order/MyOrders'
+
 import { useRouter } from 'next/router'
 import React, { FC } from 'react'
 
@@ -57,7 +57,6 @@ const HeaderNew: FC<HeaderNewProps> = ({ inputCurrency, outputCurrency }) => {
         </NavLink> */}
       </div>
       <div className="flex gap-4">
-        {isLimitOrder && <MyOrders />}
         <Settings className="!w-6 !h-6" />
       </div>
     </div>

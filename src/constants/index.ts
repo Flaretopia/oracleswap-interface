@@ -1,4 +1,4 @@
-import { AddressMap, ChainId, JSBI, Percent } from '@sushiswap/core-sdk'
+import { AddressMap, ChainId, JSBI, Percent } from '@oracleswap/core-sdk'
 
 // TODO: Move some of this to config level...
 

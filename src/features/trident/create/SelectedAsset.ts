@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount } from '@sushiswap/core-sdk'
+import { Currency, CurrencyAmount } from '@oracleswap/core-sdk'
 import { tryParseAmount } from 'app/functions'
 // @ts-ignore TYPE NEEDS FIXING
 import uuidv4 from 'uuid/v4'

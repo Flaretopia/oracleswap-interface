@@ -1,7 +1,7 @@
 import { ArrowDownIcon, InformationCircleIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, Currency, SUSHI, Token } from '@sushiswap/core-sdk'
+import { ChainId, Currency, SUSHI, Token } from '@oracleswap/core-sdk'
 import Container from 'app/components/Container'
 import Typography from 'app/components/Typography'
 import { MEOW, XSUSHI } from 'app/config/tokens'

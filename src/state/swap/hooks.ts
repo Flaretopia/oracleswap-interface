@@ -9,7 +9,7 @@ import {
   Trade as V2Trade,
   TradeType,
   WNATIVE_ADDRESS,
-} from '@sushiswap/core-sdk'
+} from '@oracleswap/core-sdk'
 import { tryParseAmount } from 'app/functions/parse'
 import { isAddress } from 'app/functions/validate'
 import { useCurrency } from 'app/hooks/Tokens'

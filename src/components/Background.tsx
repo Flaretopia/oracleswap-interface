@@ -3,7 +3,6 @@ import { classNames } from 'app/functions'
 import { FC } from 'react'
 
 export type BackgroundVariant =
-  | 'miso-bowl'
   | 'bg-bars'
   | 'bg-bubble'
   | 'bg-dots'
@@ -49,10 +48,6 @@ const VARIANTS = {
   'bg-chevron': {
     type: ImageType.REPEAT,
     url: 'https://app.sushi.com/images/trident/chevron-pattern.png',
-  },
-  'miso-bowl': {
-    type: ImageType.SINGLE,
-    url: 'https://app.sushi.com/images/miso/banner.jpg',
   },
 }
 

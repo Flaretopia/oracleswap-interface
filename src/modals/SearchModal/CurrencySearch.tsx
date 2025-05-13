@@ -1,7 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import CHAINLINK_TOKENS from '@sushiswap/chainlink-whitelist/dist/sushiswap-chainlink.whitelist.json'
-import { ChainId, Currency, NATIVE, Token } from '@sushiswap/core-sdk'
+import { ChainId, Currency, NATIVE, Token } from '@oracleswap/core-sdk'
 import Button from 'app/components/Button'
 import HeadlessUiModal from 'app/components/Modal/HeadlessUIModal'
 import Typography from 'app/components/Typography'
@@ -46,13 +45,7 @@ export function CurrencySearch({
   const searchTokenIsAdded = useIsUserAddedToken(searchToken)
   const tokenComparator = useTokenComparator()
 
-  if (router.asPath.startsWith('/kashi/create') && chainId) {
-    allTokens = Object.keys(allTokens).reduce((obj, key) => {
-      // @ts-ignore TYPE NEEDS FIXING
-      if (CHAINLINK_TOKENS[chainId].find((address) => address === key)) obj[key] = allTokens[key]
-      return obj
-    }, {})
-  }
+
 
   if (currencyList) {
     allTokens = Object.keys(allTokens).reduce((obj, key) => {

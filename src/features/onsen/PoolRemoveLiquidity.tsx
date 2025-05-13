@@ -2,7 +2,7 @@ import { TransactionResponse } from '@ethersproject/abstract-provider'
 import { BigNumber } from '@ethersproject/bignumber'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, CurrencyAmount, currencyEquals, NATIVE, Percent, WNATIVE, ZERO } from '@sushiswap/core-sdk'
+import { ChainId, CurrencyAmount, currencyEquals, NATIVE, Percent, WNATIVE, ZERO } from '@oracleswap/core-sdk'
 import AssetInput from 'app/components/AssetInput'
 import Button from 'app/components/Button'
 import ListPanel from 'app/components/ListPanel'
@@ -23,6 +23,7 @@ import { useBurnActionHandlers, useBurnState, useDerivedBurnInfo } from 'app/sta
 import { useAppSelector } from 'app/state/hooks'
 import { selectSlippageWithDefault } from 'app/state/slippage/slippageSlice'
 import { useTransactionAdder } from 'app/state/transactions/hooks'
+import { useRouter } from 'next/router'
 import React, { useCallback, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
 
@@ -46,6 +47,7 @@ const PoolWithdraw = ({ currencyA, currencyB, header }) => {
     currencyA ?? undefined,
     currencyB ?? undefined
   )
+
   const { onUserInput: _onUserInput } = useBurnActionHandlers()
   const isValid = !error
 
@@ -276,6 +278,111 @@ const PoolWithdraw = ({ currencyA, currencyB, header }) => {
           setAttemptingTxn(false)
           // we only care if the error is something _other_ than the user rejected the tx
           console.error(error)
+        })
+    }
+  }
+
+  async function onRemove2() {
+    if (!chainId || !library || !account || !deadline) throw new Error('missing dependencies')
+    const { [Field.CURRENCY_A]: currencyAmountA, [Field.CURRENCY_B]: currencyAmountB } = parsedAmounts
+    if (!currencyAmountA || !currencyAmountB) {
+      throw new Error('missing currency amounts')
+    }
+
+    const amountsMin = {
+      [Field.CURRENCY_A]: calculateSlippageAmount(currencyAmountA, allowedSlippage)[0],
+      [Field.CURRENCY_B]: calculateSlippageAmount(currencyAmountB, allowedSlippage)[0],
+    }
+
+    if (!currencyA || !currencyB) throw new Error('missing tokens')
+    const liquidityAmount = parsedAmounts[Field.LIQUIDITY]
+    if (!liquidityAmount) throw new Error('missing liquidity amount')
+
+    const currencyBIsETH = currencyB.isNative
+    const oneCurrencyIsETH = currencyA.isNative || currencyBIsETH
+
+    if (!tokenA || !tokenB) throw new Error('could not wrap')
+
+    let methodNames: string[], args: Array<string | string[] | number | boolean>
+
+    // Always use normal remove liquidity methods (no permits) on Songbird
+    if (oneCurrencyIsETH) {
+      methodNames = ['removeLiquidityETH', 'removeLiquidityETHSupportingFeeOnTransferTokens']
+      args = [
+        currencyBIsETH ? tokenA.address : tokenB.address,
+        liquidityAmount.quotient.toString(),
+        amountsMin[currencyBIsETH ? Field.CURRENCY_A : Field.CURRENCY_B].toString(),
+        amountsMin[currencyBIsETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(),
+        account,
+        deadline.toHexString(),
+      ]
+    } else {
+      methodNames = ['removeLiquidity']
+      args = [
+        tokenA.address,
+        tokenB.address,
+        liquidityAmount.quotient.toString(),
+        amountsMin[Field.CURRENCY_A].toString(),
+        amountsMin[Field.CURRENCY_B].toString(),
+        account,
+        deadline.toHexString(),
+      ]
+    }
+
+    console.log('Attempting to remove liquidity with methods:', methodNames)
+    console.log('Arguments:', args)
+
+    const safeGasEstimates: (BigNumber | undefined)[] = await Promise.all(
+      methodNames.map((methodName) =>
+        routerContract?.estimateGas[methodName](...args)
+          .then((estimate) => {
+            console.log(`Gas estimate for ${methodName}:`, estimate.toString())
+            return calculateGasMargin(estimate)
+          })
+          .catch((error) => {
+            console.error(`estimateGas failed for ${methodName}:`, error)
+            return undefined
+          })
+      )
+    )
+
+    const indexOfSuccessfulEstimation = safeGasEstimates.findIndex((safeGasEstimate) =>
+      BigNumber.isBigNumber(safeGasEstimate)
+    )
+
+    // all estimations failed...
+    if (indexOfSuccessfulEstimation === -1) {
+      console.error('This transaction would fail. Please contact support.')
+    } else {
+      const methodName = methodNames[indexOfSuccessfulEstimation]
+      const safeGasEstimate = safeGasEstimates[indexOfSuccessfulEstimation]
+
+      setAttemptingTxn(true)
+      if (!routerContract) throw new Error('Router contract is null')
+      await routerContract[methodName](...args, {
+        gasLimit: safeGasEstimate,
+      })
+        .then((response: TransactionResponse) => {
+          setAttemptingTxn(false)
+
+          addTransaction(response, {
+            summary: t`Remove ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${
+              currencyA?.symbol
+            } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencyB?.symbol}`,
+          })
+
+          // setTxHash(response.hash)
+
+          ReactGA.event({
+            category: 'Liquidity',
+            action: 'Remove',
+            label: [currencyA?.symbol, currencyB?.symbol].join('/'),
+          })
+        })
+        .catch((error: Error) => {
+          setAttemptingTxn(false)
+          // we only care if the error is something _other_ than the user rejected the tx
+          console.error('Remove liquidity failed:', error)
         })
     }
   }

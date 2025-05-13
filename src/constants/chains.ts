@@ -1,4 +1,4 @@
-import { ChainId as SushiChainId } from '@sushiswap/core-sdk'
+import { ChainId as SushiChainId } from '@oracleswap/core-sdk'
 
 export const ChainId = {
   ...SushiChainId,

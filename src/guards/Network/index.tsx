@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { Trans, useLingui } from '@lingui/react'
-import { ChainId } from '@sushiswap/core-sdk'
+import { ChainId } from '@oracleswap/core-sdk'
 import HeadlessUIModal from 'app/components/Modal/HeadlessUIModal'
 import NavLink from 'app/components/NavLink'
 import Typography from 'app/components/Typography'

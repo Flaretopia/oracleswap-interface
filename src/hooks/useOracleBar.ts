@@ -1,4 +1,4 @@
-import { ChainId, CurrencyAmount, JSBI, SUSHI_ADDRESS, Token } from '@sushiswap/core-sdk'
+import { ChainId, CurrencyAmount, JSBI, SUSHI_ADDRESS, Token } from '@oracleswap/core-sdk'
 import { XORACLE } from 'app/config/tokens'
 import { useActiveWeb3React } from 'app/services/web3'
 import { useSingleCallResult } from 'app/state/multicall/hooks'

@@ -1,4 +1,4 @@
-import { Currency } from '@sushiswap/core-sdk'
+import { Currency } from '@oracleswap/core-sdk'
 import { classNames } from 'app/functions'
 import React from 'react'
 

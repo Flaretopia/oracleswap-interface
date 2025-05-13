@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, Currency } from '@sushiswap/core-sdk'
+import { ChainId, Currency } from '@oracleswap/core-sdk'
 import loadingRollingCircle from 'app/animation/loading-rolling-circle.json'
 import receiptPrinting from 'app/animation/receipt-printing.json'
 import Button from 'app/components/Button'

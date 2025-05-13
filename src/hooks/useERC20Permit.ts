@@ -9,7 +9,7 @@ import {
   Token,
   Trade as V2Trade,
   TradeType,
-} from '@sushiswap/core-sdk'
+} from '@oracleswap/core-sdk'
 import { DAI, USDC } from 'app/config/tokens'
 import { useActiveWeb3React } from 'app/services/web3'
 import { useMemo, useState } from 'react'
@@ -284,7 +284,7 @@ export function useERC20Permit(
 
 const REMOVE_V2_LIQUIDITY_PERMIT_INFO: PermitInfo = {
   version: '1',
-  name: 'OwlSwap LP Token',
+  name: 'OracleSwap LP Token',
   type: PermitType.AMOUNT,
 }
 

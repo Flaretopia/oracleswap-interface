@@ -1,4 +1,4 @@
-import { Token } from '@sushiswap/core-sdk'
+import { Token } from '@oracleswap/core-sdk'
 import { tryParseAmount } from 'app/functions/parse'
 import { useAppSelector } from 'app/state/hooks'
 import { useMemo } from 'react'

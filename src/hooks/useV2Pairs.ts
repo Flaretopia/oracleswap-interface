@@ -1,6 +1,6 @@
 import { Interface } from '@ethersproject/abi'
 import IUniswapV2PairABI from '@sushiswap/core/abi/IUniswapV2Pair.json'
-import { computePairAddress, Currency, CurrencyAmount, FACTORY_ADDRESS, Pair } from '@sushiswap/core-sdk'
+import { computePairAddress, Currency, CurrencyAmount, FACTORY_ADDRESS, Pair } from '@oracleswap/core-sdk'
 import { useMultipleContractSingleData } from 'app/state/multicall/hooks'
 import { useMemo } from 'react'
 
@@ -53,6 +53,7 @@ export function useV2Pairs(currencies: [Currency | undefined, Currency | undefin
       if (!reserves) return [PairState.NOT_EXISTS, null]
       const { reserve0, reserve1 } = reserves
       const [token0, token1] = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA]
+
       return [
         PairState.EXISTS,
         new Pair(
@@ -66,5 +67,6 @@ export function useV2Pairs(currencies: [Currency | undefined, Currency | undefin
 
 export function useV2Pair(tokenA?: Currency, tokenB?: Currency): [PairState, Pair | null] {
   const inputs: [[Currency | undefined, Currency | undefined]] = useMemo(() => [[tokenA, tokenB]], [tokenA, tokenB])
+
   return useV2Pairs(inputs)[0]
 }

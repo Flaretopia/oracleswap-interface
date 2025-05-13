@@ -2,7 +2,7 @@ import { GlobeIcon, SwitchVerticalIcon, CollectionIcon,  CurrencyDollarIcon, Pre
 PresentationChartBarIcon
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { SUSHI_ADDRESS } from '@sushiswap/core-sdk'
+import { SUSHI_ADDRESS } from '@oracleswap/core-sdk'
 import { PoolIcon } from 'app/components/Icon'
 import { Feature } from 'app/enums'
 import { featureEnabled } from 'app/functions'
@@ -280,25 +280,6 @@ const useMenu: UseMenu = () => {
     //   })
     // }
 
-    // if (featureEnabled(Feature.MISO, chainId)) {
-    //   mainItems.push({
-    //     key: 'launchpad',
-    //     title: i18n._(t`Launchpad`),
-    //     icon: <RocketIcon width={20} />,
-    //     items: [
-    //       {
-    //         key: 'marketplace',
-    //         title: i18n._(t`Marketplace`),
-    //         link: '/miso',
-    //       },
-    //       {
-    //         key: 'launch',
-    //         title: i18n._(t`Launch`),
-    //         link: '/miso/auction',
-    //       },
-    //     ],
-    //   })
-    // }
 
     // let analyticsMenu: MenuItem = {
     //   key: 'analytics',

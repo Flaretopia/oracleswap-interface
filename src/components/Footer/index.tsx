@@ -17,7 +17,7 @@ import { useNetworkModalToggle } from 'app/state/application/hooks'
 import FlaretopiaLogo from '../../../public/flaretopia.png'
 // import Image from 'next/image'
 // import SGB from '../../../public/SGB.png'
-// import { ChainId } from '@sushiswap/core-sdk'
+// import { ChainId } from '@oracleswap/core-sdk'
 // import { NETWORK_ICON } from 'app/config/networks'
 const Footer = () => {
   const { i18n } = useLingui()

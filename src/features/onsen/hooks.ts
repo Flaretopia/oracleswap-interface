@@ -1,6 +1,6 @@
 import { Zero } from '@ethersproject/constants'
 import { Contract } from '@ethersproject/contracts'
-import { ChainId, CurrencyAmount, JSBI, MASTERCHEF_V2_ADDRESS, MINICHEF_ADDRESS, SUSHI } from '@sushiswap/core-sdk'
+import { ChainId, CurrencyAmount, JSBI, MASTERCHEF_V2_ADDRESS, MINICHEF_ADDRESS, SUSHI } from '@oracleswap/core-sdk'
 import { OLD_FARMS } from 'app/config/farms'
 import { MASTERCHEF_ADDRESS } from 'app/constants'
 import {

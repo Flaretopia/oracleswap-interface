@@ -1,4 +1,4 @@
-import { ChainId } from '@sushiswap/core-sdk'
+import { ChainId } from '@oracleswap/core-sdk'
 
 import { Oracle } from './Oracle'
 

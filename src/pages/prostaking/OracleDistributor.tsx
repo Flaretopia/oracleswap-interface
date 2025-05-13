@@ -1,4 +1,4 @@
-import { ZERO } from '@sushiswap/core-sdk'
+import { ZERO } from '@oracleswap/core-sdk'
 import Button from 'app/components/Button'
 import { ORACLE } from 'app/config/tokens'
 import { PRO_ORALCE_DISTRIBUTOR_ADDRESS } from 'app/constants'

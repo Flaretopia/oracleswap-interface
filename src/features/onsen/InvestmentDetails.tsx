@@ -2,13 +2,13 @@ import { getAddress } from '@ethersproject/address'
 import { BigNumber } from '@ethersproject/bignumber'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, CurrencyAmount, JSBI, Token, USD, ZERO } from '@sushiswap/core-sdk'
+import { ChainId, CurrencyAmount, JSBI, Token, USD, ZERO } from '@oracleswap/core-sdk'
 import Button from 'app/components/Button'
 
 import { CurrencyLogo } from 'app/components/CurrencyLogo'
 import { HeadlessUiModal } from 'app/components/Modal'
 import Typography from 'app/components/Typography'
-import { useKashiPair } from 'app/features/kashi/hooks'
+
 import { easyAmount, formatNumber } from 'app/functions'
 import { useCurrency } from 'app/hooks/Tokens'
 import { useActiveWeb3React } from 'app/services/web3'
@@ -42,7 +42,6 @@ const InvestmentDetails = ({ farm }) => {
   const { harvest } = useMasterChef(farm.chef)
   const router = useRouter()
   const addTransaction = useTransactionAdder()
-  const kashiPair = useKashiPair(farm.pair.id)
   const [pendingTx, setPendingTx] = useState(false)
   const token0 = useCurrency(farm.pair.token0?.id)
   const token1 = useCurrency(farm.pair.token1?.id)
@@ -58,19 +57,7 @@ const InvestmentDetails = ({ farm }) => {
 
   const stakedAmount = useUserInfo(farm, liquidityToken)
 
-  const kashiAssetAmount =
-    kashiPair &&
-    stakedAmount &&
-    easyAmount(
-      BigNumber.from(stakedAmount.quotient.toString()).mulDiv(
-        // @ts-ignore TYPE NEEDS FIXING
-        kashiPair.currentAllAssets.value,
-        // @ts-ignore TYPE NEEDS FIXING
-        kashiPair.totalAsset.base
-      ),
-      // @ts-ignore TYPE NEEDS FIXING
-      kashiPair.asset
-    )
+
 
   const pendingSushi = usePendingSushi(farm)
   const pendingReward = usePendingReward(farm)
@@ -79,8 +66,7 @@ const InvestmentDetails = ({ farm }) => {
     // @ts-ignore TYPE NEEDS FIXING
     USD[chainId],
     farm.pair.type === PairType.KASHI
-      ? // @ts-ignore TYPE NEEDS FIXING
-        kashiAssetAmount?.usdValue.toString() ?? ZERO
+      ?  ZERO
       : JSBI.BigInt(
           ((Number(stakedAmount?.toExact() ?? '0') * farm.pair.reserveUSD) / farm.pair.totalSupply)
             // @ts-ignore TYPE NEEDS FIXING
@@ -140,13 +126,7 @@ const InvestmentDetails = ({ farm }) => {
           <div className="flex items-center gap-2">
             {/*@ts-ignore TYPE NEEDS FIXING*/}
             {token0 && <CurrencyLogo currency={token0} size={18} />}
-            {farm.pair.type === PairType.KASHI && (
-              <RewardRow
-                symbol={token0?.symbol}
-                // @ts-ignore TYPE NEEDS FIXING
-                value={formatNumber(kashiAssetAmount?.value.toFixed(kashiPair.asset.tokenInfo.decimals) ?? 0)}
-              />
-            )}
+
             {farm.pair.type === PairType.SWAP && reserve0 && stakedAmount && totalSupply && (
               // <RewardRow
               //   value={formatNumber(
@@ -209,18 +189,7 @@ const InvestmentDetails = ({ farm }) => {
           )
         })}
       </HeadlessUiModal.BorderedContent>
-      {farm.pair.type === PairType.KASHI && (
-        <Button
-          fullWidth
-          color="blue"
-          variant="empty"
-          size="sm"
-          className="!italic"
-          onClick={() => router.push(`/lend/${farm.pair.id}`)}
-        >
-          {i18n._(t`View details on Kashi`)}
-        </Button>
-      )}
+
       <Button
         loading={pendingTx}
         fullWidth

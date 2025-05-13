@@ -1,4 +1,4 @@
-import { ChainId } from '@sushiswap/core-sdk'
+import { ChainId } from '@oracleswap/core-sdk'
 import { GRAPH_HOST } from 'app/services/graph/constants'
 import { barHistoriesQuery, barQuery } from 'app/services/graph/queries/bar'
 import { request } from 'graphql-request'

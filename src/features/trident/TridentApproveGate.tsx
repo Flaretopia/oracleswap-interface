@@ -1,7 +1,7 @@
 import { Signature } from '@ethersproject/bytes'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency, CurrencyAmount, ZERO } from '@sushiswap/core-sdk'
+import { Currency, CurrencyAmount, ZERO } from '@oracleswap/core-sdk'
 import Button from 'app/components/Button'
 import { ApprovalState, useApproveCallback } from 'app/hooks/useApproveCallback'
 import useBentoMasterApproveCallback, { BentoApprovalState, BentoPermit } from 'app/hooks/useBentoMasterApproveCallback'
@@ -23,7 +23,7 @@ const TokenApproveButton: FC<TokenApproveButtonProps> = memo(
     const { i18n } = useLingui()
     const [approveState, approveCallback] = useApproveCallback(inputAmount?.wrapped, tokenApproveOn)
     const { gatherPermitSignature, signatureData } = useTridentLiquidityTokenPermit(
-      ['Uniswap V2', 'OwlSwap LP Token'].includes(inputAmount?.currency.name ?? '')
+      ['Uniswap V2', 'OracleSwap LP Token'].includes(inputAmount?.currency.name ?? '')
         ? inputAmount?.wrapped
         : undefined,
       tokenApproveOn

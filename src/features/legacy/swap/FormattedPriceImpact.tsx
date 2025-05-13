@@ -1,4 +1,4 @@
-import { Percent } from '@sushiswap/core-sdk'
+import { Percent } from '@oracleswap/core-sdk'
 import { warningSeverity } from 'app/functions/prices'
 import React from 'react'
 

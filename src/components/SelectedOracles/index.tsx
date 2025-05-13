@@ -1,6 +1,6 @@
 import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
-import { ZERO } from '@sushiswap/core-sdk'
+import { ZERO } from '@oracleswap/core-sdk'
 import Button from 'app/components/Button'
 import { WalletIcon } from 'app/components/Icon'
 import { HeadlessUiModal } from 'app/components/Modal'

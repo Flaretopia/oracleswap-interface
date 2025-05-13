@@ -11,7 +11,7 @@ import TransactionConfirmationModal from 'app/modals/TransactionConfirmationModa
 import { HeadlessUiModal } from 'app/components/Modal'
 import Container from 'app/components/Container'
 import Dots from 'app/components/Dots'
-import { JSBI, Token, CurrencyAmount } from '@sushiswap/core-sdk'
+import { JSBI, Token, CurrencyAmount } from '@oracleswap/core-sdk'
 import { useTokenBalance } from 'app/state/wallet/hooks'
 import { useTokenContract } from 'app/hooks/useContract'
 import Image from 'next/image'

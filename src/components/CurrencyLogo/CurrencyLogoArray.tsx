@@ -1,4 +1,4 @@
-import { Currency } from '@sushiswap/core-sdk'
+import { Currency } from '@oracleswap/core-sdk'
 import React, { FC } from 'react'
 
 import Typography from '../Typography'
