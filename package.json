@@ -23,6 +23,10 @@
     "e2e": "concurrently -k -s first -n \"app,e2e\" \"yarn dev\" \"yarn e2e:safe\"",
     "postinstall": "yarn lingui"
   },
+  "engines": {
+    "node": "20.19.0",
+    "yarn": "1.22.22"
+  },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix",
